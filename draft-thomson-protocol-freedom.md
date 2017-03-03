@@ -1,7 +1,7 @@
 ---
 title: "Freedom in Protocols"
 abbrev: Protocol Freedom
-docname: draft-thomson-freedom-latest
+docname: draft-thomson-protocol-freedom-latest
 date: {DATE}
 category: std
 ipr: trust200902
