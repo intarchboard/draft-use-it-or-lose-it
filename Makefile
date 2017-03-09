@@ -15,13 +15,9 @@ TEST_REPORT := report.xml
 endif
 .PHONY: report
 report: $(TEST_REPORT)
-
-$(TEST_REPORT): $(dir $(TEST_REPORT))
-$(dir $(TEST_REPORT)):
-	mkdir -p $@
-
 $(TEST_REPORT): $(drafts_html) $(drafts_txt)
 	@echo build_report $^
+	@mkdir -p $(dir $@)
 	@echo '<?xml version="1.0" encoding="UTF-8"?>' >$@
 	@passed=();failed=();for i in $^; do \
 	  if [ -f "$$i" ]; then passed+=("$$i"); else failed+=("$$i"); fi; \
