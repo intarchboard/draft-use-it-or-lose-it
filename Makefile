@@ -13,8 +13,13 @@ TEST_REPORT := $(CIRCLE_TEST_REPORTS)/report/drafts.xml
 else
 TEST_REPORT := report.xml
 endif
-.PHONY:
+.PHONY: report
 report: $(TEST_REPORT)
+
+$(TEST_REPORT): $(dir $(TEST_REPORT))
+$(dir $(TEST_REPORT)):
+	mkdir -p $@
+
 $(TEST_REPORT): $(drafts_html) $(drafts_txt)
 	@echo build_report $^
 	@echo '<?xml version="1.0" encoding="UTF-8"?>' >$@
