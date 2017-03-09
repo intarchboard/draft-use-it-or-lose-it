@@ -22,8 +22,21 @@ normative:
 
 
 informative:
+  FOUCAULT1:
+    title: "The Foucault Reader"
+    author:
+      -
+        ins: M. Foucault
+        name: Michel Foucault
+      -
+        ins: P. Rabinow
+        name: Paul Rabinow
+        role: editor
+    date: 1984-11-12
+    seriesinfo:
+      ISBN: 0394713400
 
-  FOUCAULT:
+  FOUCAULT2:
     title: "Ethics: Subjectivity and Truth"
     author:
       -
@@ -33,9 +46,9 @@ informative:
         ins: P. Rabinow
         name: Paul Rabinow
         role: editor
-    date: 1997
+    date: 1998-05-15
     seriesinfo:
-      ISBN: 1565843525
+      ISBN: 1565844343
 
   SNI:
     title: "Accepting that other SNI name types will never work"
@@ -55,9 +68,12 @@ informative:
     date: 2016-07-20
     target: "https://mailarchive.ietf.org/arch/msg/tls/bOJ2JQc3HjAHFFWCiNTIb0JuMZc"
 
+
 --- abstract
 
-The ability to change protocols depends on exercising that ability.
+The ability to change protocols depends on exercising that ability.  Protocols
+that don't change can find that the mechanisms that support change become
+unusable.
 
 
 --- middle
@@ -81,39 +97,39 @@ protocols.  Though new protocol versions are much more disruptive, they are
 needed if there are fundamental shortcomings in the original protocol design
 when assessed against current needs.
 
-Experience with deployment of Internet protocols has shown that adding features
-to protocols or designing entirely new versions is not uniformly successful.
+Experience with Internet scale protocol deployment shows that adding features or
+designing entirely new versions is not uniformly successful.
+{{?I-D.iab-protocol-transitions}} examines the problem more broadly.
 
-This document examines the conditions that determine whether protocol
-maintainers have the ability - the freedom - to design and deploy new protocol
-mechanisms or protocols.
+This document examines the specific conditions that determine whether protocol
+maintainers have the ability - the freedom - to design and deploy new or
+modified protocols.
 
 
 # Implementations of Protocols are Imperfect
 
 A change to a protocol can be made extremely difficult to deploy if there are
-bugs in implementations with which the deployment needs to interoperate.  Bugs
-in the handling of new codepoints or extensions can mean that instead of
+bugs in implementations with which the new deployment needs to interoperate.
+Bugs in the handling of new codepoints or extensions can mean that instead of
 handling the mechanism as designed, endpoints react poorly.  This can manifest
 as abrupt termination of sessions, errors, crashes, or disappearances of
 endpoints and timeouts.
 
 Interoperability with other implementations is usually highly valued, so
 deploying mechanisms that trigger adverse reactions like these can be untenable.
-This is true even if the negative reactions happen infrequently or only under
-certain circumstances.
+Where interoperability is a competitive advantage, this is true even if the
+negative reactions happen infrequently or only under relatively rare conditions.
 
-Deploying a change to a protocol could require fixing a good proportion of
-these issues in the deployments with buggy implementations.  This can involve a
-tedious and lengthy process that includes identifying the cause of these errors,
-finding the responsible implementation, coordinating a bug fix and release plan,
-contacting the operator of affected services, and waiting for the fix to be
-deployed to those services.
+Deploying a change to a protocol could require fixing a substantial proportion
+of the bugs that the change exposes.  This can involve a difficult process that
+includes identifying the cause of these errors, finding the responsible
+implementation, coordinating a bug fix and release plan, contacting the operator
+of affected services, and waiting for the fix to be deployed to those services.
 
 Given the effort involved in fixing these problems, the existence of these sorts
-of bugs can outright prevent the deployment of some protocol changes.  It could
-even be necessarily to come up with a new protocol design that uses a different
-method to achieve the same result.
+of bugs can outright prevent the deployment of some types of protocol changes.
+It could even be necessary to come up with a new protocol design that uses a
+different method to achieve the same result.
 
 
 ## Good Protocol Design is Not Sufficient
@@ -130,26 +146,32 @@ designing for extension.  It includes the following advice:
   version-negotiation mechanism correctly.
 
 This has proven to be insufficient in practice.  Many protocols have evidence of
-imperfect implementation of key mechanisms, and those that aren't used are the
-ones that fail most often. The same paragraph from RFC 6709 even acknowledges
-the existence of this problem, but does not offer any remedy:
+imperfect implementation of these critical mechanisms.  Mechanisms that aren't
+used are the ones that fail most often.  The same paragraph from RFC 6709
+acknowledges the existence of this problem, but does not offer any remedy:
 
 > The nature of protocol version-negotiation mechanisms is that, by definition,
   they don't get widespread real-world testing until *after* the base protocol
   has been deployed for a while, and its deficiencies have become evident.
 
-Transport Layer Security (TLS) {{?RFC5246}} provides an example of where a
-design that is objectively sound fails when incorrectly implemented.  TLS
-provides examples of failures in protocol version negotiation and extensibility.
+Transport Layer Security (TLS) {{?RFC5246}} provides examples of where a design
+that is objectively sound fails when incorrectly implemented.  TLS provides
+examples of failures in protocol version negotiation and extensibility.
 
 Version negotiation in TLS 1.2 and earlier uses the "Highest mutually supported
 version (HMSV)" exactly as described in {{?RFC6709}}.  However, clients are
 unable to advertise a new version without causing a non-trivial proportions of
 sessions to fail due to bugs in server (or middlebox) implementations.
 
-Intolerance to new TLS versions is so severe {{INTOLERANCE}} that TLS 1.3 has
-abandoned HMSV version negotiation for a different mechanism
-{{?I-D.ietf-tls-tls13}}.
+Note:
+
+: It is possible that some middleboxes prevent negotiation of protocol versions
+  and features they do not understand.  It is hard to imagine what those
+  middleboxes hope to gain from doing so for a protocol like TLS.
+
+Intolerance to new TLS versions is so severe {{INTOLERANCE}} that TLS 1.3
+{{?I-D.ietf-tls-tls13}} has abandoned HMSV version negotiation for a different
+mechanism.
 
 The server name indication (SNI) {{?RFC6066}} in TLS is another excellent
 example of the failure of a well-designed extensibility point.  SNI uses the
@@ -169,29 +191,33 @@ abandoned {{SNI}}.
 Even the most superficially simple protocols can often involve more actors than
 is immediately apparent.  A two-party protocol still has two ends, and even at
 the endpoints of an interaction, protocol elements can be passed on to other
-entities (machines or software components) in ways that can affect protcol
-operation.
+entities in ways that can affect protcol operation.
 
 One of the key challenges in deploying new features in a protocol is ensuring
-compat that all actors that could influence the success of the protocol.
+compatibility with all actors that could influence the outcome.
 
-In particular, one of the consequences of an unencrypted protocol is that any
-element on path can interact with the protocol.  This was originally seen as an
-advantage for HTTP and was what produced the notion of a transparent proxy
-{{?RFC7230}}.  Because HTTP was specifically designed with intermediation in
-mind, this was not only possible, but sometimes advantageous.  Consequently,
-transparent proxies for HTTP are commonplace.
+Protocols that deploy without active measures against intermediation can accrue
+middleboxes that depend on certain aspects of the protocol.  In particular, one
+of the consequences of an unencrypted protocol is that any element on path can
+interact with the protocol.  For example, HTTP recognizes the role of a
+transparent proxy {{?RFC7230}}.  Because HTTP was specifically designed with
+intermediation in mind, transparent proxies are not only possible, but sometimes
+advantageous.  Consequently, transparent proxies for HTTP are commonplace.
 
 Middleboxes are also protocol participants, to the degree that they are able to
-observe and act within the protocol.  The degree to which a middlebox
-participates varies from the basic functions that a router performs to full
-session participation.  For example, a SIP back-to-back user agent (B2BUA)
+observe and act in ways that affect the protocol.  The degree to which a
+middlebox participates varies from the basic functions that a router performs to
+full participation.  For example, a SIP back-to-back user agent (B2BUA)
 {{?RFC7092}} can be very deeply involved in the SIP protocol.
 
 By increasing the number of different actors involved in any single protocol
 exchange, the number of potential implementation bugs that a deployment needs to
-contend with also increases.  This can increase the difficulty of deploying
-changes to a protocol considerably.
+contend with also increases.  In particular, incompatible changes to a protocol
+that might be negotiated between endpoints in ignorance of the presence of a
+middlebox can result in a middlebox acting badly.
+
+Thus, middleboxes can increase the difficulty of deploying changes to a protocol
+considerably.
 
 
 # Protocol Freedom
@@ -202,18 +228,16 @@ to later change a deployed protocol?
 Michel Foucault defines freedom as a practice rather than a state that is
 bestowed or attained:
 
-> \[...] when a colonized people attempts to liberate itself from its
-  colonizers, this is indeed a practice of liberation in the strict sense.  But
-  we know very well \[...] that this practice of liberation is not in itself
-  sufficient to define the practices of freedom that will still be needed if
-  this people, this society, and these individuals are to be able to
-  define·admissible and acceptable forms of existence or political
-  society. --{{FOUCAULT}}
+> Freedom is practice; \[...] the freedom of men is never assured by the laws
+  and the institutions that are intended to guarantee them.  \[...] I think it
+  can never be inherent in the structure of things to guarantee the exercise of
+  freedom.  The guarantee of freedom is freedom. --{{FOUCAULT1}}
 
 In the same way, the design of a protocol for extensibility and eventual
-replacement {{?RFC6709}} is the act of liberation.  Liberating a protocol makes
-it possible to use that protocol for use cases that were not originally
-conceived by the designers or to provide a replacement that is better suited.
+replacement {{?RFC6709}} is not assured by the specification that defines the
+protocol.  The specification only makes it possible to use that protocol for use
+cases that were not originally conceived by the designers or to provide a
+replacement that is better suited.
 
 
 ## Use of Protocol Freedom
@@ -222,21 +246,17 @@ Designing for protocol freedom makes freedom possible, but does not assure it.
 
 > This is why I emphasize practices of freedom over processes of liberation;
   again, the latter indeed have their place, but they do not seem to me, to be
-  capable by themselves of defining all the practical forms of
-  freedom. --{{FOUCAULT}}
+  capable by themselves of defining all the practical forms of freedom.
+  --{{FOUCAULT2}}
 
-If freedom exists only in practice, it becomes clear that the definition of
-mechanisms is not important, it's the active use of those mechanisms that
+The fact that freedom depends on practice is evident in protocols that are known
+to have viable version negotiation or extension points.  The definition of
+mechanisms alone is insufficient, it's the active use of those mechanisms that
 determines the existence of freedom.
 
-This is evident in protocols that are known to have viable version negotiation
-or extension points.
-
 For example, header fields in email {{?RFC5322}}, HTTP {{?RFC7230}} and SIP
-{{?RFC3261}} all derive from the same basic design.  Though there have been
-improvements to the process by which new header fields are defined, there is no
-evidence of any barriers to deploying header fields with new names and
-semantics.
+{{?RFC3261}} all derive from the same basic design.  There is no evidence of any
+barriers to deploying header fields with new names and semantics.
 
 In another example, the attribute-value pairs (AVPs) in Diameter {{?RFC6733}}
 are fundamental to the design of the protocol.  The definition of new uses of
@@ -250,30 +270,29 @@ despite shortcomings in the design.  For instance, the shortcomings of HTTP
 header fields are significant enough that there are ongoing efforts to improve
 the syntax {{?I-D.ietf-httpbis-header-structure}}.
 
-This suggests that it is *use* that ensures that a given protocol capability
-remains available.  Protocols that fail to use a mechanism, or a protocol that
-only rarely uses a mechanism, suffer an inability to rely on that mechanism.
+Only using a protocol capability is able to ensure availability of that
+capability.  Protocols that fail to use a mechanism, or a protocol that only
+rarely uses a mechanism, suffer an inability to rely on that mechanism.
 
 
 ## Reliance on Protocol Freedom
 
 The best way to guarantee that a protocol mechanism is used is to make it
 critical to an endpoint participating in that protocol.  This means that
-implementations need to rely on the existence of a mechanism and that also
-depend on the mechanism being used.
+implementations rely on both the existence of a mechanism and it being used.
 
 For example, the message format in SMTP relies on header fields for most of its
-functions, including the most basic functions.  This, together with the fact
-that new header fields are added so easily, means that no implementation can
-operate on the Internet for any reasonable period without encountering a header
-field that it does not understand.  An SMTP implementation therefore needs to be
-able to both process header fields that it understands and ignore those that it
-does not.
+functions, including the most basic functions.  A deployment of SMTP cannot
+avoid including an implementation of header field handling.  In addition to
+this, the regularity with which new header fields are defined and used ensures
+that deployments frequently encounter header fields that it does not understand.
+An SMTP implementation therefore needs to be able to both process header fields
+that it understands and ignore those that it does not.
 
-In this way, implementation of this extensibility mechanism is not merely
-mandated by the specification, it becomes critical to the functioning of the
-endpoint.  Should an implementation fail to correctly implement the mechanism,
-that failure would become immediately apparent.
+In this way, implementing the extensibility mechanism is not merely mandated by
+the specification, it is critical to the functioning of a protocol deployment.
+Should an implementation fail to correctly implement the mechanism, that failure
+would become immediately apparent.
 
 
 ## Unused Extension Points Become Unusable
@@ -291,7 +310,13 @@ transfer codings other than the chunked coding, and the range unit in a range
 request {{?RFC7233}}.
 
 
-## Defensive Design for Protocol Freedom
+# Defensive Design Principles for Protocol Freedom
+
+There are several potential approaches that can provide some measure of
+protection against a protocol deployment becoming resistant to change.
+
+
+## Grease
 
 "Grease" {{?I-D.ietf-tls-grease}} identifies lack of use as an issue (protocol
 mechanisms "rusting" shut) and proposes a system of use that exercises extension
@@ -325,28 +350,60 @@ not easily translate to other forms of extension point.  Other techniques might
 be necessary for protocols that don't rely on the particular style of exchange
 that is predominant in TLS.
 
+
+## Cryptography
+
 A method of defensive design is that of using cryptography (such as TLS) to
 forcibly reduce the number of entities that can participate in the protocol.
+
 Data that is exchanged under encryption cannot be seen by middleboxes, excluding
-them from participating in that part of the protocol.  Similarly, data that is exchanged
-with integrity protection cannot be modified by middleboxes.
+them from participating in that part of the protocol.  Similarly, data that is
+exchanged with integrity protection cannot be modified by middleboxes.
 
 The QUIC protocol {{?I-D.ietf-quic-transport}}, adopts both encryption to
 carefully control what information is exposed to middleboxes.  QUIC also uses
 integrity protection over all the data it exchanges to prevent modification.
 
 
-#
+## Visibility
 
-A protocol replacement necessarily takes some time to deploy and displace the
-protocol that it was intended to replace {{?I-D.iab-protocol-transitions}}.  Moreover, it
-is possible that the new protocol will never completely replace the old.
+Modern software engineering practice includes a strong emphasis on measuring the
+effects of changes and correcting based on that feedback.  Runtime monitoring of
+system health is an important part of that, which relies on systems of logging
+and synthetic health indicators, such as aggregate transaction failure rates.
 
-The decision to exclude some use cases and deployments can restore
+Feedback is critical to the success of the grease technique (see {{grease}}).
+The system only works if an implementer creates a way to ensure that errors are
+detected and analyzed.  This process can be automated, but when operating at
+scale it might be difficult or impossible to collect details of specific errors.
+
+Treating errors in protocol implementation as fatal can greatly improve
+visibility.  Disabling automatic recovery from protocol errors can be disruptive
+to users when those errors occur, but it also ensures that errors are made
+visible.  Where users are part of the feedback system, visibility of error
+conditions is especially important.
+
+New protocol designs are encouraged to define conditions that result in fatal
+errors.  Competitive pressures often force implementations to favor strategies
+that mask or hide errors.  Standardizing on error handling that ensures
+visibility of flaws avoids handling that hides problems.
+
+Feedback on errors can be more important during the development and early
+deployment of a change.  Disabling automatic error recovery methods during
+development can improve visibility of errors.
+
+Automated feedback systems are important for automated systems, or where error
+recovery is also automated.  For instance, failures to connect to HTTP
+alternative services {{?RFC7838}} are not permitted to affect the outcome of
+transactions.  A feedback system for capturing failures in alternative services
+is therefore crucial to ensuring the mechanism remains viable.
 
 
+# Security Considerations
 
-# Security and Privacy Considerations
+The ability to design, implement, and deploy new protocol mechanisms can be
+critical to security.  In particular, the need to be able to replace
+cryptographic algorithms over time has been well established {{?RFC7696}}.
 
 
 # IANA Considerations
