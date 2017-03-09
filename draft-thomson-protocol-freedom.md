@@ -77,26 +77,20 @@ unusable.
 
 # Introduction
 
-Successful protocols evolve over time in response to changes in their usage.
-New use cases, conditions and constraints on the deployment of a protocol can
-render the protocol obsolete.  A successful protocol {{?RFC5218}} will change in
-ways that allow it to continue to fulfill the needs of its users.
+A successful protocol {{?RFC5218}} will change in ways that allow it to continue
+to fulfill the needs of its users.  New use cases, conditions and constraints on
+the deployment of a protocol can render a protocol that does not change
+obsolete.
 
-Changes often manifest over time with a shift in the usage patterns of the
-protocol.  These changes are made without changing the fundamental structure of
-the protocol.  However, it is rare that the design of a protocol properly
-anticipate future needs to the extent that a protocol can remain relevant
-without being changed itself.
+Usage patterns and requirements for a protocol shift over time.  Protocols can
+react to these shifts in one of three ways: adjust usage patterns within the
+constraints of the protocol, extend the protocol, and replace the protocol.
+These reactions are progressively more disruptive, but are also dictated by the
+nature of the change in requirements over longer periods.
 
-Evolving requirements for protocols can often be managed incrementally for some
-time.  Over longer periods it might be necessary to deploy entirely new
-protocols.  Though new protocol versions are much more disruptive, they are
-needed if there are fundamental shortcomings in the original protocol design
-when assessed against current needs.
-
-Experience with Internet scale protocol deployment shows that adding features or
-designing entirely new versions is not uniformly successful.
-{{?I-D.iab-protocol-transitions}} examines the problem more broadly.
+Experience with Internet scale protocol deployment shows that changing protocols
+is not uniformly successful.  {{?I-D.iab-protocol-transitions}} examines the
+problem more broadly.
 
 This document examines the specific conditions that determine whether protocol
 maintainers have the ability - the freedom - to design and deploy new or
@@ -231,15 +225,16 @@ bestowed or attained:
   freedom.  The guarantee of freedom is freedom. --{{FOUCAULT1}}
 
 In the same way, the design of a protocol for extensibility and eventual
-replacement {{?RFC6709}} is not assured by the specification that defines the
-protocol.  The specification only makes it possible to use that protocol for use
-cases that were not originally conceived by the designers or to provide a
-replacement that is better suited.
+replacement {{?RFC6709}} does not guarantee the ability to exercise those
+options.
 
 
 ## Use of Protocol Freedom
 
-Designing for protocol freedom makes freedom possible, but does not assure it.
+Though planning and specifying these options is a necessarily precondition for
+their availability, whether they are available depends on more than what is
+written in a specification.  The nature a protocol deployment has a significant
+effect on whether that protocol can be changed.
 
 > This is why I emphasize practices of freedom over processes of liberation;
   again, the latter indeed have their place, but they do not seem to me, to be
