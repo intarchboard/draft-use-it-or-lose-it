@@ -1,5 +1,5 @@
 ---
-title: "Freedom in Protocols"
+title: "Factors Influencing the Freedom to Change Protocols"
 abbrev: Protocol Freedom
 docname: draft-thomson-protocol-freedom-latest
 category: std
