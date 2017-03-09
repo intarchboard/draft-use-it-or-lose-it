@@ -88,7 +88,7 @@ constraints of the protocol, extend the protocol, and replace the protocol.
 These reactions are progressively more disruptive, but are also dictated by the
 nature of the change in requirements over longer periods.
 
-Experience with Internet scale protocol deployment shows that changing protocols
+Experience with Internet-scale protocol deployment shows that changing protocols
 is not uniformly successful.  {{?I-D.iab-protocol-transitions}} examines the
 problem more broadly.
 
@@ -182,7 +182,7 @@ abandoned {{SNI}}.
 Even the most superficially simple protocols can often involve more actors than
 is immediately apparent.  A two-party protocol still has two ends, and even at
 the endpoints of an interaction, protocol elements can be passed on to other
-entities in ways that can affect protcol operation.
+entities in ways that can affect protocol operation.
 
 One of the key challenges in deploying new features in a protocol is ensuring
 compatibility with all actors that could influence the outcome.
@@ -192,7 +192,7 @@ middleboxes that depend on certain aspects of the protocol.  In particular, one
 of the consequences of an unencrypted protocol is that any element on path can
 interact with the protocol.  For example, HTTP recognizes the role of a
 transparent proxy {{?RFC7230}}.  Because HTTP was specifically designed with
-intermediation in mind, transparent proxies are not only possible, but sometimes
+intermediation in mind, transparent proxies are not only possible but sometimes
 advantageous.  Consequently, transparent proxies for HTTP are commonplace.
 
 Middleboxes are also protocol participants, to the degree that they are able to
@@ -231,10 +231,10 @@ options.
 
 ## Use of Protocol Freedom
 
-Though planning and specifying these options is a necessarily precondition for
+Though planning and specifying these options is a necessary precondition for
 their availability, whether they are available depends on more than what is
-written in a specification.  The nature a protocol deployment has a significant
-effect on whether that protocol can be changed.
+written in a specification.  The nature of a protocol deployment has a
+significant effect on whether that protocol can be changed.
 
 > This is why I emphasize practices of freedom over processes of liberation;
   again, the latter indeed have their place, but they do not seem to me, to be
@@ -243,7 +243,7 @@ effect on whether that protocol can be changed.
 
 The fact that freedom depends on practice is evident in protocols that are known
 to have viable version negotiation or extension points.  The definition of
-mechanisms alone is insufficient, it's the active use of those mechanisms that
+mechanisms alone is insufficient; it's the active use of those mechanisms that
 determines the existence of freedom.
 
 For example, header fields in email {{?RFC5322}}, HTTP {{?RFC7230}} and SIP
@@ -252,7 +252,7 @@ barriers to deploying header fields with new names and semantics.
 
 In another example, the attribute-value pairs (AVPs) in Diameter {{?RFC6733}}
 are fundamental to the design of the protocol.  The definition of new uses of
-Diameter regularly exercise the ability to add new AVPs and do so with no fear
+Diameter regularly exercises the ability to add new AVPs and do so with no fear
 that the definition might be unsuccessful.
 
 These examples show extension points that are heavily used also being relatively
@@ -352,8 +352,8 @@ Data that is exchanged under encryption cannot be seen by middleboxes, excluding
 them from participating in that part of the protocol.  Similarly, data that is
 exchanged with integrity protection cannot be modified by middleboxes.
 
-The QUIC protocol {{?I-D.ietf-quic-transport}}, adopts both encryption to
-carefully control what information is exposed to middleboxes.  QUIC also uses
+The QUIC protocol {{?I-D.ietf-quic-transport}} adopts both. Encryption is used
+to carefully control what information is exposed to middleboxes.  QUIC also uses
 integrity protection over all the data it exchanges to prevent modification.
 
 
