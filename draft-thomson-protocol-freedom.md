@@ -2,11 +2,8 @@
 title: "Freedom in Protocols"
 abbrev: Protocol Freedom
 docname: draft-thomson-protocol-freedom-latest
-date: {DATE}
 category: std
 ipr: trust200902
-area: GEN
-workgroup: Thoughtful
 
 stand_alone: yes
 pi: [toc, sortrefs, symrefs, docmapping]
