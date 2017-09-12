@@ -2,7 +2,7 @@
 title: "Long-term Viability of Protocol Extension Mechanisms"
 abbrev: Use It Or Lose It
 docname: draft-thomson-use-it-or-lose-it-latest
-category: std
+category: info
 ipr: trust200902
 
 stand_alone: yes
