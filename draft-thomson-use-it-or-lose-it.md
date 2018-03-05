@@ -19,20 +19,6 @@ normative:
 
 
 informative:
-  FOUCAULT:
-    title: "The Foucault Reader"
-    author:
-      -
-        ins: M. Foucault
-        name: Michel Foucault
-      -
-        ins: P. Rabinow
-        name: Paul Rabinow
-        role: editor
-    date: 1984-11-12
-    seriesinfo:
-      ISBN: 0394713400
-
   SNI:
     title: "Accepting that other SNI name types will never work"
     author:
@@ -162,8 +148,8 @@ abandoned {{SNI}}.
 ## Multi-Party Interactions and Middleboxes
 
 Even the most superficially simple protocols can often involve more actors than
-is immediately apparent.  A two-party protocol still has two ends, and even at
-the endpoints of an interaction, protocol elements can be passed on to other
+is immediately apparent.  A two-party protocol has two ends, but even at the
+endpoints of an interaction, protocol elements can be passed on to other
 entities in ways that can affect protocol operation.
 
 One of the key challenges in deploying new features in a protocol is ensuring
@@ -196,29 +182,13 @@ considerably.
 
 # Retaining Viable Protocol Evolution Mechanisms {#use-it}
 
-If design is insufficient, what then would give protocol designers the freedom
-to later change a deployed protocol?
-
-Michel Foucault defines freedom as a practice rather than a state that is
-bestowed or attained:
-
-> Freedom is practice; \[...] the freedom of men is never assured by the laws
-  and the institutions that are intended to guarantee them.  \[...] I think it
-  can never be inherent in the structure of things to guarantee the exercise of
-  freedom.  The guarantee of freedom is freedom. --{{FOUCAULT}}
-
-In the same way, the design of a protocol for extensibility and eventual
-replacement {{?EXTENSIBILITY}} does not guarantee the ability to
-exercise those options.
+The design of a protocol for extensibility and eventual replacement
+{{?EXTENSIBILITY}} does not guarantee the ability to exercise those options.
+Only active use of those mechanisms can ensure that they remain available for
+new uses.
 
 
 ## Practice Can Ensure Viability
-
-Planning and careful specificiation of mechanisms that support protocol
-evolution is a necessary precondition for their later availability.  However,
-whether those mechanisms are available for use depends on their correct
-implementation and deployment.  The nature of a protocol deployment has a
-significant effect on whether that protocol can be changed.
 
 The fact that the freedom to change depends on practice is evident in protocols
 that are known to have viable version negotiation or extension points.  The
@@ -268,15 +238,16 @@ An SMTP implementation therefore needs to be able to both process header fields
 that it understands and ignore those that it does not.
 
 In this way, implementing the extensibility mechanism is not merely mandated by
-the specification, it is critical to the functioning of a protocol deployment.
+the specification, it is crucial to the functioning of a protocol deployment.
 Should an implementation fail to correctly implement the mechanism, that failure
 would quickly become apparent.
 
-Caution is advised to avoid assuming that this is sufficient to ensure
-extensibility in the long term.  If the set of possible variations is small and
-deployments do not change over time, implementations might not see new
-variations.  Those implementations might still exhibit errors when presented
-with a new variation.
+Caution is advised to avoid assuming that building a dependency on an extension
+mechanism is sufficient to ensure availability of that mechanism in the long
+term.  If the set of possible uses is narrowly constrained and deployments do
+not change over time, implementations might not see new variations or assume a
+narrower interpretation of what is possible.  Those implementations might still
+exhibit errors when presented with a new variation.
 
 
 ## Unused Extension Points Become Unusable
@@ -321,10 +292,10 @@ server will never have cause to genuinely select one of these values.
 
 The principle that grease operates on is that an implementation that is
 regularly exposed to unknown values is not likely to become intolerant of new
-values when they appear.  This depends somewhat on the fact that the difficulty
-of implementing the protocol mechanism correctly is not significantly more
-effort than implementing code to specifically filter out the randomized grease
-values.
+values when they appear.  This depends largely on the assumption that the
+difficulty of implementing the protocol mechanism correctly is not significantly
+more effort than implementing code to specifically filter out the randomized
+grease values.
 
 To avoid simple techniques for filtering greasing codepoints, grease values are
 not reserved from a single contiguous block of code points, but are distributed
@@ -340,18 +311,15 @@ less effective.  Incorrect implementations might still be able to correctly
 identify these code points and ignore them.
 
 Grease is deployed with the intent of quickly detecting errors in implementing
-the mechanisms it safeguards.  Any failure to properly handle grease values is
-more likely to be detected.
+the mechanisms it safeguards.
 
 This form of defensive design has some limitations.  It does not necessarily
 create the need for an implementation to rely on the mechanism it safeguards;
 that is determined by the underlying protocol itself.  More critically, it does
-not easily translate to other forms of extension point.  Other techniques might
-be necessary for protocols that don't rely on the particular style of exchange
-that is predominant in TLS.
-
-For instance, grease works poorly for HMSV negotiation, where offering a higher
-version risks acceptance of a newly deployed version.
+not easily translate to other forms of extension point.  For instance, HMSV
+negotiation cannot be greased in this fashion.  Other techniques might be
+necessary for protocols that don't rely on the particular style of exchange that
+is predominant in TLS.
 
 
 ## Cryptography
@@ -362,7 +330,8 @@ are able to influence whether a new protocol feature is used.
 
 Data that is exchanged under encryption cannot be seen by middleboxes, excluding
 them from participating in that part of the protocol.  Similarly, data that is
-exchanged with integrity protection cannot be modified by middleboxes.
+exchanged with integrity protection cannot be modified without being detected
+and discarded.
 
 The QUIC protocol {{?QUIC=I-D.ietf-quic-transport}} adopts both encryption and
 integrity protection.  Encryption is used to carefully control what information
@@ -372,28 +341,11 @@ data it exchanges to prevent modification.
 
 ## Visibility of Faults
 
-Modern software engineering practice includes a strong emphasis on measuring the
-effects of changes and correcting based on that feedback.  Runtime monitoring of
-system health is an important part of that, which relies on systems of logging
-and synthetic health indicators, such as aggregate transaction failure rates.
-
 Feedback is critical to the success of the grease technique (see {{grease}}).
-The system only works if an implementer creates a way to ensure that errors are
-detected and analyzed.  This process can be automated, but when operating at
-scale it might be difficult or impossible to collect details of specific errors.
-
-Treating errors in protocol implementation as fatal can greatly improve
-visibility.  Disabling automatic recovery from protocol errors can be disruptive
-to users when those errors occur, but it also ensures that errors are made
-visible.
-
-Visibility of error conditions is especially important if users are part of the
-feedback system.
-
-New protocol designs are encouraged to define conditions that result in fatal
-errors.  Competitive pressures often force implementations to favor strategies
-that mask or hide errors.  Standardizing on error handling that ensures
-visibility of flaws avoids handling that suppresses problems.
+The system only works if an protocol deployment has a means of detecting and
+analyzing errors.  Ignoring errors could allow those errors to become
+entrenched.  This process can be automated, but when operating at scale it might
+be difficult or impossible to collect details of specific errors.
 
 Feedback on errors is more important during the development and early deployment
 of a change.  Disabling automatic error recovery methods during development
@@ -402,9 +354,8 @@ improves visibility of errors.
 Automated feedback systems are important for automated systems, or where error
 recovery is also automated.  For instance, connection failures with HTTP
 alternative services {{?ALT-SVC=RFC7838}} are not permitted to affect the
-outcome of transactions.  A feedback system for capturing failures in
-alternative services is therefore crucial to ensuring that failures are detected
-and the mechanism remains viable.
+outcome of transactions.  An automated feedback system for capturing failures in
+alternative services is therefore necessary for failures to be detected.
 
 
 # Security Considerations
