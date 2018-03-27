@@ -19,6 +19,19 @@ normative:
 
 
 informative:
+  HASH:
+    title: "Deploying a New Hash Algorithm"
+    author:
+      -
+        ins: S. Bellovin
+        name: Steven M. Bellovin
+      -
+        ins: E. Rescorla
+        name: Eric M. Rescorla
+    date: 2006
+    target: "https://www.cs.columbia.edu/~smb/papers/new-hash.pdf"
+    seriesinfo: "Proceedings of NDSS '06"
+
   SNI:
     title: "Accepting that other SNI name types will never work"
     author:
@@ -362,7 +375,9 @@ alternative services is therefore necessary for failures to be detected.
 
 The ability to design, implement, and deploy new protocol mechanisms can be
 critical to security.  In particular, it is important to be able to replace
-cryptographic algorithms over time {{?AGILITY=RFC7696}}.
+cryptographic algorithms over time {{?AGILITY=RFC7696}}.  For example,
+preparing for replacement of weak hash algorithms was made more difficult
+through misuse {{HASH}}.
 
 
 # IANA Considerations
