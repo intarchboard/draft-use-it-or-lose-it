@@ -108,6 +108,10 @@ of bugs can outright prevent the deployment of some types of protocol changes.
 It could even be necessary to come up with a new protocol design that uses a
 different method to achieve the same result.
 
+The set of interoperable features in a protocol is often the subset of its
+features that have some value to those implementing and deploying the protocol.
+It is not always the case that future extensibility is in that set.
+
 
 ## Good Protocol Design is Not Sufficient
 
@@ -168,14 +172,14 @@ entities in ways that can affect protocol operation.
 One of the key challenges in deploying new features in a protocol is ensuring
 compatibility with all actors that could influence the outcome.
 
-Protocols that deploy without active measures against intermediation can accrue
-middleboxes that depend on certain aspects of the protocol
-{{?PATH-SIGNALS=I-D.hardie-path-signals}}.  In particular, one of the
-consequences of an unencrypted protocol is that any element on path can interact
-with the protocol.  For example, HTTP was specifically designed with
-intermediation in mind, transparent proxies {{?HTTP=RFC7230}} are not only
-possible but sometimes advantageous, despite some significant downsides.
-Consequently, transparent proxies for cleartext HTTP are commonplace.
+Protocols deployed without active measures against intermediation will tend to
+become intermediated over time, as network operators deploy middleboxes to
+perform some function on traffic.  In particular, one of the consequences of an
+unencrypted protocol is that any element on path can interact with the protocol.
+For example, HTTP was specifically designed with intermediation in mind,
+transparent proxies {{?HTTP=RFC7230}} are not only possible but sometimes
+advantageous, despite some significant downsides.  Consequently, transparent
+proxies for cleartext HTTP are commonplace.
 
 Middleboxes are also protocol participants, to the degree that they are able to
 observe and act in ways that affect the protocol.  The degree to which a
@@ -197,16 +201,18 @@ considerably.
 
 The design of a protocol for extensibility and eventual replacement
 {{?EXTENSIBILITY}} does not guarantee the ability to exercise those options.
-Only active use of those mechanisms can ensure that they remain available for
+The set of features that enable future evolution need to be interoperable in the
+first implementations and deployments of the protocol.  Active use of mechanisms
+that support evolution is the only way to ensure that they remain available for
 new uses.
 
 
-## Practice Can Ensure Viability
+## Examples of Active Use
 
-The fact that the freedom to change depends on practice is evident in protocols
-that are known to have viable version negotiation or extension points.  The
-definition of mechanisms alone is insufficient; it's the active use of those
-mechanisms that determines the existence of freedom.
+The conditions for retaining the ability to evolve a design is most clearly
+evident in the protocols that are known to have viable version negotiation or
+extension points.  The definition of mechanisms alone is insufficient; it's the
+active use of those mechanisms that determines the existence of freedom.
 
 For example, header fields in email {{?SMTP=RFC5322}}, HTTP {{?HTTP=RFC7230}}
 and SIP {{?SIP=RFC3261}} all derive from the same basic design.  There is no
@@ -386,3 +392,8 @@ This document makes no request of IANA.
 
 
 --- back
+
+# Acknowledgments
+{:numbered="false"}
+
+Brian Trammell and Mark Nottingham made contributions to this document.
