@@ -305,7 +305,7 @@ extension points by using dummy values.
 The primary feature of the grease design is aimed at the style of negotiation
 most used in TLS, where the client offers a set of options and the server
 chooses the one that it most prefers from those that it supports.  A client that
-uses grease randomly offers options (usually just one) from a set of reserved
+uses grease randomly offers options - usually just one - from a set of reserved
 values.  These values are guaranteed to never be assigned real meaning, so the
 server will never have cause to genuinely select one of these values.
 
@@ -354,8 +354,8 @@ and discarded.
 
 The QUIC protocol {{?QUIC=I-D.ietf-quic-transport}} adopts both encryption and
 integrity protection.  Encryption is used to carefully control what information
-is exposed to middleboxes.  QUIC also uses integrity protection over all the
-data it exchanges to prevent modification.
+is exposed to middleboxes.  For those fields that are not encrypted, QUIC uses
+integrity protection to prevent modification.
 
 
 ## Visibility of Faults
