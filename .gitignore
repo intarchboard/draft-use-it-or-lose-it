@@ -10,4 +10,4 @@
 venv/
 issues.json
 lib
-draft-thomson-protocol-freedom.md
+*.upload
