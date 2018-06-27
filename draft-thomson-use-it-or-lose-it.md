@@ -135,6 +135,12 @@ acknowledges the existence of this problem, but does not offer any remedy:
   they don't get widespread real-world testing until *after* the base protocol
   has been deployed for a while, and its deficiencies have become evident.
 
+Indeed, basic interoperability is considered critical early in the deployment
+of a protocol, and any engineering practice that values simplicity will tend
+to make version negotiation and extension mechanisms optional for this basic
+interoperability. This leads to these mechanisms being uniquely affected by
+this problem.
+
 Transport Layer Security (TLS) {{?TLS12=RFC5246}} provides examples of where a
 design that is objectively sound fails when incorrectly implemented.  TLS
 provides examples of failures in protocol version negotiation and extensibility.
@@ -181,11 +187,20 @@ transparent proxies {{?HTTP=RFC7230}} are not only possible but sometimes
 advantageous, despite some significant downsides.  Consequently, transparent
 proxies for cleartext HTTP are commonplace.
 
-Middleboxes are also protocol participants, to the degree that they are able to
-observe and act in ways that affect the protocol.  The degree to which a
-middlebox participates varies from the basic functions that a router performs to
-full participation.  For example, a SIP back-to-back user agent (B2BUA)
+Middleboxes are also protocol participants, to the degree that they are able
+to observe and act in ways that affect the protocol.  The degree to which a
+middlebox participates varies from the basic functions that a router performs
+to full participation.  For example, a SIP back-to-back user agent (B2BUA)
 {{?B2BUA=RFC7092}} can be very deeply involved in the SIP protocol.
+
+This phenomenon appears at all layers of the protocol stack, even when
+protocols are not designed with middlebox participation in mind. TCP's
+{{?TCP=RFC0793}} extension points have been rendered difficult to use, largely
+due to middlebox interactions, as experience with Multipath TCP
+{{?MPTCP=RFC6824}} has shown. IP's version field was rendered useless when
+encapsulated over Ethernet, requring a new ethertype with IPv6 {{?RFC2462}},
+due in part to layer 2 devices making version-independent assumptions about
+the structure of the IPv4 header.
 
 By increasing the number of different actors involved in any single protocol
 exchange, the number of potential implementation bugs that a deployment needs to
