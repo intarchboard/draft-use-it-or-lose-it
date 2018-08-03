@@ -345,9 +345,10 @@ less effective.  Incorrect implementations might still be able to correctly
 identify these code points and ignore them.
 
 Grease is deployed with the intent of quickly detecting errors in implementing
-the mechanisms it safeguards.
+the mechanisms it safeguards.  Though it has been effective at revealing
+problems in some cases with TLS, its efficacy isn't proven more generally.
 
-This form of defensive design has some limitations.  It does not necessarily
+This style of defensive design has some limitations.  It does not necessarily
 create the need for an implementation to rely on the mechanism it safeguards;
 that is determined by the underlying protocol itself.  More critically, it does
 not easily translate to other forms of extension point.  For instance, HMSV
