@@ -374,11 +374,11 @@ what information is exposed to middleboxes.  For those fields that are not
 encrypted, QUIC uses integrity protection to prevent modification.
 
 
-## Visibility of Faults
+# Feedback Mechanisms
 
-Feedback is critical to the success of the grease technique (see {{grease}}).
-The system only works if an protocol deployment has a means of detecting and
-analyzing errors.  Ignoring errors could allow those errors to become
+Visibility of errors is critical to the success of the grease technique (see
+{{grease}}).  The system only works if an protocol deployment has a means of
+detecting and analyzing errors.  Ignoring errors could allow problems to become
 entrenched.  This process can be automated, but when operating at scale it might
 be difficult or impossible to collect details of specific errors.
 
