@@ -363,15 +363,15 @@ Cryptography can be used to reduce the number of entities that can participate
 in a protocol.  Using tools like TLS ensures that only authorized participants
 are able to influence whether a new protocol feature is used.
 
-Data that is exchanged under encryption cannot be seen by middleboxes, excluding
-them from participating in that part of the protocol.  Similarly, data that is
-exchanged with integrity protection cannot be modified without being detected
-and discarded.
+Permitting fewer protocol participants reduces the number of implementations
+that can prevent a new mechanism from being deployed.  As recommended in
+{{?PATH-SIGNALS=I-D.iab-path-signals}}, use of encryption and integrity
+protection can be used to limit participation.
 
-The QUIC protocol {{?QUIC=I-D.ietf-quic-transport}} adopts both encryption and
-integrity protection.  Encryption is used to carefully control what information
-is exposed to middleboxes.  For those fields that are not encrypted, QUIC uses
-integrity protection to prevent modification.
+For example, the QUIC protocol {{?QUIC=I-D.ietf-quic-transport}} adopts both
+encryption and integrity protection.  Encryption is used to carefully control
+what information is exposed to middleboxes.  For those fields that are not
+encrypted, QUIC uses integrity protection to prevent modification.
 
 
 ## Visibility of Faults
