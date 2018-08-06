@@ -256,7 +256,7 @@ capability.  Protocols that fail to use a mechanism, or a protocol that only
 rarely uses a mechanism, suffer an inability to rely on that mechanism.
 
 
-## Dependency is Better
+## Dependency is Better {#need-it}
 
 The best way to guarantee that a protocol mechanism is used is to make it
 critical to an endpoint participating in that protocol.  This means that
@@ -284,7 +284,7 @@ narrower interpretation of what is possible.  Those implementations might still
 exhibit errors when presented with a new variation.
 
 
-## Unused Extension Points Become Unusable
+## Unused Extension Points Become Unusable {#unused}
 
 In contrast, there are many examples of extension points in protocols that have
 been either completely unused, or their use was so infrequent that they could no
@@ -298,6 +298,13 @@ on each chunk in the chunked transfer coding {{?HTTP=RFC7230}}, the ability to u
 transfer codings other than the chunked coding, and the range unit in a range
 request {{?HTTP-RANGE=RFC7233}}.
 
+Even where extension points have multiple valid values, if the set of permitted
+values does not change over time, there is still a risk that new values are not
+tolerated by existing implementations.  If the set of values for a particular
+field remains fixed over a long period, some implementations might not correctly
+handle a new value when it is introduced.  For example, implementations of TLS
+broke when new values of the signature_algorithms extension were introduced.
+
 
 # Defensive Design Principles for Protocols {#strategies}
 
@@ -309,6 +316,20 @@ protection against a protocol deployment becoming resistant to change.
 
 As discussed in {{use-it}}, the most effective defense against misuse of
 protocol extension points is active use.
+
+Implementations are most likely to be tolerant of new values if they depend on
+being able to use new values.  Failing that, implementations that routinely see
+new values are more likely to correctly handle new values.  More frequent
+changes will improve the likelihood that incorrect handling or intolerance is
+discovered and rectified.  The longer an intolerant implementation is deployed,
+the more difficult it is to correct.
+
+What active use means could depend greatly on the environment in which a
+protocol is deployed.  The frequency of changes necessary to safeguard some
+mechanisms might be slow enough to attract ossification in another protocol
+deployment, while being excessive in others.  There are currently no firm
+guidelines for new protocol development, as much is being learned about what
+techniques are most effective.
 
 
 ## Grease
@@ -414,4 +435,5 @@ This document makes no request of IANA.
 # Acknowledgments
 {:numbered="false"}
 
-Brian Trammell and Mark Nottingham made contributions to this document.
+Mirja Kühlewind, Mark Nottingham, and Brian Trammell made significant
+contributions to this document.
