@@ -305,6 +305,15 @@ field remains fixed over a long period, some implementations might not correctly
 handle a new value when it is introduced.  For example, implementations of TLS
 broke when new values of the signature_algorithms extension were introduced.
 
+Codepoints that are reserved for future use can be especially problematic.
+Reserving codepoints without attributing semantics to their use can result in
+diverse or conflicting semantics being attributed without any hope of
+interoperability.  An example of this is the "class E" address space in IPv4
+{{?RFC0990}}, which was reserved without assigning any semantics.  For
+protocols that can use negotiation to attribute semantics to codepoints, it is
+possible that unused codepoints can be reclaimed for active use, though this
+requires that the negotiation include all protocol participants.
+
 
 # Defensive Design Principles for Protocols {#strategies}
 
