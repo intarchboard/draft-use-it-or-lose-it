@@ -344,29 +344,25 @@ techniques are most effective.
 ## Grease
 
 "Grease" {{?GREASE=I-D.ietf-tls-grease}} identifies lack of use as an issue
-(protocol mechanisms "rusting" shut) and proposes a system of use that exercises
-extension points by using dummy values.
+(protocol mechanisms "rusting" shut) and proposes a system of use that
+exercises extension points by using dummy values.  Greasing is any attempt to
+exercise extension points without changing endpoint behavior, other than to
+encourage participants to tolerate new or varying values of protocol elements.
 
-The primary feature of the grease design is aimed at the style of negotiation
-most used in TLS, where the client offers a set of options and the server
-chooses the one that it most prefers from those that it supports.  A client that
-uses grease randomly offers options - usually just one - from a set of reserved
-values.  These values are guaranteed to never be assigned real meaning, so the
-server will never have cause to genuinely select one of these values.
+The grease design is aimed at the style of negotiation most used in TLS, where
+the client offers a set of options and the server chooses the one that it most
+prefers from those that it supports.  A client that uses grease randomly offers
+options - usually just one - from a set of reserved values.  These values are
+guaranteed to never be assigned real meaning, so the server will never have
+cause to genuinely select one of these values.
 
 The principle that grease operates on is that an implementation that is
 regularly exposed to unknown values is not likely to become intolerant of new
 values when they appear.  This depends largely on the assumption that the
 difficulty of implementing the protocol mechanism correctly is not significantly
 more effort than implementing code to specifically filter out the randomized
-grease values.
-
-To avoid simple techniques for filtering greasing codepoints, grease values are
-not reserved from a single contiguous block of code points, but are distributed
-evenly across the entire space of code points.  Reserving a randomly selected
-set of code points has a greater chance of avoiding this problem, though it
-might be more difficult to specify and implement, especially over larger code
-point spaces.
+grease values.  Reserving random or unevenly distributed values for this
+purpose is thought to further discourage special treatment.
 
 Without reserved greasing codepoints, an implementation can use code points from
 spaces used for private or experimental use if such a range exists.  In addition
@@ -384,6 +380,25 @@ critically, it does not easily translate to all forms of extension point.  For
 instance, HMSV negotiation cannot be greased in this fashion.  Other techniques
 might be necessary for protocols that don't rely on the particular style of
 exchange that is predominant in TLS.
+
+
+## Invariants
+
+Documenting aspects of the protocol that cannot or will not change as
+extensions or new versions are added can be a useful exercise. Understanding
+what aspects of a protocol are invariant can help guide the process of
+protecting those parts of the protocol that might change.
+
+Like greasing, a declaration of protocol invariants is useful only to the
+extent that implementations of the protocol are willing to admit the
+possibility of new uses for the protocol.  A protocol that declares protocol
+invariants relies on implementations understanding and respecting those
+invariants.
+
+Protocol invariants need to be clearly and concisely documented.  Including
+examples of aspects of the protocol that are not invariant, such as the
+appendix of {{?QUIC-INVARIANTS=I-D.ietf-quic-invariants}}, can be used to
+clarify intent.
 
 
 ## Cryptography
