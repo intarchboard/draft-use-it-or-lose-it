@@ -344,24 +344,26 @@ techniques are most effective.
 ## Grease
 
 "Grease" {{?GREASE=I-D.ietf-tls-grease}} identifies lack of use as an issue
-(protocol mechanisms "rusting" shut) and proposes a system of use that
-exercises extension points by using dummy values.  Greasing is any attempt to
-exercise extension points without changing endpoint behavior, other than to
-encourage participants to tolerate new or varying values of protocol elements.
+(protocol mechanisms "rusting" shut) and proposes reserving values for
+extensions that have no semantic value attached.
 
-The grease design is aimed at the style of negotiation most used in TLS, where
-the client offers a set of options and the server chooses the one that it most
-prefers from those that it supports.  A client that uses grease randomly offers
-options - usually just one - from a set of reserved values.  These values are
-guaranteed to never be assigned real meaning, so the server will never have
-cause to genuinely select one of these values.
+The design in {{?GREASE}} is aimed at the style of negotiation most used in
+TLS, where the client offers a set of options and the server chooses the one
+that it most prefers from those that it supports.  A client that uses grease
+randomly offers options - usually just one - from a set of reserved values.
+These values are guaranteed to never be assigned real meaning, so the server
+will never have cause to genuinely select one of these values.
+
+More generally, greasing is used to refer to any attempt to exercise extension
+points without changing endpoint behavior, other than to encourage participants
+to tolerate new or varying values of protocol elements.
 
 The principle that grease operates on is that an implementation that is
-regularly exposed to unknown values is not likely to become intolerant of new
+regularly exposed to unknown values is less likely to be intolerant of new
 values when they appear.  This depends largely on the assumption that the
-difficulty of implementing the protocol mechanism correctly is not significantly
-more effort than implementing code to specifically filter out the randomized
-grease values.  Reserving random or unevenly distributed values for this
+difficulty of implementing the extension mechanism correctly is not
+significantly more effort than implementing code to identify and filter out
+reserved values.  Reserving random or unevenly distributed values for this
 purpose is thought to further discourage special treatment.
 
 Without reserved greasing codepoints, an implementation can use code points from
@@ -375,7 +377,7 @@ the mechanisms it safeguards.  Though it has been effective at revealing
 problems in some cases with TLS, its efficacy isn't proven more generally.
 
 This style of defensive design is limited because it is only superficial.  It
-only exercises a small part of the mechanisms supporting extensibility.  More
+only exercises a small part of the mechanisms that support extensibility.  More
 critically, it does not easily translate to all forms of extension point.  For
 instance, HMSV negotiation cannot be greased in this fashion.  Other techniques
 might be necessary for protocols that don't rely on the particular style of
