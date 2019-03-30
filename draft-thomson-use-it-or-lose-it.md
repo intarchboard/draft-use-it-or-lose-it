@@ -93,9 +93,9 @@ as abrupt termination of sessions, errors, crashes, or disappearances of
 endpoints and timeouts.
 
 Interoperability with other implementations is usually highly valued, so
-deploying mechanisms that trigger adverse reactions like these can be untenable.
-Where interoperability is a competitive advantage, this is true even if the
-negative reactions happen infrequently or only under relatively rare conditions.
+deploying mechanisms that trigger adverse reactions can be untenable.  Where
+interoperability is a competitive advantage, this is true even if the negative
+reactions happen infrequently or only under relatively rare conditions.
 
 Deploying a change to a protocol could require fixing a substantial proportion
 of the bugs that the change exposes.  This can involve a difficult process that
@@ -103,9 +103,9 @@ includes identifying the cause of these errors, finding the responsible
 implementation, coordinating a bug fix and release plan, contacting the operator
 of affected services, and waiting for the fix to be deployed to those services.
 
-Given the effort involved in fixing these problems, the existence of these sorts
-of bugs can outright prevent the deployment of some types of protocol changes.
-It could even be necessary to come up with a new protocol design that uses a
+Given the effort involved in fixing problems, the existence of these sorts of
+bugs can outright prevent the deployment of some types of protocol changes.  It
+could even be necessary to come up with a new protocol design that uses a
 different method to achieve the same result.
 
 The set of interoperable features in a protocol is often the subset of its
@@ -127,9 +127,9 @@ advice on designing for extension.  It includes the following advice:
   version-negotiation mechanism correctly.
 
 This has proven to be insufficient in practice.  Many protocols have evidence of
-imperfect implementation of these critical mechanisms.  Mechanisms that aren't
-used are the ones that fail most often.  The same paragraph from RFC 6709
-acknowledges the existence of this problem, but does not offer any remedy:
+imperfect implementation of critical mechanisms of this sort.  Mechanisms that
+aren't used are the ones that fail most often.  The same paragraph from RFC
+6709 acknowledges the existence of this problem, but does not offer any remedy:
 
 > The nature of protocol version-negotiation mechanisms is that, by definition,
   they don't get widespread real-world testing until *after* the base protocol
@@ -152,8 +152,7 @@ non-trivial proportions of sessions to fail due to bugs in server and middlebox
 implementations.
 
 Intolerance to new TLS versions is so severe {{INTOLERANCE}} that TLS 1.3
-{{?TLS13=I-D.ietf-tls-tls13}} has abandoned HMSV version negotiation for a new
-mechanism.
+{{?TLS13=RFC8446}} has abandoned HMSV version negotiation for a new mechanism.
 
 The server name indication (SNI) {{?TLS-EXT=RFC6066}} in TLS is another
 excellent example of the failure of a well-designed extensibility point.  SNI
@@ -175,17 +174,18 @@ is immediately apparent.  A two-party protocol has two ends, but even at the
 endpoints of an interaction, protocol elements can be passed on to other
 entities in ways that can affect protocol operation.
 
-One of the key challenges in deploying new features in a protocol is ensuring
-compatibility with all actors that could influence the outcome.
+One of the key challenges in deploying new features is ensuring compatibility
+with all actors that could be involved in the protocol.
 
 Protocols deployed without active measures against intermediation will tend to
 become intermediated over time, as network operators deploy middleboxes to
-perform some function on traffic.  In particular, one of the consequences of an
-unencrypted protocol is that any element on path can interact with the protocol.
-For example, HTTP was specifically designed with intermediation in mind,
-transparent proxies {{?HTTP=RFC7230}} are not only possible but sometimes
-advantageous, despite some significant downsides.  Consequently, transparent
-proxies for cleartext HTTP are commonplace.
+perform some function on traffic {{?PATH-SIGNALS=I-D.iab-path-signals}}.  In
+particular, one of the consequences of an unencrypted protocol is that any
+element on path can interact with the protocol.  For example, HTTP was
+specifically designed with intermediation in mind, transparent proxies
+{{?HTTP=RFC7230}} are not only possible but sometimes advantageous, despite
+some significant downsides.  Consequently, transparent proxies for cleartext
+HTTP are commonplace.
 
 Middleboxes are also protocol participants, to the degree that they are able
 to observe and act in ways that affect the protocol.  The degree to which a
@@ -197,10 +197,10 @@ This phenomenon appears at all layers of the protocol stack, even when
 protocols are not designed with middlebox participation in mind. TCP's
 {{?TCP=RFC0793}} extension points have been rendered difficult to use, largely
 due to middlebox interactions, as experience with Multipath TCP
-{{?MPTCP=RFC6824}} has shown. IP's version field was rendered useless when
-encapsulated over Ethernet, requring a new ethertype with IPv6 {{?RFC2462}},
-due in part to layer 2 devices making version-independent assumptions about
-the structure of the IPv4 header.
+{{?MPTCP=RFC6824}} and Fast Open {{?TFO=RFC7413}} has shown. IP's version field
+was rendered useless when encapsulated over Ethernet, requring a new ethertype
+with IPv6 {{?RFC2462}}, due in part to layer 2 devices making
+version-independent assumptions about the structure of the IPv4 header.
 
 By increasing the number of different actors involved in any single protocol
 exchange, the number of potential implementation bugs that a deployment needs to
@@ -233,7 +233,7 @@ For example, header fields in email {{?SMTP=RFC5322}}, HTTP {{?HTTP=RFC7230}}
 and SIP {{?SIP=RFC3261}} all derive from the same basic design.  There is no
 evidence of significant barriers to deploying header fields with new names and
 semantics in email and HTTP, though the widespread deployment of SIP B2BUAs
-means that new SIP header fields can be more difficult.
+means that new SIP header fields do not reliably reach peers.
 
 In another example, the attribute-value pairs (AVPs) in Diameter
 {{?DIAMETER=RFC6733}} are fundamental to the design of the protocol.  The
@@ -378,13 +378,12 @@ Grease is deployed with the intent of quickly detecting errors in implementing
 the mechanisms it safeguards.  Though it has been effective at revealing
 problems in some cases with TLS, its efficacy isn't proven more generally.
 
-This style of defensive design has some limitations.  It does not necessarily
-create the need for an implementation to rely on the mechanism it safeguards;
-that is determined by the underlying protocol itself.  More critically, it does
-not easily translate to other forms of extension point.  For instance, HMSV
-negotiation cannot be greased in this fashion.  Other techniques might be
-necessary for protocols that don't rely on the particular style of exchange that
-is predominant in TLS.
+This style of defensive design is limited because it is only superficial.  It
+only exercises a small part of the mechanisms supporting extensibility.  More
+critically, it does not easily translate to all forms of extension point.  For
+instance, HMSV negotiation cannot be greased in this fashion.  Other techniques
+might be necessary for protocols that don't rely on the particular style of
+exchange that is predominant in TLS.
 
 
 ## Cryptography
