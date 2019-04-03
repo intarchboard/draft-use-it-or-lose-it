@@ -389,13 +389,14 @@ exchange that is predominant in TLS.
 Documenting aspects of the protocol that cannot or will not change as
 extensions or new versions are added can be a useful exercise. Understanding
 what aspects of a protocol are invariant can help guide the process of
-protecting those parts of the protocol that might change.
+identifying those parts of the protocol that might change.
 
-Like greasing, a declaration of protocol invariants is useful only to the
-extent that implementations of the protocol are willing to admit the
-possibility of new uses for the protocol.  A protocol that declares protocol
-invariants relies on implementations understanding and respecting those
-invariants.
+As a means of protecting extensibility, a declaration of protocol invariants is
+useful only to the extent that protocol participants are willing to
+allow new uses for the protocol.  Like greasing, protocol participants could
+still purposefully block the deployment of new features.  A protocol that
+declares protocol invariants relies on implementations understanding and
+respecting those invariants.
 
 Protocol invariants need to be clearly and concisely documented.  Including
 examples of aspects of the protocol that are not invariant, such as the
