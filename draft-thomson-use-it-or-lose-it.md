@@ -235,22 +235,19 @@ code-points and extensions are to be safely ignored when not understood.
 
 ## Examples of Active Use
 
-For example, header fields in email {{?SMTP=RFC5322}}, HTTP
-{{?HTTP=RFC7230}} and SIP {{?SIP=RFC3261}} all derive from the same
-basic design, which amounts to a list name/value pairs.  There is no
-evidence of significant barriers to deploying header fields with new
-names and semantics in email and HTTP as clients and servers can
-simply ignore headers they do not understand or need.  The widespread
-deployment of SIP B2BUAs means that new SIP header fields do not
-reliably reach peers, however, which doesn't necessarily cause
-interoperability issues but rather does cause feature deployment
-issues.
+For example, header fields in email {{?SMTP=RFC5322}}, HTTP {{?HTTP=RFC7230}}
+and SIP {{?SIP=RFC3261}} all derive from the same basic design, which amounts to
+a list name/value pairs.  There is no evidence of significant barriers to
+deploying header fields with new names and semantics in email and HTTP as
+clients and servers can ignore headers they do not understand or need.  The
+widespread deployment of SIP B2BUAs means that new SIP header fields do not
+reliably reach peers, however, which doesn't necessarily cause interoperability
+issues but rather does cause feature deployment issues.
 
 In another example, the attribute-value pairs (AVPs) in Diameter
-{{?DIAMETER=RFC6733}} are fundamental to the design of the protocol.
-The definition of new uses of Diameter regularly exercise the ability
-to add new Attribute-Value Pairs (AVPs) and do so without fear that
-the new feature might not be successfully deployed.
+{{?DIAMETER=RFC6733}} are fundamental to the design of the protocol.  Any use of
+Diameter requires exercising the ability to add new AVPs.  This is routinely
+done without fear that the new feature might not be successfully deployed.
 
 Ossified DNS code bases and systems resulted in fears that new
 Resource Record Codes (RRCodes) would take years of software
