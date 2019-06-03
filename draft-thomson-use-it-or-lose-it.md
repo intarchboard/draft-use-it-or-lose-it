@@ -233,6 +233,7 @@ freedom.  Protocols that routinely add new extensions and code points
 rarely have trouble adding additional ones, especially when unknown
 code-points and extensions are to be safely ignored when not understood.
 
+
 ## Examples of Active Use
 
 For example, header fields in email {{?SMTP=RFC5322}}, HTTP {{?HTTP=RFC7230}}
