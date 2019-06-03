@@ -359,6 +359,23 @@ guidelines for new protocol development, as much is being learned about what
 techniques are most effective.
 
 
+## Cryptography
+
+Cryptography can be used to reduce the number of entities that can participate
+in a protocol.  Using tools like TLS ensures that only authorized participants
+are able to influence whether a new protocol feature is used.
+
+Permitting fewer protocol participants reduces the number of implementations
+that can prevent a new mechanism from being deployed.  As recommended in
+{{?PATH-SIGNALS=I-D.iab-path-signals}}, use of encryption and integrity
+protection can be used to limit participation.
+
+For example, the QUIC protocol {{?QUIC=I-D.ietf-quic-transport}} adopts both
+encryption and integrity protection.  Encryption is used to carefully control
+what information is exposed to middleboxes.  For those fields that are not
+encrypted, QUIC uses integrity protection to prevent modification.
+
+
 ## Grease
 
 "Grease" {{?GREASE=I-D.ietf-tls-grease}} identifies lack of use as an issue
@@ -402,23 +419,6 @@ critically, it does not easily translate to all forms of extension point.  For
 instance, HMSV negotiation cannot be greased in this fashion.  Other techniques
 might be necessary for protocols that don't rely on the particular style of
 exchange that is predominant in TLS.
-
-
-## Cryptography
-
-Cryptography can be used to reduce the number of entities that can participate
-in a protocol.  Using tools like TLS ensures that only authorized participants
-are able to influence whether a new protocol feature is used.
-
-Permitting fewer protocol participants reduces the number of implementations
-that can prevent a new mechanism from being deployed.  As recommended in
-{{?PATH-SIGNALS=I-D.iab-path-signals}}, use of encryption and integrity
-protection can be used to limit participation.
-
-For example, the QUIC protocol {{?QUIC=I-D.ietf-quic-transport}} adopts both
-encryption and integrity protection.  Encryption is used to carefully control
-what information is exposed to middleboxes.  For those fields that are not
-encrypted, QUIC uses integrity protection to prevent modification.
 
 
 ## Effective Feedback
