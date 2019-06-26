@@ -79,11 +79,14 @@ broadly.
 
 This document examines the specific conditions that determine whether protocol
 maintainers have the ability to design and deploy new or modified protocols.
+{{implementations}} highlights some historical issues with
+difficulties in transitions to new protocol features.  {{use-it}}
+argues that ossified protocols are more difficult to update and
+successful protocols make frequent use of new extensions and code-points.
 {{strategies}} outlines several strategies that might aid in ensuring that
 protocol changes remain possible over time.
 
-
-# Implementations of Protocols are Imperfect
+# Implementations of Protocols are Imperfect {#implementations}
 
 A change to a protocol can be made extremely difficult to deploy if there are
 bugs in implementations with which the new deployment needs to interoperate.
