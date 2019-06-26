@@ -135,11 +135,12 @@ aren't used are the ones that fail most often.  The same paragraph from RFC
   they don't get widespread real-world testing until *after* the base protocol
   has been deployed for a while, and its deficiencies have become evident.
 
-Indeed, basic interoperability is considered critical early in the deployment
-of a protocol, and any engineering practice that values simplicity will tend
-to make version negotiation and extension mechanisms optional for this basic
-interoperability. This leads to these mechanisms being uniquely affected by
-this problem.
+Indeed, basic interoperability is considered critical early in the
+deployment of a protocol.  Race-to-market attitudes frequent results in an
+engineering practice that values simplicity will tend to make version
+negotiation and extension mechanisms optional for this basic
+interoperability. This leads to these mechanisms being uniquely
+affected by this problem.
 
 Transport Layer Security (TLS) {{?TLS12=RFC5246}} provides examples of where a
 design that is objectively sound fails when incorrectly implemented.  TLS
