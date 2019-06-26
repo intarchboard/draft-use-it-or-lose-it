@@ -113,7 +113,7 @@ features that have some value to those implementing and deploying the protocol.
 It is not always the case that future extensibility is in that set.
 
 
-## Good Protocol Design is Not Sufficient
+## Good Protocol Design is Frequently Not Sufficient
 
 It is often argued that the design of a protocol extension point or version
 negotiation capability is critical to the freedom that it ultimately offers.
@@ -167,6 +167,22 @@ been proposed.  Despite an otherwise exemplary design, SNI is so inconsistently
 implemented that any hope for using the extension point it defines has been
 abandoned {{SNI}}.
 
+Requiring simplistic processing steps when encountering unknown
+conditions, such as unsupported version numbers, can potentially
+prevent these sorts of situations.  A counter example is the first
+version of the Simple Network Management Protocol (SNMP), where an
+unparsible and an authentication message are treated the same way be
+the server: no response is generated {{?SNMPv1=RFC1157}}:
+
+> It then verifies the version number of the SNMP message. If there is
+  a mismatch, it discards the datagram and performs no further
+  actions.
+
+When SNMP versions 2, 2c and 3 came along, older agents did exactly
+what the protocol specfies should have done: dropped it from being
+processing without returning a response.  This was likely successful
+because there was no requirement to create and return an elaborate
+error response to the client.
 
 ## Multi-Party Interactions and Middleboxes
 
