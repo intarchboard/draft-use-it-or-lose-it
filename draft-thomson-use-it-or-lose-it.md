@@ -171,7 +171,7 @@ Requiring simplistic processing steps when encountering unknown
 conditions, such as unsupported version numbers, can potentially
 prevent these sorts of situations.  A counter example is the first
 version of the Simple Network Management Protocol (SNMP), where an
-unparsible and an authentication message are treated the same way be
+unparseable and an authentication message are treated the same way by
 the server: no response is generated {{?SNMPv1=RFC1157}}:
 
 > It then verifies the version number of the SNMP message. If there is
