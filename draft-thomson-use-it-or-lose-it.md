@@ -136,7 +136,7 @@ aren't used are the ones that fail most often.  The same paragraph from RFC
   has been deployed for a while, and its deficiencies have become evident.
 
 Indeed, basic interoperability is considered critical early in the
-deployment of a protocol.  Race-to-market attitudes frequent results in an
+deployment of a protocol.  Race-to-market attitudes frequently result in an
 engineering practice that values simplicity will tend to make version
 negotiation and extension mechanisms optional for this basic
 interoperability. This leads to these mechanisms being uniquely
