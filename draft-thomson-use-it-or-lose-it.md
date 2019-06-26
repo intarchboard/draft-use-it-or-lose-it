@@ -222,26 +222,43 @@ that support evolution is the only way to ensure that they remain available for
 new uses.
 
 
-## Examples of Active Use
-
 The conditions for retaining the ability to evolve a design is most clearly
 evident in the protocols that are known to have viable version negotiation or
 extension points.  The definition of mechanisms alone is insufficient; it's the
-active use of those mechanisms that determines the existence of freedom.
+active use of those mechanisms that determines the existence of
+freedom.  Protocols that routinely add new extensions and code points
+rarely have trouble adding additional ones, especially when unknown
+code-points and extensions are to be safely ignored when not understood.
 
-For example, header fields in email {{?SMTP=RFC5322}}, HTTP {{?HTTP=RFC7230}}
-and SIP {{?SIP=RFC3261}} all derive from the same basic design.  There is no
-evidence of significant barriers to deploying header fields with new names and
-semantics in email and HTTP, though the widespread deployment of SIP B2BUAs
-means that new SIP header fields do not reliably reach peers.
+## Examples of Active Use
+
+For example, header fields in email {{?SMTP=RFC5322}}, HTTP
+{{?HTTP=RFC7230}} and SIP {{?SIP=RFC3261}} all derive from the same
+basic design, which amounts to a list name/value pairs.  There is no
+evidence of significant barriers to deploying header fields with new
+names and semantics in email and HTTP as clients and servers can
+simply ignore headers they do not understand or need.  The widespread
+deployment of SIP B2BUAs means that new SIP header fields do not
+reliably reach peers, however, which doesn't necessarily cause
+interoperability issues but rather does cause feature deployment
+issues.
 
 In another example, the attribute-value pairs (AVPs) in Diameter
-{{?DIAMETER=RFC6733}} are fundamental to the design of the protocol.  The
-definition of new uses of Diameter regularly exercise the ability to add new
-AVPs and do so with no fear that the new feature might not be successfully
-deployed.
+{{?DIAMETER=RFC6733}} are fundamental to the design of the protocol.
+The definition of new uses of Diameter regularly exercise the ability
+to add new Attribute-Value Pairs (AVPs) and do so without fear that
+the new feature might not be successfully deployed.
 
-These examples show extension points that are heavily used also being relatively
+Ossified DNS code bases and systems resulted in fears that new
+Resource Record Codes (RRCodes) would take years of software
+propagation before new RRCodes could be used.  The result for a long
+time was heavily overloaded use of the TXT record, such as in the
+Sender Policy Framework {{?SPF=RFC7208}}.  It wasn't until after the
+standard mechanism for dealing with new RRCodes {{?RRTYPE=RFC3597}}
+was considered widely deployed that new RRCodes can be safely created
+and used immediately.
+
+These examples show extension points that are heavily used are also being relatively
 unaffected by deployment issues preventing addition of new values for new use
 cases.
 
@@ -251,9 +268,10 @@ For instance, the shortcomings of HTTP header fields are significant enough that
 there are ongoing efforts to improve the syntax
 {{?HTTP-HEADERS=I-D.ietf-httpbis-header-structure}}.
 
-Only using a protocol capability is able to ensure availability of that
-capability.  Protocols that fail to use a mechanism, or a protocol that only
-rarely uses a mechanism, suffer an inability to rely on that mechanism.
+Only by using a protocol's extension capabilities does it ensure the
+availability of that capability.  Protocols that fail to use a
+mechanism, or a protocol that only rarely uses a mechanism, may suffer an
+inability to rely on that mechanism.
 
 
 ## Dependency is Better {#need-it}
