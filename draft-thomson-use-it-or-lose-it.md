@@ -202,7 +202,12 @@ element on path can interact with the protocol.  For example, HTTP was
 specifically designed with intermediation in mind, transparent proxies
 {{?HTTP=RFC7230}} are not only possible but sometimes advantageous, despite
 some significant downsides.  Consequently, transparent proxies for cleartext
-HTTP are commonplace.
+HTTP are commonplace.  The DNS protocol was designed with
+intermediation in mind through its use of caching recursive
+resolvers {{?DNS=RFC1034}}.  What was less anticipated was the forced
+spoofing of DNS records by many middle-boxes to inject authentication
+or pay-wall mechanisms as an authentication and authorization check,
+which are now prevalent in hotels, coffee shops and business networks.
 
 Middleboxes are also protocol participants, to the degree that they are able
 to observe and act in ways that affect the protocol.  The degree to which a
@@ -223,10 +228,11 @@ By increasing the number of different actors involved in any single protocol
 exchange, the number of potential implementation bugs that a deployment needs to
 contend with also increases.  In particular, incompatible changes to a protocol
 that might be negotiated between endpoints in ignorance of the presence of a
-middlebox can result in a middlebox acting badly.
+middlebox can result in a middlebox interfering in negative and
+unexpected ways.
 
-Thus, middleboxes can increase the difficulty of deploying changes to a protocol
-considerably.
+Unfortunately, middleboxes can considerably increase the difficulty of
+deploying new versions or other changes to a protocol.
 
 
 # Retaining Viable Protocol Evolution Mechanisms {#use-it}
