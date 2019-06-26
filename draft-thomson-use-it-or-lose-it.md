@@ -179,7 +179,7 @@ the server: no response is generated {{?SNMPv1=RFC1157}}:
   actions.
 
 When SNMP versions 2, 2c and 3 came along, older agents did exactly
-what the protocol specfies should have done: dropped it from being
+what the protocol specifies should have done: dropped it from being
 processing without returning a response.  This was likely successful
 because there was no requirement to create and return an elaborate
 error response to the client.
