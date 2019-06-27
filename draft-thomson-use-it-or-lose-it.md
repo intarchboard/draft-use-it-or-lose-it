@@ -442,6 +442,9 @@ alternative services {{?ALT-SVC=RFC7838}} are not permitted to affect the
 outcome of transactions.  An automated feedback system for capturing failures in
 alternative services is therefore necessary for failures to be detected.
 
+How errors are gathered and reported will depend greatly on the nature of the
+protocol deployment and the entity that receives the report.
+
 
 # Security Considerations
 
