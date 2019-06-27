@@ -79,12 +79,18 @@ broadly.
 
 This document examines the specific conditions that determine whether protocol
 maintainers have the ability to design and deploy new or modified protocols.
-{{implementations}} highlights some historical issues with
-difficulties in transitions to new protocol features.  {{use-it}}
-argues that ossified protocols are more difficult to update and
-successful protocols make frequent use of new extensions and code-points.
-{{strategies}} outlines several strategies that might aid in ensuring that
-protocol changes remain possible over time.
+{{implementations}} highlights some historical issues with difficulties in
+transitions to new protocol features.  {{use-it}} argues that ossified protocols
+are more difficult to update and successful protocols make frequent use of new
+extensions and code-points.  {{strategies}} outlines several strategies that
+might aid in ensuring that protocol changes remain possible over time.
+
+The experience that informs this document is predominantly at "higher" layers of
+the network stack, in protocols that operate at very large scale and
+Internet-scale applications.  It is possible that these conclusions are less
+applicable to protocol deployments that have less scale and diversity, or
+operate under different constraints.
+
 
 # Implementations of Protocols are Imperfect {#implementations}
 
