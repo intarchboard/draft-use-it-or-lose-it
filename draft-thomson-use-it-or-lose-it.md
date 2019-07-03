@@ -205,7 +205,7 @@ some significant downsides.  Consequently, transparent proxies for cleartext
 HTTP are commonplace.  The DNS protocol was designed with
 intermediation in mind through its use of caching recursive
 resolvers {{?DNS=RFC1034}}.  What was less anticipated was the forced
-spoofing of DNS records by many middle-boxes to inject authentication
+spoofing of DNS records by many middle-boxes such as those that inject authentication
 or pay-wall mechanisms as an authentication and authorization check,
 which are now prevalent in hotels, coffee shops and business networks.
 
