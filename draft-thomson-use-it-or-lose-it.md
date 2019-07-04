@@ -119,7 +119,7 @@ features that have some value to those implementing and deploying the protocol.
 It is not always the case that future extensibility is in that set.
 
 
-## Good Protocol Design is Not Sufficient
+## Good Protocol Design is Not Itself Sufficient
 
 It is often argued that the design of a protocol extension point or version
 negotiation capability is critical to the freedom that it ultimately offers.
@@ -141,11 +141,12 @@ aren't used are the ones that fail most often.  The same paragraph from RFC
   they don't get widespread real-world testing until *after* the base protocol
   has been deployed for a while, and its deficiencies have become evident.
 
-Indeed, basic interoperability is considered critical early in the deployment
-of a protocol, and any engineering practice that values simplicity will tend
-to make version negotiation and extension mechanisms optional for this basic
-interoperability. This leads to these mechanisms being uniquely affected by
-this problem.
+Indeed, basic interoperability is considered critical early in the
+deployment of a protocol.  Race-to-market attitudes frequently result in an
+engineering practice that values simplicity will tend to make version
+negotiation and extension mechanisms optional for this basic
+interoperability. This leads to these mechanisms being uniquely
+affected by this problem.
 
 Transport Layer Security (TLS) {{?TLS12=RFC5246}} provides examples of where a
 design that is objectively sound fails when incorrectly implemented.  TLS
@@ -172,6 +173,22 @@ been proposed.  Despite an otherwise exemplary design, SNI is so inconsistently
 implemented that any hope for using the extension point it defines has been
 abandoned {{SNI}}.
 
+Requiring simplistic processing steps when encountering unknown
+conditions, such as unsupported version numbers, can potentially
+prevent these sorts of situations.  A counter example is the first
+version of the Simple Network Management Protocol (SNMP), where an
+unparseable and an authentication message are treated the same way by
+the server: no response is generated {{?SNMPv1=RFC1157}}:
+
+> It then verifies the version number of the SNMP message. If there is
+  a mismatch, it discards the datagram and performs no further
+  actions.
+
+When SNMP versions 2, 2c and 3 came along, older agents did exactly
+what the protocol specifies should have done: dropped it from being
+processing without returning a response.  This was likely successful
+because there was no requirement to create and return an elaborate
+error response to the client.
 
 ## Multi-Party Interactions and Middleboxes
 
@@ -191,7 +208,12 @@ element on path can interact with the protocol.  For example, HTTP was
 specifically designed with intermediation in mind, transparent proxies
 {{?HTTP=RFC7230}} are not only possible but sometimes advantageous, despite
 some significant downsides.  Consequently, transparent proxies for cleartext
-HTTP are commonplace.
+HTTP are commonplace.  The DNS protocol was designed with
+intermediation in mind through its use of caching recursive
+resolvers {{?DNS=RFC1034}}.  What was less anticipated was the forced
+spoofing of DNS records by many middle-boxes such as those that inject authentication
+or pay-wall mechanisms as an authentication and authorization check,
+which are now prevalent in hotels, coffee shops and business networks.
 
 Middleboxes are also protocol participants, to the degree that they are able
 to observe and act in ways that affect the protocol.  The degree to which a
@@ -212,10 +234,11 @@ By increasing the number of different actors involved in any single protocol
 exchange, the number of potential implementation bugs that a deployment needs to
 contend with also increases.  In particular, incompatible changes to a protocol
 that might be negotiated between endpoints in ignorance of the presence of a
-middlebox can result in a middlebox acting badly.
+middlebox can result in a middlebox interfering in negative and
+unexpected ways.
 
-Thus, middleboxes can increase the difficulty of deploying changes to a protocol
-considerably.
+Unfortunately, middleboxes can considerably increase the difficulty of
+deploying new versions or other changes to a protocol.
 
 
 # Retaining Viable Protocol Evolution Mechanisms {#use-it}
