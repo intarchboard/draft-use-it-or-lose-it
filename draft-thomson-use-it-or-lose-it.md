@@ -445,7 +445,7 @@ alternative services is therefore necessary for failures to be detected.
 How errors are gathered and reported will depend greatly on the nature of the
 protocol deployment and the entity that receives the report.  For instance, end
 users, developers, and network operations each have different requirements for
-how error reports are created, managed, and acted upon..
+how error reports are created, managed, and acted upon.
 
 
 # Security Considerations
