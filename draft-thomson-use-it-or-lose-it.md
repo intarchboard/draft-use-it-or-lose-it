@@ -426,7 +426,7 @@ the mechanisms it safeguards.  Though it has been effective at revealing
 problems in some cases with TLS, the efficacy of greasing isn't proven more
 generally.  Where implementations are able to tolerate a non-zero error rate in
 their operation, greasing offers a potential option for safeguarding
-extensibility.
+future extensibility.
 
 
 ## Effective Feedback
