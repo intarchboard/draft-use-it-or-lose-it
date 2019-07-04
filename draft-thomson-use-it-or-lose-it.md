@@ -383,29 +383,27 @@ encrypted, QUIC uses integrity protection to prevent modification.
 ## Grease
 
 "Grease" {{?GREASE=I-D.ietf-tls-grease}} identifies lack of use as an issue
-(protocol mechanisms "rusting" shut) and proposes a system of use that exercises
-extension points by using dummy values.
+(protocol mechanisms "rusting" shut) and proposes reserving values for
+extensions that have no semantic value attached.
 
-The primary feature of the grease design is aimed at the style of negotiation
-most used in TLS, where the client offers a set of options and the server
-chooses the one that it most prefers from those that it supports.  A client that
-uses grease randomly offers options - usually just one - from a set of reserved
-values.  These values are guaranteed to never be assigned real meaning, so the
-server will never have cause to genuinely select one of these values.
+The design in {{?GREASE}} is aimed at the style of negotiation most used in
+TLS, where the client offers a set of options and the server chooses the one
+that it most prefers from those that it supports.  A client that uses grease
+randomly offers options - usually just one - from a set of reserved values.
+These values are guaranteed to never be assigned real meaning, so the server
+will never have cause to genuinely select one of these values.
+
+More generally, greasing is used to refer to any attempt to exercise extension
+points without changing endpoint behavior, other than to encourage participants
+to tolerate new or varying values of protocol elements.
 
 The principle that grease operates on is that an implementation that is
-regularly exposed to unknown values is not likely to become intolerant of new
+regularly exposed to unknown values is less likely to be intolerant of new
 values when they appear.  This depends largely on the assumption that the
-difficulty of implementing the protocol mechanism correctly is not significantly
-more effort than implementing code to specifically filter out the randomized
-grease values.
-
-To avoid simple techniques for filtering greasing codepoints, grease values are
-not reserved from a single contiguous block of code points, but are distributed
-evenly across the entire space of code points.  Reserving a randomly selected
-set of code points has a greater chance of avoiding this problem, though it
-might be more difficult to specify and implement, especially over larger code
-point spaces.
+difficulty of implementing the extension mechanism correctly is not
+significantly more effort than implementing code to identify and filter out
+reserved values.  Reserving random or unevenly distributed values for this
+purpose is thought to further discourage special treatment.
 
 Without reserved greasing codepoints, an implementation can use code points from
 spaces used for private or experimental use if such a range exists.  In addition
@@ -418,11 +416,31 @@ the mechanisms it safeguards.  Though it has been effective at revealing
 problems in some cases with TLS, its efficacy isn't proven more generally.
 
 This style of defensive design is limited because it is only superficial.  It
-only exercises a small part of the mechanisms supporting extensibility.  More
+only exercises a small part of the mechanisms that support extensibility.  More
 critically, it does not easily translate to all forms of extension point.  For
 instance, HMSV negotiation cannot be greased in this fashion.  Other techniques
 might be necessary for protocols that don't rely on the particular style of
 exchange that is predominant in TLS.
+
+
+## Invariants
+
+Documenting aspects of the protocol that cannot or will not change as
+extensions or new versions are added can be a useful exercise. Understanding
+what aspects of a protocol are invariant can help guide the process of
+identifying those parts of the protocol that might change.
+
+As a means of protecting extensibility, a declaration of protocol invariants is
+useful only to the extent that protocol participants are willing to
+allow new uses for the protocol.  Like greasing, protocol participants could
+still purposefully block the deployment of new features.  A protocol that
+declares protocol invariants relies on implementations understanding and
+respecting those invariants.
+
+Protocol invariants need to be clearly and concisely documented.  Including
+examples of aspects of the protocol that are not invariant, such as the
+appendix of {{?QUIC-INVARIANTS=I-D.ietf-quic-invariants}}, can be used to
+clarify intent.
 
 
 ## Effective Feedback
