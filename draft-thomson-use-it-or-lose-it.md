@@ -79,11 +79,14 @@ broadly.
 
 This document examines the specific conditions that determine whether protocol
 maintainers have the ability to design and deploy new or modified protocols.
+{{implementations}} highlights some historical issues with
+difficulties in transitions to new protocol features.  {{use-it}}
+argues that ossified protocols are more difficult to update and
+successful protocols make frequent use of new extensions and code-points.
 {{strategies}} outlines several strategies that might aid in ensuring that
 protocol changes remain possible over time.
 
-
-# Implementations of Protocols are Imperfect
+# Implementations of Protocols are Imperfect {#implementations}
 
 A change to a protocol can be made extremely difficult to deploy if there are
 bugs in implementations with which the new deployment needs to interoperate.
@@ -97,16 +100,19 @@ deploying mechanisms that trigger adverse reactions can be untenable.  Where
 interoperability is a competitive advantage, this is true even if the negative
 reactions happen infrequently or only under relatively rare conditions.
 
-Deploying a change to a protocol could require fixing a substantial proportion
-of the bugs that the change exposes.  This can involve a difficult process that
-includes identifying the cause of these errors, finding the responsible
-implementation, coordinating a bug fix and release plan, contacting the operator
-of affected services, and waiting for the fix to be deployed to those services.
+Deploying a change to a protocol could require implementations fix a
+substantial proportion of the bugs that the change exposes.  This can
+involve a difficult process that includes identifying the cause of
+these errors, finding the responsible implementation(s), coordinating a
+bug fix and release plan, contacting users and/or the operator of affected
+services, and waiting for the fix to be deployed.
 
-Given the effort involved in fixing problems, the existence of these sorts of
-bugs can outright prevent the deployment of some types of protocol changes.  It
-could even be necessary to come up with a new protocol design that uses a
-different method to achieve the same result.
+Given the effort involved in fixing problems, the existence of these
+sorts of bugs can outright prevent the deployment of some types of
+protocol changes, especially for protocols involving multiple parties or that are considered
+critical infrastructure (e.g., IP, BGP, DNS, or TLS).  It could even be
+necessary to come up with a new protocol design that uses a different
+method to achieve the same result.
 
 The set of interoperable features in a protocol is often the subset of its
 features that have some value to those implementing and deploying the protocol.
@@ -222,26 +228,41 @@ that support evolution is the only way to ensure that they remain available for
 new uses.
 
 
-## Examples of Active Use
-
 The conditions for retaining the ability to evolve a design is most clearly
 evident in the protocols that are known to have viable version negotiation or
 extension points.  The definition of mechanisms alone is insufficient; it's the
-active use of those mechanisms that determines the existence of freedom.
+active use of those mechanisms that determines the existence of
+freedom.  Protocols that routinely add new extensions and code points
+rarely have trouble adding additional ones, especially when unknown
+code-points and extensions are to be safely ignored when not understood.
+
+
+## Examples of Active Use
 
 For example, header fields in email {{?SMTP=RFC5322}}, HTTP {{?HTTP=RFC7230}}
-and SIP {{?SIP=RFC3261}} all derive from the same basic design.  There is no
-evidence of significant barriers to deploying header fields with new names and
-semantics in email and HTTP, though the widespread deployment of SIP B2BUAs
-means that new SIP header fields do not reliably reach peers.
+and SIP {{?SIP=RFC3261}} all derive from the same basic design, which amounts to
+a list name/value pairs.  There is no evidence of significant barriers to
+deploying header fields with new names and semantics in email and HTTP as
+clients and servers can ignore headers they do not understand or need.  The
+widespread deployment of SIP B2BUAs means that new SIP header fields do not
+reliably reach peers, however, which doesn't necessarily cause interoperability
+issues but rather does cause feature deployment issues.
 
 In another example, the attribute-value pairs (AVPs) in Diameter
-{{?DIAMETER=RFC6733}} are fundamental to the design of the protocol.  The
-definition of new uses of Diameter regularly exercise the ability to add new
-AVPs and do so with no fear that the new feature might not be successfully
-deployed.
+{{?DIAMETER=RFC6733}} are fundamental to the design of the protocol.  Any use of
+Diameter requires exercising the ability to add new AVPs.  This is routinely
+done without fear that the new feature might not be successfully deployed.
 
-These examples show extension points that are heavily used also being relatively
+Ossified DNS code bases and systems resulted in fears that new
+Resource Record Codes (RRCodes) would take years of software
+propagation before new RRCodes could be used.  The result for a long
+time was heavily overloaded use of the TXT record, such as in the
+Sender Policy Framework {{?SPF=RFC7208}}.  It wasn't until after the
+standard mechanism for dealing with new RRCodes {{?RRTYPE=RFC3597}}
+was considered widely deployed that new RRCodes can be safely created
+and used immediately.
+
+These examples show extension points that are heavily used are also being relatively
 unaffected by deployment issues preventing addition of new values for new use
 cases.
 
@@ -251,9 +272,10 @@ For instance, the shortcomings of HTTP header fields are significant enough that
 there are ongoing efforts to improve the syntax
 {{?HTTP-HEADERS=I-D.ietf-httpbis-header-structure}}.
 
-Only using a protocol capability is able to ensure availability of that
-capability.  Protocols that fail to use a mechanism, or a protocol that only
-rarely uses a mechanism, suffer an inability to rely on that mechanism.
+Only by using a protocol's extension capabilities does it ensure the
+availability of that capability.  Protocols that fail to use a
+mechanism, or a protocol that only rarely uses a mechanism, may suffer an
+inability to rely on that mechanism.
 
 
 ## Dependency is Better {#need-it}
@@ -341,6 +363,23 @@ guidelines for new protocol development, as much is being learned about what
 techniques are most effective.
 
 
+## Cryptography
+
+Cryptography can be used to reduce the number of entities that can participate
+in a protocol.  Using tools like TLS ensures that only authorized participants
+are able to influence whether a new protocol feature is used.
+
+Permitting fewer protocol participants reduces the number of implementations
+that can prevent a new mechanism from being deployed.  As recommended in
+{{?PATH-SIGNALS=I-D.iab-path-signals}}, use of encryption and integrity
+protection can be used to limit participation.
+
+For example, the QUIC protocol {{?QUIC=I-D.ietf-quic-transport}} adopts both
+encryption and integrity protection.  Encryption is used to carefully control
+what information is exposed to middleboxes.  For those fields that are not
+encrypted, QUIC uses integrity protection to prevent modification.
+
+
 ## Grease
 
 "Grease" {{?GREASE=I-D.ietf-tls-grease}} identifies lack of use as an issue
@@ -402,23 +441,6 @@ Protocol invariants need to be clearly and concisely documented.  Including
 examples of aspects of the protocol that are not invariant, such as the
 appendix of {{?QUIC-INVARIANTS=I-D.ietf-quic-invariants}}, can be used to
 clarify intent.
-
-
-## Cryptography
-
-Cryptography can be used to reduce the number of entities that can participate
-in a protocol.  Using tools like TLS ensures that only authorized participants
-are able to influence whether a new protocol feature is used.
-
-Permitting fewer protocol participants reduces the number of implementations
-that can prevent a new mechanism from being deployed.  As recommended in
-{{?PATH-SIGNALS=I-D.iab-path-signals}}, use of encryption and integrity
-protection can be used to limit participation.
-
-For example, the QUIC protocol {{?QUIC=I-D.ietf-quic-transport}} adopts both
-encryption and integrity protection.  Encryption is used to carefully control
-what information is exposed to middleboxes.  For those fields that are not
-encrypted, QUIC uses integrity protection to prevent modification.
 
 
 ## Effective Feedback
