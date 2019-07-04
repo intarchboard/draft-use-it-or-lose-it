@@ -100,16 +100,19 @@ deploying mechanisms that trigger adverse reactions can be untenable.  Where
 interoperability is a competitive advantage, this is true even if the negative
 reactions happen infrequently or only under relatively rare conditions.
 
-Deploying a change to a protocol could require fixing a substantial proportion
-of the bugs that the change exposes.  This can involve a difficult process that
-includes identifying the cause of these errors, finding the responsible
-implementation, coordinating a bug fix and release plan, contacting the operator
-of affected services, and waiting for the fix to be deployed to those services.
+Deploying a change to a protocol could require implementations fix a
+substantial proportion of the bugs that the change exposes.  This can
+involve a difficult process that includes identifying the cause of
+these errors, finding the responsible implementation(s), coordinating a
+bug fix and release plan, contacting users and/or the operator of affected
+services, and waiting for the fix to be deployed.
 
-Given the effort involved in fixing problems, the existence of these sorts of
-bugs can outright prevent the deployment of some types of protocol changes.  It
-could even be necessary to come up with a new protocol design that uses a
-different method to achieve the same result.
+Given the effort involved in fixing problems, the existence of these
+sorts of bugs can outright prevent the deployment of some types of
+protocol changes, especially for protocols involving multiple parties or that are considered
+critical infrastructure (e.g., IP, BGP, DNS, or TLS).  It could even be
+necessary to come up with a new protocol design that uses a different
+method to achieve the same result.
 
 The set of interoperable features in a protocol is often the subset of its
 features that have some value to those implementing and deploying the protocol.
