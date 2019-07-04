@@ -113,7 +113,7 @@ features that have some value to those implementing and deploying the protocol.
 It is not always the case that future extensibility is in that set.
 
 
-## Good Protocol Design is Frequently Not Sufficient
+## Good Protocol Design is Not Itself Sufficient
 
 It is often argued that the design of a protocol extension point or version
 negotiation capability is critical to the freedom that it ultimately offers.
