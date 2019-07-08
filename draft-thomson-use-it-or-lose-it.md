@@ -209,7 +209,8 @@ By increasing the number of different actors involved in any single protocol
 exchange, the number of potential implementation bugs that a deployment needs to
 contend with also increases.  In particular, incompatible changes to a protocol
 that might be negotiated between endpoints in ignorance of the presence of a
-middlebox can result in a middlebox acting badly.
+middlebox can result in a middlebox preventing interoperability that
+would have otherwise succeeded.
 
 Thus, middleboxes can increase the difficulty of deploying changes to a protocol
 considerably.
