@@ -67,15 +67,12 @@ continue to fulfill the needs of its users.  New use cases, conditions and
 constraints on the deployment of a protocol can render a protocol that does not
 change obsolete.
 
-Usage patterns and requirements for a protocol shift over time.  Protocols can
-react to these shifts in one of three ways: adjust usage patterns within the
-constraints of the protocol, extend the protocol, and replace the protocol.
-These reactions are progressively more disruptive, but are also dictated by the
-nature of the change in requirements over longer periods.
-
-Experience with Internet-scale protocol deployment shows that changing protocols
-is not uniformly successful.  {{?TRANSITIONS=RFC8170}} examines the problem more
-broadly.
+Usage patterns and requirements for a protocol shift over time.  In response,
+implementations might adjust usage patterns within the constraints of the
+protocol, the protocol could be extended, or a replacement protocol might be
+developed.  Experience with Internet-scale protocol deployment shows that each
+option comes with different costs.  {{?TRANSITIONS=RFC8170}} examines the
+problem of protocol evolution more broadly.
 
 This document examines the specific conditions that determine whether protocol
 maintainers have the ability to design and deploy new or modified protocols.
