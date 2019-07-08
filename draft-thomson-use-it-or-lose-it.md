@@ -521,5 +521,5 @@ This document makes no request of IANA.
 # Acknowledgments
 {:numbered="false"}
 
-Mirja Kühlewind, Mark Nottingham, and Brian Trammell made significant
-contributions to this document.
+Wes Hardaker, Mirja Kühlewind, Mark Nottingham, and Brian Trammell made
+significant contributions to this document.
