@@ -170,7 +170,7 @@ implemented that any hope for using the extension point it defines has been
 abandoned {{SNI}}.
 
 
-## Multi-Party Interactions and Middleboxes
+## Multi-Party Interactions and Middleboxes {#middleboxes}
 
 Even the most superficially simple protocols can often involve more actors than
 is immediately apparent.  A two-party protocol has two ends, but even at the
@@ -219,20 +219,22 @@ considerably.
 # Retaining Viable Protocol Evolution Mechanisms {#use-it}
 
 The design of a protocol for extensibility and eventual replacement
-{{?EXTENSIBILITY}} does not guarantee the ability to exercise those options.
-The set of features that enable future evolution need to be interoperable in the
-first implementations and deployments of the protocol.  Active use of mechanisms
-that support evolution is the only way to ensure that they remain available for
-new uses.
+{{?EXTENSIBILITY}} does not guarantee the ability to exercise those
+options.  The set of features that enable future evolution need to be
+interoperable in the first implementations and deployments of the
+protocol.  Implementations of mechanisms that support evolution
+is necessary to ensure that they remain available for new uses, and
+history has shown this occurs almost exclusively under active
+mechanism use.
 
-
-The conditions for retaining the ability to evolve a design is most clearly
-evident in the protocols that are known to have viable version negotiation or
-extension points.  The definition of mechanisms alone is insufficient; it's the
-active use of those mechanisms that determines the existence of
-freedom.  Protocols that routinely add new extensions and code points
-rarely have trouble adding additional ones, especially when unknown
-code-points and extensions are to be safely ignored when not understood.
+The conditions for retaining the ability to evolve a design is most
+clearly evident in the protocols that are known to have viable version
+negotiation or extension points.  The definition of mechanisms alone
+is insufficient; it's the assured implementation through active use of
+those mechanisms that determines the existence of freedom.  Protocols
+that routinely add new extensions and code points rarely have trouble
+adding additional ones, especially when unknown code-points and
+extensions are to be safely ignored when not understood.
 
 
 ## Examples of Active Use
@@ -244,9 +246,10 @@ deploying header fields with new names and semantics in email and HTTP as
 clients and servers can ignore headers they do not understand or need.  The
 widespread deployment of SIP B2BUAs means that new SIP header fields do not
 reliably reach peers, however, which doesn't necessarily cause interoperability
-issues but rather does cause feature deployment issues.
+issues but rather causes feature deployment issues due to the lack of
+option passing {{middleboxes}}.
 
-In another example, the attribute-value pairs (AVPs) in Diameter
+As another example, the attribute-value pairs (AVPs) in Diameter
 {{?DIAMETER=RFC6733}} are fundamental to the design of the protocol.  Any use of
 Diameter requires exercising the ability to add new AVPs.  This is routinely
 done without fear that the new feature might not be successfully deployed.
@@ -264,7 +267,8 @@ These examples show extension points that are heavily used are also being relati
 unaffected by deployment issues preventing addition of new values for new use
 cases.
 
-These examples also confirm the case that good design is not a prerequisite for
+These examples also confirm the case that good design is not a
+solitary prerequisite for
 success.  On the contrary, success is often despite shortcomings in the design.
 For instance, the shortcomings of HTTP header fields are significant enough that
 there are ongoing efforts to improve the syntax
@@ -278,18 +282,26 @@ inability to rely on that mechanism.
 
 ## Dependency is Better {#need-it}
 
-The best way to guarantee that a protocol mechanism is used is to make it
-critical to an endpoint participating in that protocol.  This means that
-implementations rely on both the existence of the protocol mechanism and its
-use.
+The best way to guarantee that a protocol mechanism is used is to make
+the understanding of it critical to an endpoint participating in that
+protocol.  This means that implementations must rely on both the
+existence of extension mechanisms and their continued, repeated
+expansion over time.
 
 For example, the message format in SMTP relies on header fields for most of its
-functions, including the most basic functions.  A deployment of SMTP cannot
+functions, including the most basic delivery functions.
+A deployment of SMTP cannot
 avoid including an implementation of header field handling.  In addition to
 this, the regularity with which new header fields are defined and used ensures
-that deployments frequently encounter header fields that it does not understand.
+that deployments frequently encounter header fields that it does not
+yet (and may never) understand.
 An SMTP implementation therefore needs to be able to both process header fields
 that it understands and ignore those that it does not.
+<!-- wjh: do we want to mention that the success of headers functionally is -->
+<!-- because there is a mix of both protocol specific fields and extra -->
+<!-- meta data; IE, allowing users and developers to specify new -->
+<!-- fields that will never be part of the protocol makes the fields -->
+<!-- be understood -->
 
 In this way, implementing the extensibility mechanism is not merely mandated by
 the specification, it is crucial to the functioning of a protocol deployment.
@@ -301,7 +313,7 @@ mechanism is sufficient to ensure availability of that mechanism in the long
 term.  If the set of possible uses is narrowly constrained and deployments do
 not change over time, implementations might not see new variations or assume a
 narrower interpretation of what is possible.  Those implementations might still
-exhibit errors when presented with a new variation.
+exhibit errors when presented with new variations.
 
 
 ## Unused Extension Points Become Unusable {#unused}
@@ -311,7 +323,7 @@ been either completely unused, or their use was so infrequent that they could no
 longer be relied upon to function correctly.
 
 HTTP has a number of very effective extension points in addition to the
-aforementioned header fields.  It also has some examples of extension point that
+aforementioned header fields.  It also has some examples of extension points that
 are so rarely used that it is possible that they are not at all usable.
 Extension points in HTTP that might be unwise to use include the extension point
 on each chunk in the chunked transfer coding {{?HTTP=RFC7230}}, the ability to use
@@ -323,7 +335,11 @@ values does not change over time, there is still a risk that new values are not
 tolerated by existing implementations.  If the set of values for a particular
 field remains fixed over a long period, some implementations might not correctly
 handle a new value when it is introduced.  For example, implementations of TLS
-broke when new values of the signature_algorithms extension were introduced.
+broke when new values of the signature_algorithms extension were
+introduced.
+
+<!-- wjh: mandator and optional frequently means only mandatory is -->
+<!-- used -->
 
 Codepoints that are reserved for future use can be especially problematic.
 Reserving codepoints without attributing semantics to their use can result in
@@ -338,32 +354,36 @@ requires that the negotiation include all protocol participants.
 # Defensive Design Principles for Protocols {#strategies}
 
 There are several potential approaches that can provide some measure of
-protection against a protocol deployment becoming resistant to change.
+protection against a protocol deployment becoming resistant to future changes.
 
 
 ## Active Use
 
-As discussed in {{use-it}}, the most effective defense against misuse of
+As discussed in {{use-it}}, the most effective defense against
+ossification of
 protocol extension points is active use.
 
 Implementations are most likely to be tolerant of new values if they depend on
-being able to use new values.  Failing that, implementations that routinely see
-new values are more likely to correctly handle new values.  More frequent
+being able to frequently use new values.
+Failing that, implementations that routinely see
+new values are more likely to correctly handle, potentially safely
+ignoring, new values.  More frequent
 changes will improve the likelihood that incorrect handling or intolerance is
 discovered and rectified.  The longer an intolerant implementation is deployed,
 the more difficult it is to correct.
 
-What active use means could depend greatly on the environment in which a
+What active use means can depend greatly on the environment in which a
 protocol is deployed.  The frequency of changes necessary to safeguard some
 mechanisms might be slow enough to attract ossification in another protocol
 deployment, while being excessive in others.  There are currently no firm
 guidelines for new protocol development, as much is being learned about what
 techniques are most effective.
-
+<!-- wjh: the last half of that sentence makes no sense to me (and -->
+<!-- thus I can't fix it either) -->
 
 ## Cryptography
 
-Cryptography can be used to reduce the number of entities that can participate
+Cryptography can be used to reduce the number of middlebox entities that can participate
 in a protocol.  Using tools like TLS ensures that only authorized participants
 are able to influence whether a new protocol feature is used.
 
@@ -417,18 +437,22 @@ problems in some cases with TLS, its efficacy isn't proven more generally.
 
 This style of defensive design is limited because it is only superficial.  It
 only exercises a small part of the mechanisms supporting extensibility.  More
-critically, it does not easily translate to all forms of extension point.  For
+critically, it does not easily translate to all forms of extension points.  For
 instance, HMSV negotiation cannot be greased in this fashion.  Other techniques
 might be necessary for protocols that don't rely on the particular style of
 exchange that is predominant in TLS.
 
+Grease also requires a participant that is willing to invest the time
+and code in an implementation to implement grease; this is likely hard
+to find for new protocols and it may be that only protocols in danger
+of ossification will attract motivated implementers.
 
 ## Effective Feedback
 
 While not a direct means of protecting extensibility mechanisms, feedback
 systems can be important to discovering problems.
 
-Visibility of errors is critical to the success of the grease technique (see
+Visibility of errors is critical to the success of techniques like grease (see
 {{grease}}).  The grease design is most effective if a deployment has a means of
 detecting and reporting errors.  Ignoring errors could allow problems to become
 entrenched.
@@ -443,6 +467,9 @@ alternative services {{?ALT-SVC=RFC7838}} are not permitted to affect the
 outcome of transactions.  An automated feedback system for capturing failures in
 alternative services is therefore necessary for failures to be detected.
 
+Automated delivery of error reports can be critical for squashing
+deployment errors as early as possible, such as seen in {{?DMARC=RFC7589}}
+and {{?SMTP-TLS-Reporting=RFC8460}}.
 
 # Security Considerations
 
