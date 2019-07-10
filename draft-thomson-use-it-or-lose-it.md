@@ -364,10 +364,10 @@ tolerated by existing implementations.  If the set of values for a particular
 field remains fixed over a long period, some implementations might not correctly
 handle a new value when it is introduced.  For example, implementations of TLS
 broke when new values of the signature_algorithms extension were
-introduced.
-
-<!-- wjh: mandator and optional frequently means only mandatory is -->
-<!-- used -->
+introduced.  Mandatory-to-implement parameters, intended to promote
+minimal interoperability, may actually reduce the interoperability of
+the other code points, which seem almost pointless to implement in the
+shadow of the mandatory one.
 
 Codepoints that are reserved for future use can be especially problematic.
 Reserving codepoints without attributing semantics to their use can result in
