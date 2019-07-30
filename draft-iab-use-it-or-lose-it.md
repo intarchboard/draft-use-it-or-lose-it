@@ -150,6 +150,9 @@ values simplicity, which could result in deferring implementation of version
 negotiation and extension mechanisms.  This leads to these mechanisms being
 uniquely affected by this problem.
 
+
+## Examples of Disuse
+
 Transport Layer Security (TLS) {{?TLS12=RFC5246}} provides examples of where a
 design that is objectively sound fails when incorrectly implemented.  TLS
 provides examples of failures in protocol version negotiation and extensibility.
@@ -183,19 +186,16 @@ until after the standard mechanism for dealing with new RRCodes
 {{?RRTYPE=RFC3597}} was considered widely deployed that new RRCodes can be
 safely created and used.
 
-As a counter example, clear and simple handling for new inputs, such as
-unsupported version numbers, might prevent these sorts of situations.  The first
-version of the Simple Network Management Protocol (SNMP) {{?SNMPv1=RFC1157}}
-defines that unparseable or unauthenticated messages are simply discarded
-without response:
+As a counter example, the first version of the Simple Network Management
+Protocol (SNMP) {{?SNMPv1=RFC1157}} defines that unparseable or unauthenticated
+messages are simply discarded without response:
 
 > It then verifies the version number of the SNMP message. If there is a
   mismatch, it discards the datagram and performs no further actions.
 
 When SNMP versions 2, 2c and 3 came along, older agents did exactly what the
 protocol specifies.  Deployment of new versions was likely successful because
-the handling of newer versions was well specified and easy to implement
-correctly.
+the handling of newer versions was both clear and simple.
 
 
 ## Multi-Party Interactions and Middleboxes {#middleboxes}

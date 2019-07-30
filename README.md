@@ -1,10 +1,10 @@
 # Long-term Viability of Protocol Extension Mechanisms
 
-This is the working area for the individual Internet-Draft, "Long-term Viability of Protocol Extension Mechanisms".
+This is the working area for the IAB Internet-Draft, "Long-term Viability of Protocol Extension Mechanisms".
 
-* [Editor's Copy](https://martinthomson.github.io/use-it-or-lose-it/#go.draft-thomson-use-it-or-lose-it.html)
-* [Working Group Draft](https://tools.ietf.org/html/draft-thomson-use-it-or-lose-it)
-* [Compare Editor's Copy to Working Group Draft](https://martinthomson.github.io/use-it-or-lose-it/#go.draft-thomson-use-it-or-lose-it.diff)
+* [Editor's Copy](https://intarchboard.github.io/use-it-or-lose-it/#go.draft-iab-use-it-or-lose-it.html)
+* [Working Group Draft](https://tools.ietf.org/html/draft-iab-use-it-or-lose-it)
+* [Compare Editor's Copy to Working Group Draft](https://intarchboard.github.io/use-it-or-lose-it/#go.draft-iab-use-it-or-lose-it.diff)
 
 ## Building the Draft
 
@@ -21,4 +21,4 @@ This requires that you have the necessary software installed.  See
 ## Contributing
 
 See the
-[guidelines for contributions](https://github.com/martinthomson/use-it-or-lose-it/blob/master/CONTRIBUTING.md).
+[guidelines for contributions](https://github.com/intarchboard/use-it-or-lose-it/blob/master/CONTRIBUTING.md).
