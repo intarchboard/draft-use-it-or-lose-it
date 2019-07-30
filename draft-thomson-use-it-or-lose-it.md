@@ -247,22 +247,20 @@ deploying new versions or other changes to a protocol.
 # Retaining Viable Protocol Evolution Mechanisms {#use-it}
 
 The design of a protocol for extensibility and eventual replacement
-{{?EXTENSIBILITY}} does not guarantee the ability to exercise those
-options.  The set of features that enable future evolution need to be
-interoperable in the first implementations and deployments of the
-protocol.  Implementations of mechanisms that support evolution
-is necessary to ensure that they remain available for new uses, and
-history has shown this occurs almost exclusively under active
-mechanism use.
+{{?EXTENSIBILITY}} does not guarantee the ability to exercise those options.
+The set of features that enable future evolution need to be interoperable in the
+first implementations and deployments of the protocol.  Implementations of
+mechanisms that support evolution is necessary to ensure that they remain
+available for new uses, and history has shown this occurs almost exclusively
+under active mechanism use.
 
-The conditions for retaining the ability to evolve a design is most
-clearly evident in the protocols that are known to have viable version
-negotiation or extension points.  The definition of mechanisms alone
-is insufficient; it's the assured implementation through active use of
-those mechanisms that determines the existence of freedom.  Protocols
-that routinely add new extensions and code points rarely have trouble
-adding additional ones, especially when unknown code-points and
-extensions are to be safely ignored when not understood.
+The conditions for retaining the ability to evolve a design is most clearly
+evident in the protocols that are known to have viable version negotiation or
+extension points.  The definition of mechanisms alone is insufficient; it's the
+assured implementation through active use of those mechanisms that determines
+the existence of freedom.  Protocols that routinely add new extensions and code
+points rarely have trouble adding additional ones, especially when the handling
+of new versions or extension is well defined.
 
 
 ## Examples of Active Use
@@ -295,41 +293,33 @@ These examples show extension points that are heavily used are also being relati
 unaffected by deployment issues preventing addition of new values for new use
 cases.
 
-These examples also confirm the case that good design is not a
-solitary prerequisite for
+These examples also confirm the case that good design does not guarantee
 success.  On the contrary, success is often despite shortcomings in the design.
 For instance, the shortcomings of HTTP header fields are significant enough that
 there are ongoing efforts to improve the syntax
 {{?HTTP-HEADERS=I-D.ietf-httpbis-header-structure}}.
 
 Only by using a protocol's extension capabilities does it ensure the
-availability of that capability.  Protocols that fail to use a
-mechanism, or a protocol that only rarely uses a mechanism, may suffer an
-inability to rely on that mechanism.
+availability of that capability.  Protocols that fail to use a mechanism, or a
+protocol that only rarely uses a mechanism, may suffer an inability to rely on
+that mechanism.
 
 
 ## Dependency is Better {#need-it}
 
-The best way to guarantee that a protocol mechanism is used is to make
-the understanding of it critical to an endpoint participating in that
-protocol.  This means that implementations must rely on both the
-existence of extension mechanisms and their continued, repeated
-expansion over time.
+The best way to guarantee that a protocol mechanism is used is to make the
+understanding of it critical to an endpoint participating in that protocol.
+This means that implementations must rely on both the existence of extension
+mechanisms and their continued, repeated expansion over time.
 
 For example, the message format in SMTP relies on header fields for most of its
-functions, including the most basic delivery functions.
-A deployment of SMTP cannot
-avoid including an implementation of header field handling.  In addition to
-this, the regularity with which new header fields are defined and used ensures
-that deployments frequently encounter header fields that it does not
-yet (and may never) understand.
-An SMTP implementation therefore needs to be able to both process header fields
-that it understands and ignore those that it does not.
-<!-- wjh: do we want to mention that the success of headers functionally is -->
-<!-- because there is a mix of both protocol specific fields and extra -->
-<!-- meta data; IE, allowing users and developers to specify new -->
-<!-- fields that will never be part of the protocol makes the fields -->
-<!-- be understood -->
+functions, including the most basic delivery functions.  A deployment of SMTP
+cannot avoid including an implementation of header field handling.  In addition
+to this, the regularity with which new header fields are defined and used
+ensures that deployments frequently encounter header fields that it does not yet
+(and may never) understand.  An SMTP implementation therefore needs to be able
+to both process header fields that it understands and ignore those that it does
+not.
 
 In this way, implementing the extensibility mechanism is not merely mandated by
 the specification, it is crucial to the functioning of a protocol deployment.
@@ -351,32 +341,28 @@ been either completely unused, or their use was so infrequent that they could no
 longer be relied upon to function correctly.
 
 HTTP has a number of very effective extension points in addition to the
-aforementioned header fields.  It also has some examples of extension points that
-are so rarely used that it is possible that they are not at all usable.
+aforementioned header fields.  It also has some examples of extension points
+that are so rarely used that it is possible that they are not at all usable.
 Extension points in HTTP that might be unwise to use include the extension point
-on each chunk in the chunked transfer coding {{?HTTP=RFC7230}}, the ability to use
-transfer codings other than the chunked coding, and the range unit in a range
-request {{?HTTP-RANGE=RFC7233}}.
+on each chunk in the chunked transfer coding {{?HTTP=RFC7230}}, the ability to
+use transfer codings other than the chunked coding, and the range unit in a
+range request {{?HTTP-RANGE=RFC7233}}.
 
 Even where extension points have multiple valid values, if the set of permitted
 values does not change over time, there is still a risk that new values are not
 tolerated by existing implementations.  If the set of values for a particular
 field remains fixed over a long period, some implementations might not correctly
 handle a new value when it is introduced.  For example, implementations of TLS
-broke when new values of the signature_algorithms extension were
-introduced.  Mandatory-to-implement parameters, intended to promote
-minimal interoperability, may actually reduce the interoperability of
-the other code points, which seem almost pointless to implement in the
-shadow of the mandatory one.
+broke when new values of the signature_algorithms extension were introduced.
 
 Codepoints that are reserved for future use can be especially problematic.
 Reserving codepoints without attributing semantics to their use can result in
 diverse or conflicting semantics being attributed without any hope of
 interoperability.  An example of this is the "class E" address space in IPv4
-{{?RFC0988}}, which was reserved without assigning any semantics.  For
-protocols that can use negotiation to attribute semantics to codepoints, it is
-possible that unused codepoints can be reclaimed for active use, though this
-requires that the negotiation include all protocol participants.
+{{?RFC0988}}, which was reserved without assigning any semantics.  For protocols
+that can use negotiation to attribute semantics to codepoints, it is possible
+that unused codepoints can be reclaimed for active use, though this requires
+that the negotiation include all protocol participants.
 
 
 # Defensive Design Principles for Protocols {#strategies}
@@ -387,33 +373,28 @@ protection against a protocol deployment becoming resistant to future changes.
 
 ## Active Use
 
-As discussed in {{use-it}}, the most effective defense against
-ossification of
+As discussed in {{use-it}}, the most effective defense against ossification of
 protocol extension points is active use.
 
 Implementations are most likely to be tolerant of new values if they depend on
-being able to frequently use new values.
-Failing that, implementations that routinely see
-new values are more likely to correctly handle, potentially safely
-ignoring, new values.  More frequent
-changes will improve the likelihood that incorrect handling or intolerance is
-discovered and rectified.  The longer an intolerant implementation is deployed,
-the more difficult it is to correct.
+being able to frequently use new values.  Failing that, implementations that
+routinely see new values are more likely to correctly handle new values.  More
+frequent changes will improve the likelihood that incorrect handling or
+intolerance is discovered and rectified.  The longer an intolerant
+implementation is deployed, the more difficult it is to correct.
 
 What active use means can depend greatly on the environment in which a
 protocol is deployed.  The frequency of changes necessary to safeguard some
 mechanisms might be slow enough to attract ossification in another protocol
 deployment, while being excessive in others.  There are currently no firm
-guidelines for new protocol development, as much is being learned about what
-techniques are most effective.
-<!-- wjh: the last half of that sentence makes no sense to me (and -->
-<!-- thus I can't fix it either) -->
+guidelines for new protocol development.
+
 
 ## Cryptography
 
-Cryptography can be used to reduce the number of middlebox entities that can participate
-in a protocol.  Using tools like TLS ensures that only authorized participants
-are able to influence whether a new protocol feature is used.
+Cryptography can be used to reduce the number of middlebox entities that can
+participate in a protocol.  Using tools like TLS ensures that only authorized
+participants are able to influence whether a new protocol feature is used.
 
 Permitting fewer protocol participants reduces the number of implementations
 that can prevent a new mechanism from being deployed.  As recommended in
@@ -432,12 +413,12 @@ encrypted, QUIC uses integrity protection to prevent modification.
 (protocol mechanisms "rusting" shut) and proposes reserving values for
 extensions that have no semantic value attached.
 
-The design in {{?GREASE}} is aimed at the style of negotiation most used in
-TLS, where the client offers a set of options and the server chooses the one
-that it most prefers from those that it supports.  A client that uses grease
-randomly offers options - usually just one - from a set of reserved values.
-These values are guaranteed to never be assigned real meaning, so the server
-will never have cause to genuinely select one of these values.
+The design in {{?GREASE}} is aimed at the style of negotiation most used in TLS,
+where the client offers a set of options and the server chooses the one that it
+most prefers from those that it supports.  A client that uses grease randomly
+offers options - usually just one - from a set of reserved values.  These values
+are guaranteed to never be assigned real meaning, so the server will never have
+cause to genuinely select one of these values.
 
 More generally, greasing is used to refer to any attempt to exercise extension
 points without changing endpoint behavior, other than to encourage participants
@@ -472,13 +453,11 @@ Grease is deployed with the intent of quickly revealing errors in implementing
 the mechanisms it safeguards.  Though it has been effective at revealing
 problems in some cases with TLS, the efficacy of greasing isn't proven more
 generally.  Where implementations are able to tolerate a non-zero error rate in
-their operation, greasing offers a potential option for safeguarding
-future extensibility.
+their operation, greasing offers a potential option for safeguarding future
+extensibility.  However, this relies on there being a sufficient proportion of
+participants that are willing to invest the effort and tolerate the risk of
+interoperability failures.
 
-Grease also requires a participant that is willing to invest the time
-and code in an implementation to implement grease; this is likely hard
-to find for new protocols and it may be that only protocols in danger
-of ossification will attract motivated implementers.
 
 ## Invariants
 
@@ -488,16 +467,17 @@ what aspects of a protocol are invariant can help guide the process of
 identifying those parts of the protocol that might change.
 
 As a means of protecting extensibility, a declaration of protocol invariants is
-useful only to the extent that protocol participants are willing to
-allow new uses for the protocol.  Like greasing, protocol participants could
-still purposefully block the deployment of new features.  A protocol that
-declares protocol invariants relies on implementations understanding and
-respecting those invariants.
+useful only to the extent that protocol participants are willing to allow new
+uses for the protocol.  Like with greasing, protocol participants could still
+purposefully block the deployment of new features.  A protocol that declares
+protocol invariants relies on implementations understanding and respecting those
+invariants.
 
 Protocol invariants need to be clearly and concisely documented.  Including
 examples of aspects of the protocol that are not invariant, such as the
 appendix of {{?QUIC-INVARIANTS=I-D.ietf-quic-invariants}}, can be used to
 clarify intent.
+
 
 ## Effective Feedback
 
@@ -524,9 +504,10 @@ protocol deployment and the entity that receives the report.  For instance, end
 users, developers, and network operations each have different requirements for
 how error reports are created, managed, and acted upon.
 
-Automated delivery of error reports can be critical for squashing
-deployment errors as early as possible, such as seen in {{?DMARC=RFC7589}}
-and {{?SMTP-TLS-Reporting=RFC8460}}.
+Automated delivery of error reports can be critical for rectifying deployment
+errors as early as possible, such as seen in {{?DMARC=RFC7489}} and
+{{?SMTP-TLS-Reporting=RFC8460}}.
+
 
 # Security Considerations
 
