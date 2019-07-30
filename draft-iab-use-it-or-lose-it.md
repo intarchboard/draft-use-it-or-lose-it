@@ -144,12 +144,11 @@ aren't used are the ones that fail most often.  The same paragraph from RFC
   they don't get widespread real-world testing until *after* the base protocol
   has been deployed for a while, and its deficiencies have become evident.
 
-Indeed, basic interoperability is considered critical early in the
-deployment of a protocol.  Race-to-market attitudes frequently result in an
-engineering practice that values simplicity will tend to make version
-negotiation and extension mechanisms optional for this basic
-interoperability. This leads to these mechanisms being uniquely
-affected by this problem.
+Indeed, basic interoperability is considered critical early in the deployment of
+a protocol.  A desire to deploy can result in an engineering practice that
+values simplicity, which could result in deferring implementation of version
+negotiation and extension mechanisms.  This leads to these mechanisms being
+uniquely affected by this problem.
 
 Transport Layer Security (TLS) {{?TLS12=RFC5246}} provides examples of where a
 design that is objectively sound fails when incorrectly implemented.  TLS
@@ -175,6 +174,14 @@ a domain name.  No other type has ever been standardized, though several have
 been proposed.  Despite an otherwise exemplary design, SNI is so inconsistently
 implemented that any hope for using the extension point it defines has been
 abandoned {{SNI}}.
+
+Ossified DNS code bases and systems resulted in fears that new Resource Record
+Codes (RRCodes) would take years of software propagation before new RRCodes
+could be used.  The result for a long time was heavily overloaded use of the TXT
+record, such as in the Sender Policy Framework {{?SPF=RFC7208}}.  It wasn't
+until after the standard mechanism for dealing with new RRCodes
+{{?RRTYPE=RFC3597}} was considered widely deployed that new RRCodes can be
+safely created and used.
 
 As a counter example, clear and simple handling for new inputs, such as
 unsupported version numbers, might prevent these sorts of situations.  The first
@@ -277,14 +284,6 @@ As another example, the attribute-value pairs (AVPs) in Diameter
 {{?DIAMETER=RFC6733}} are fundamental to the design of the protocol.  Any use of
 Diameter requires exercising the ability to add new AVPs.  This is routinely
 done without fear that the new feature might not be successfully deployed.
-
-Ossified DNS code bases and systems resulted in fears that new Resource Record
-Codes (RRCodes) would take years of software propagation before new RRCodes
-could be used.  The result for a long time was heavily overloaded use of the TXT
-record, such as in the Sender Policy Framework {{?SPF=RFC7208}}.  It wasn't
-until after the standard mechanism for dealing with new RRCodes
-{{?RRTYPE=RFC3597}} was considered widely deployed that new RRCodes can be
-safely created and used.
 
 These examples show extension points that are heavily used are also being relatively
 unaffected by deployment issues preventing addition of new values for new use
