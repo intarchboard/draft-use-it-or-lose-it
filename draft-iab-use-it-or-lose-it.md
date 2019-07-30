@@ -176,22 +176,20 @@ been proposed.  Despite an otherwise exemplary design, SNI is so inconsistently
 implemented that any hope for using the extension point it defines has been
 abandoned {{SNI}}.
 
-Requiring simplistic processing steps when encountering unknown
-conditions, such as unsupported version numbers, can potentially
-prevent these sorts of situations.  A counter example is the first
-version of the Simple Network Management Protocol (SNMP), where an
-unparseable and an authentication message are treated the same way by
-the server: no response is generated {{?SNMPv1=RFC1157}}:
+As a counter example, clear and simple handling for new inputs, such as
+unsupported version numbers, might prevent these sorts of situations.  The first
+version of the Simple Network Management Protocol (SNMP) {{?SNMPv1=RFC1157}}
+defines that unparseable or unauthenticated messages are simply discarded
+without response:
 
-> It then verifies the version number of the SNMP message. If there is
-  a mismatch, it discards the datagram and performs no further
-  actions.
+> It then verifies the version number of the SNMP message. If there is a
+  mismatch, it discards the datagram and performs no further actions.
 
-When SNMP versions 2, 2c and 3 came along, older agents did exactly
-what the protocol specifies should have done: dropped it from being
-processing without returning a response.  This was likely successful
-because there was no requirement to create and return an elaborate
-error response to the client.
+When SNMP versions 2, 2c and 3 came along, older agents did exactly what the
+protocol specifies.  Deployment of new versions was likely successful because
+the handling of newer versions was well specified and easy to implement
+correctly.
+
 
 ## Multi-Party Interactions and Middleboxes {#middleboxes}
 
