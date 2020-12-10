@@ -15,10 +15,10 @@ $ make
 ```
 
 This requires that you have the necessary software installed.  See
-[the instructions](https://github.com/martinthomson/i-d-template/blob/master/doc/SETUP.md).
+[the instructions](https://github.com/martinthomson/i-d-template/blob/main/doc/SETUP.md).
 
 
 ## Contributing
 
 See the
-[guidelines for contributions](https://github.com/intarchboard/use-it-or-lose-it/blob/master/CONTRIBUTING.md).
+[guidelines for contributions](https://github.com/intarchboard/use-it-or-lose-it/blob/main/CONTRIBUTING.md).
