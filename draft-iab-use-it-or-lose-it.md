@@ -210,18 +210,17 @@ with all actors that could be involved in the protocol.
 
 Protocols deployed without active measures against intermediation will tend to
 become intermediated over time, as network operators deploy middleboxes to
-perform some function on traffic {{?PATH-SIGNALS=I-D.iab-path-signals}}.  In
-particular, one of the consequences of an unencrypted protocol is that any
-element on path can interact with the protocol.  For example, HTTP was
-specifically designed with intermediation in mind, transparent proxies
-{{?HTTP=RFC7230}} are not only possible but sometimes advantageous, despite
-some significant downsides.  Consequently, transparent proxies for cleartext
-HTTP are commonplace.  The DNS protocol was designed with
-intermediation in mind through its use of caching recursive
-resolvers {{?DNS=RFC1034}}.  What was less anticipated was the forced
-spoofing of DNS records by many middle-boxes such as those that inject authentication
-or pay-wall mechanisms as an authentication and authorization check,
-which are now prevalent in hotels, coffee shops and business networks.
+perform some function on traffic {{?PATH-SIGNALS=RFC8588}}.  In particular, one
+of the consequences of an unencrypted protocol is that any element on path can
+interact with the protocol.  For example, HTTP was specifically designed with
+intermediation in mind, transparent proxies {{?HTTP=RFC7230}} are not only
+possible but sometimes advantageous, despite some significant downsides.
+Consequently, transparent proxies for cleartext HTTP are commonplace.  The DNS
+protocol was designed with intermediation in mind through its use of caching
+recursive resolvers {{?DNS=RFC1034}}.  What was less anticipated was the forced
+spoofing of DNS records by many middle-boxes such as those that inject
+authentication or pay-wall mechanisms as an authentication and authorization
+check, which are now prevalent in hotels, coffee shops and business networks.
 
 Middleboxes are also protocol participants, to the degree that they are able
 to observe and act in ways that affect the protocol.  The degree to which a
@@ -394,8 +393,8 @@ participants are able to influence whether a new protocol feature is used.
 
 Permitting fewer protocol participants reduces the number of implementations
 that can prevent a new mechanism from being deployed.  As recommended in
-{{?PATH-SIGNALS=I-D.iab-path-signals}}, use of encryption and integrity
-protection can be used to limit participation.
+{{?PATH-SIGNALS=RFC8588}}, use of encryption and integrity protection can be
+used to limit participation.
 
 For example, the QUIC protocol {{?QUIC=I-D.ietf-quic-transport}} adopts both
 encryption and integrity protection.  Encryption is used to carefully control
@@ -405,9 +404,9 @@ encrypted, QUIC uses integrity protection to prevent modification.
 
 ## Grease
 
-"Grease" {{?GREASE=I-D.ietf-tls-grease}} identifies lack of use as an issue
-(protocol mechanisms "rusting" shut) and proposes reserving values for
-extensions that have no semantic value attached.
+"Grease" {{?GREASE=RFC8701}} identifies lack of use as an issue (protocol
+mechanisms "rusting" shut) and proposes reserving values for extensions that
+have no semantic value attached.
 
 The design in {{?GREASE}} is aimed at the style of negotiation most used in TLS,
 where the client offers a set of options and the server chooses the one that it
