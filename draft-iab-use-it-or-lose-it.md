@@ -50,6 +50,16 @@ informative:
     date: 2016-07-20
     target: "https://mailarchive.ietf.org/arch/msg/tls/bOJ2JQc3HjAHFFWCiNTIb0JuMZc"
 
+  RIPE-99:
+    title: "RIPE NCC and Duke University BGP Experiment"
+    author:
+      -
+        ins: E. Romijn
+        name: Erik Romijn
+    date: 2010-08-27
+    target: https://labs.ripe.net/Members/erik/ripe-ncc-and-duke-university-bgp-experiment/
+
+
 
 --- abstract
 
@@ -232,10 +242,12 @@ This phenomenon appears at all layers of the protocol stack, even when
 protocols are not designed with middlebox participation in mind. TCP's
 {{?TCP=RFC0793}} extension points have been rendered difficult to use, largely
 due to middlebox interactions, as experience with Multipath TCP
-{{?MPTCP=RFC6824}} and Fast Open {{?TFO=RFC7413}} has shown. IP's version field
+{{?MPTCP=RFC6824}} and Fast Open {{?TFO=RFC7413}} has shown.  IP's version field
 was rendered useless when encapsulated over Ethernet, requring a new ethertype
 with IPv6 {{?RFC2462}}, due in part to layer 2 devices making
-version-independent assumptions about the structure of the IPv4 header.
+version-independent assumptions about the structure of the IPv4 header.  The
+announcements of new optional transitive attributes in BGP caused significant
+routing instability {{RIPE-99}}.
 
 By increasing the number of different actors involved in any single protocol
 exchange, the number of potential implementation bugs that a deployment needs to
