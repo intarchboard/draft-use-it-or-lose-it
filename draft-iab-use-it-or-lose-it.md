@@ -110,12 +110,12 @@ these errors, finding the responsible implementation(s), coordinating a
 bug fix and release plan, contacting users and/or the operator of affected
 services, and waiting for the fix to be deployed.
 
-Given the effort involved in fixing problems, the existence of these
-sorts of bugs can outright prevent the deployment of some types of
-protocol changes, especially for protocols involving multiple parties or that are considered
+Given the effort involved in fixing problems, the existence of these sorts of
+bugs can outright prevent the deployment of some types of protocol changes,
+especially for protocols involving multiple parties or that are considered
 critical infrastructure (e.g., IP, BGP, DNS, or TLS).  It could even be
-necessary to come up with a new protocol design that uses a different
-method to achieve the same result.
+necessary to come up with a new protocol design that uses a different method to
+achieve the same result.
 
 The set of interoperable features in a protocol is often the subset of its
 features that have some value to those implementing and deploying the protocol.
@@ -284,9 +284,9 @@ As another example, the attribute-value pairs (AVPs) in Diameter
 Diameter requires exercising the ability to add new AVPs.  This is routinely
 done without fear that the new feature might not be successfully deployed.
 
-These examples show extension points that are heavily used are also being relatively
-unaffected by deployment issues preventing addition of new values for new use
-cases.
+These examples show extension points that are heavily used are also being
+relatively unaffected by deployment issues preventing addition of new values
+for new use cases.
 
 These examples also confirm the case that good design does not guarantee
 success.  On the contrary, success is often despite shortcomings in the design.
