@@ -122,7 +122,7 @@ features that have some value to those implementing and deploying the protocol.
 It is not always the case that future extensibility is in that set.
 
 
-## Good Protocol Design is Not Itself Sufficient
+## Good Protocol Design is Not Itself Sufficient {#not-good-enough}
 
 It is often argued that the design of a protocol extension point or version
 negotiation capability is critical to the freedom that it ultimately offers.
@@ -130,7 +130,7 @@ negotiation capability is critical to the freedom that it ultimately offers.
 RFC 6709 {{?EXTENSIBILITY=RFC6709}} contains a great deal of well-considered
 advice on designing for extension.  It includes the following advice:
 
-> This means that, to be useful, a protocol version- negotiation mechanism
+> This means that, to be useful, a protocol version-negotiation mechanism
   should be simple enough that it can reasonably be assumed that all the
   implementers of the first protocol version at least managed to implement the
   version-negotiation mechanism correctly.
@@ -213,12 +213,12 @@ become intermediated over time, as network operators deploy middleboxes to
 perform some function on traffic {{?PATH-SIGNALS=RFC8588}}.  In particular, one
 of the consequences of an unencrypted protocol is that any element on path can
 interact with the protocol.  For example, HTTP was specifically designed with
-intermediation in mind, transparent proxies {{?HTTP=RFC7230}} are not only
-possible but sometimes advantageous, despite some significant downsides.
-Consequently, transparent proxies for cleartext HTTP are commonplace.  The DNS
-protocol was designed with intermediation in mind through its use of caching
-recursive resolvers {{?DNS=RFC1034}}.  What was less anticipated was the forced
-spoofing of DNS records by many middle-boxes such as those that inject
+intermediation in mind, transparent proxies {{?HTTP=I-D.ietf-httpbis-semantics}}
+are not only possible but sometimes advantageous, despite some significant
+downsides.  Consequently, transparent proxies for cleartext HTTP are commonplace.
+The DNS protocol was designed with intermediation in mind through its use of
+caching recursive resolvers {{?DNS=RFC1034}}.  What was less anticipated was the
+forced spoofing of DNS records by many middle-boxes such as those that inject
 authentication or pay-wall mechanisms as an authentication and authorization
 check, which are now prevalent in hotels, coffee shops and business networks.
 
@@ -234,7 +234,7 @@ protocols are not designed with middlebox participation in mind. TCP's
 due to middlebox interactions, as experience with Multipath TCP
 {{?MPTCP=RFC6824}} and Fast Open {{?TFO=RFC7413}} has shown. IP's version field
 was rendered useless when encapsulated over Ethernet, requring a new ethertype
-with IPv6 {{?RFC2462}}, due in part to layer 2 devices making
+with IPv6 {{?RFC2464}}, due in part to layer 2 devices making
 version-independent assumptions about the structure of the IPv4 header.
 
 By increasing the number of different actors involved in any single protocol
@@ -269,7 +269,7 @@ of new versions or extension is well defined.
 
 ## Examples of Active Use
 
-For example, header fields in email {{?SMTP=RFC5322}}, HTTP {{?HTTP=RFC7230}}
+For example, header fields in email {{?SMTP=RFC5322}}, HTTP {{?HTTP}}
 and SIP {{?SIP=RFC3261}} all derive from the same basic design, which amounts to
 a list name/value pairs.  There is no evidence of significant barriers to
 deploying header fields with new names and semantics in email and HTTP as
@@ -339,7 +339,7 @@ HTTP has a number of very effective extension points in addition to the
 aforementioned header fields.  It also has some examples of extension points
 that are so rarely used that it is possible that they are not at all usable.
 Extension points in HTTP that might be unwise to use include the extension point
-on each chunk in the chunked transfer coding {{?HTTP=RFC7230}}, the ability to
+on each chunk in the chunked transfer coding {{?HTTP}}, the ability to
 use transfer codings other than the chunked coding, and the range unit in a
 range request {{?HTTP-RANGE=RFC7233}}.
 
@@ -383,6 +383,30 @@ protocol is deployed.  The frequency of changes necessary to safeguard some
 mechanisms might be slow enough to attract ossification in another protocol
 deployment, while being excessive in others.  There are currently no firm
 guidelines for new protocol development.
+
+
+## Version Negotiation
+
+As noted in {{not-good-enough}}, protocols that provide version negotiation
+mechanisms might not be able to test that feature until a new version is
+deployed.  One relatively successful design approach has been to use the
+protocol selection mechanisms built into a lower-layer protocol to select the
+protocol.  This could allow a version negotiation mechanism to benefit from
+active use of the extension point by other protocols.
+
+For instance, all published version of IP contain a version number as the two
+high bits of the first header byte.  However, version selection using this
+field proved to be unsuccessful. Ultimately, successful deployment of IPv6
+over Ethernet {{?RFC2464}} required a different EtherType from IPv4.  This
+change took advantage of the already-diverse usage of EtherType.
+
+Other examples of this style of design include Application-Layer Protocol
+Negotiation ({{?ALPN=RFC7301}}) and HTTP content negotiation (Section 12 of
+{{?HTTP}}).
+
+This technique relies on the codepoint being usable.  For instance, the IP
+protocol number is known to be unreliable and therefore not suitable
+{{?NEW-PROTOCOLS=DOI.10.1016/j.comnet.2020.107211}}.
 
 
 ## Cryptography
