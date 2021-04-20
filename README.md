@@ -2,9 +2,9 @@
 
 This is the working area for the IAB Internet-Draft, "Long-term Viability of Protocol Extension Mechanisms".
 
-* [Editor's Copy](https://intarchboard.github.io/use-it-or-lose-it/#go.draft-iab-use-it-or-lose-it.html)
+* [Editor's Copy](https://intarchboard.github.io/draft-use-it-or-lose-it/draft-iab-use-it-or-lose-it.html)
 * [Working Group Draft](https://tools.ietf.org/html/draft-iab-use-it-or-lose-it)
-* [Compare Editor's Copy to Working Group Draft](https://intarchboard.github.io/use-it-or-lose-it/#go.draft-iab-use-it-or-lose-it.diff)
+* [Compare Editor's Copy to Working Group Draft](https://tools.ietf.org/rfcdiff?url1=https://tools.ietf.org/id/draft-iab-use-it-or-lose-it.txt&url2=https://intarchboard.github.io/draft-use-it-or-lose-it/draft-iab-use-it-or-lose-it.txt)
 
 ## Building the Draft
 
