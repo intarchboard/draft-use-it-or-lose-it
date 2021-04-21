@@ -65,15 +65,15 @@ informative:
 
 The ability to change protocols depends on exercising the extension and version
 negotiation mechanisms that support change.  Protocols that don't use these
-mechanisms can find that deploying changes can be difficult and costly.
+mechanisms can find it difficult and costly to deploy changes.
 
 
 --- middle
 
 # Introduction
 
-A successful protocol {{?SUCCESS=RFC5218}} will change in ways that allow it to
-continue to fulfill the needs of its users.  New use cases, conditions and
+A successful protocol {{?SUCCESS=RFC5218}} needs to change in ways that allow it
+to continue to fulfill the needs of its users.  New use cases, conditions and
 constraints on the deployment of a protocol can render a protocol that does not
 change obsolete.
 
@@ -86,7 +86,7 @@ problem of protocol evolution more broadly.
 
 This document examines the specific conditions that determine whether protocol
 maintainers have the ability to design and deploy new or modified protocols.
-{{implementations}} highlights some historical issues with difficulties in
+{{implementations}} highlights some historical examples of difficulties in
 transitions to new protocol features.  {{use-it}} argues that ossified protocols
 are more difficult to update and successful protocols make frequent use of new
 extensions and code-points.  {{strategies}} outlines several strategies that
@@ -99,12 +99,12 @@ applicable to protocol deployments that have less scale and diversity, or
 operate under different constraints.
 
 
-# Implementations of Protocols are Imperfect {#implementations}
+# Imperfect Implementations Limit Protocol Evolution {#implementations}
 
-A change to a protocol can be made extremely difficult to deploy if there are
+It can be extremely difficult to deploy a change to a protocol if there are
 bugs in implementations with which the new deployment needs to interoperate.
-Bugs in the handling of new codepoints or extensions can mean that instead of
-handling the mechanism as designed, endpoints react poorly.  This can manifest
+Bugs in how new codepoints or extensions are handled often mean that endpoints
+will react poorly to the use of extension mechanisms. This can manifest
 as abrupt termination of sessions, errors, crashes, or disappearances of
 endpoints and timeouts.
 
@@ -134,8 +134,9 @@ It is not always the case that future extensibility is in that set.
 
 ## Good Protocol Design is Not Itself Sufficient {#not-good-enough}
 
-It is often argued that the design of a protocol extension point or version
-negotiation capability is critical to the freedom that it ultimately offers.
+It is often argued that the careful design of a protocol extension point or
+version negotiation capability is critical to the freedom that it ultimately
+offers.
 
 RFC 6709 {{?EXTENSIBILITY=RFC6709}} contains a great deal of well-considered
 advice on designing for extension.  It includes the following advice:
@@ -158,7 +159,7 @@ Indeed, basic interoperability is considered critical early in the deployment of
 a protocol.  A desire to deploy can result in an engineering practice that
 values simplicity, which could result in deferring implementation of version
 negotiation and extension mechanisms.  This leads to these mechanisms being
-uniquely affected by this problem.
+particularly affected by this problem.
 
 
 ## Examples of Disuse
@@ -268,7 +269,7 @@ The set of features that enable future evolution need to be interoperable in the
 first implementations and deployments of the protocol.  Implementations of
 mechanisms that support evolution is necessary to ensure that they remain
 available for new uses, and history has shown this occurs almost exclusively
-under active mechanism use.
+through active mechanism use.
 
 The conditions for retaining the ability to evolve a design is most clearly
 evident in the protocols that are known to have viable version negotiation or
@@ -315,7 +316,7 @@ that mechanism.
 ## Dependency is Better {#need-it}
 
 The best way to guarantee that a protocol mechanism is used is to make the
-understanding of it critical to an endpoint participating in that protocol.
+handling of it critical to an endpoint participating in that protocol.
 This means that implementations must rely on both the existence of extension
 mechanisms and their continued, repeated expansion over time.
 
@@ -390,7 +391,7 @@ frequent changes will improve the likelihood that incorrect handling or
 intolerance is discovered and rectified.  The longer an intolerant
 implementation is deployed, the more difficult it is to correct.
 
-What active use means can depend greatly on the environment in which a
+What constitutes "active use" can depend greatly on the environment in which a
 protocol is deployed.  The frequency of changes necessary to safeguard some
 mechanisms might be slow enough to attract ossification in another protocol
 deployment, while being excessive in others.  There are currently no firm
@@ -406,7 +407,7 @@ protocol selection mechanisms built into a lower-layer protocol to select the
 protocol.  This could allow a version negotiation mechanism to benefit from
 active use of the extension point by other protocols.
 
-For instance, all published version of IP contain a version number as the four
+For instance, all published versions of IP contain a version number as the four
 high bits of the first header byte.  However, version selection using this
 field proved to be unsuccessful. Ultimately, successful deployment of IPv6
 over Ethernet {{?RFC2464}} required a different EtherType from IPv4.  This
@@ -440,9 +441,9 @@ encrypted, QUIC uses integrity protection to prevent modification.
 
 ## Grease
 
-"Grease" {{?GREASE=RFC8701}} identifies lack of use as an issue (protocol
-mechanisms "rusting" shut) and proposes reserving values for extensions that
-have no semantic value attached.
+"Grease", originally defined for TLS {{?GREASE=RFC8701}}, identifies lack of use
+as an issue (protocol mechanisms "rusting" shut) and proposes reserving values
+for extensions that have no semantic value attached.
 
 The design in {{?GREASE}} is aimed at the style of negotiation most used in TLS,
 where the client offers a set of options and the server chooses the one that it
