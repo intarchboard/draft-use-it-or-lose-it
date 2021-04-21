@@ -406,7 +406,7 @@ protocol selection mechanisms built into a lower-layer protocol to select the
 protocol.  This could allow a version negotiation mechanism to benefit from
 active use of the extension point by other protocols.
 
-For instance, all published version of IP contain a version number as the two
+For instance, all published version of IP contain a version number as the four
 high bits of the first header byte.  However, version selection using this
 field proved to be unsuccessful. Ultimately, successful deployment of IPv6
 over Ethernet {{?RFC2464}} required a different EtherType from IPv4.  This
