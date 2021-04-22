@@ -438,7 +438,7 @@ what information is exposed to middleboxes.  For those fields that are not
 encrypted, QUIC uses integrity protection to prevent modification.
 
 
-## Falsifying Active Use
+## Falsifying Active Use {#grease}
 
 "Grease" {{?GREASE=RFC8701}} identifies lack of use as an issue (protocol
 mechanisms "rusting" shut) and proposes reserving values for extensions that
