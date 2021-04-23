@@ -366,10 +366,14 @@ Codepoints that are reserved for future use can be especially problematic.
 Reserving codepoints without attributing semantics to their use can result in
 diverse or conflicting semantics being attributed without any hope of
 interoperability.  An example of this is the "class E" address space in IPv4
-{{?RFC0988}}, which was reserved without assigning any semantics.  For protocols
-that can use negotiation to attribute semantics to codepoints, it is possible
-that unused codepoints can be reclaimed for active use, though this requires
-that the negotiation include all protocol participants.
+{{?RFC0988}}, which was reserved without assigning any semantics.
+
+For protocols that can use negotiation to attribute semantics to codepoints, it
+is possible that unused codepoints can be reclaimed for active use, though this
+requires that the negotiation include all protocol participants.  For something
+as fundamental as addressing, negotiation is difficult or even impossible, as
+all nodes on the network path plus potential alternative paths would need to be
+involved.
 
 
 # Defensive Design Principles for Protocols {#strategies}
