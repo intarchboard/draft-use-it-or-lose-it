@@ -162,7 +162,7 @@ negotiation and extension mechanisms.  This leads to these mechanisms being
 particularly affected by this problem.
 
 
-## Examples of Disuse
+## Disuse Can Hide Problems {#disuse}
 
 Transport Layer Security (TLS) {{?TLS12=RFC5246}} provides examples of where a
 design that is objectively sound fails when incorrectly implemented.  TLS
