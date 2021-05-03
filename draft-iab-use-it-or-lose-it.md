@@ -443,7 +443,7 @@ what information is exposed to middleboxes.  For those fields that are not
 encrypted, QUIC uses integrity protection to prevent modification.
 
 
-## Grease
+## Falsifying Active Use {#grease}
 
 "Grease", originally defined for TLS {{?GREASE=RFC8701}}, identifies lack of use
 as an issue (protocol mechanisms "rusting" shut) and proposes reserving values
@@ -478,12 +478,13 @@ In addition to advertising bogus capabilities, an endpoint might also
 selectively disable non-critical protocol elements to test the ability of peers
 to handle the absence of certain capabilities.
 
-This style of defensive design is limited because it is only superficial.  It
-only exercises a small part of the mechanisms that support extensibility.  More
-critically, it does not easily translate to all forms of extension points.  For
-instance, HMSV negotiation cannot be greased in this fashion.  Other techniques
-might be necessary for protocols that don't rely on the particular style of
-exchange that is predominant in TLS.
+This style of defensive design is limited because it is only superficial.  As
+greasing only mimics active use of an extension point, it only exercises a small
+part of the mechanisms that support extensibility.  More critically, it does not
+easily translate to all forms of extension points.  For instance, HMSV
+negotiation cannot be greased in this fashion.  Other techniques might be
+necessary for protocols that don't rely on the particular style of exchange that
+is predominant in TLS.
 
 Grease is deployed with the intent of quickly revealing errors in implementing
 the mechanisms it safeguards.  Though it has been effective at revealing
