@@ -474,7 +474,7 @@ selectively disable non-critical protocol elements to test the ability of peers
 to handle the absence of certain capabilities.
 
 This style of defensive design is limited because it is only superficial.  As
-greasing only mimics active use of extension point, it only exercises a small
+greasing only mimics active use of an extension point, it only exercises a small
 part of the mechanisms that support extensibility.  More critically, it does not
 easily translate to all forms of extension points.  For instance, HMSV
 negotiation cannot be greased in this fashion.  Other techniques might be
