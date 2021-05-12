@@ -398,8 +398,7 @@ implementation is deployed, the more difficult it is to correct.
 What constitutes "active use" can depend greatly on the environment in which a
 protocol is deployed.  The frequency of changes necessary to safeguard some
 mechanisms might be slow enough to attract ossification in another protocol
-deployment, while being excessive in others.  There are currently no firm
-guidelines for new protocol development.
+deployment, while being excessive in others.
 
 
 ## Version Negotiation
