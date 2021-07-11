@@ -14,6 +14,11 @@ author:
     name: Martin Thomson
     org: Mozilla
     email: mt@lowentropy.net
+  -
+    ins: T. Pauly
+    name: Tommy Pauly
+    org: Apple
+    email: tpauly@apple.com
 
 normative:
 
@@ -305,7 +310,7 @@ These examples also confirm the case that good design does not guarantee
 success.  On the contrary, success is often despite shortcomings in the design.
 For instance, the shortcomings of HTTP header fields are significant enough that
 there are ongoing efforts to improve the syntax
-{{?HTTP-HEADERS=I-D.ietf-httpbis-header-structure}}.
+{{?HTTP-HEADERS=RFC8941}}.
 
 Only by using a protocol's extension capabilities does it ensure the
 availability of that capability.  Protocols that fail to use a mechanism, or a
@@ -401,7 +406,7 @@ mechanisms might be slow enough to attract ossification in another protocol
 deployment, while being excessive in others.
 
 
-## Version Negotiation
+### Version Negotiation
 
 As noted in {{not-good-enough}}, protocols that provide version negotiation
 mechanisms might not be able to test that feature until a new version is
@@ -425,24 +430,7 @@ protocol number is known to be unreliable and therefore not suitable
 {{?NEW-PROTOCOLS=DOI.10.1016/j.comnet.2020.107211}}.
 
 
-## Cryptography
-
-Cryptography can be used to reduce the number of middlebox entities that can
-participate in a protocol.  Using tools like TLS ensures that only authorized
-participants are able to influence whether a new protocol feature is used.
-
-Permitting fewer protocol participants reduces the number of implementations
-that can prevent a new mechanism from being deployed.  As recommended in
-{{?PATH-SIGNALS=RFC8588}}, use of encryption and integrity protection can be
-used to limit participation.
-
-For example, the QUIC protocol {{?QUIC=I-D.ietf-quic-transport}} adopts both
-encryption and integrity protection.  Encryption is used to carefully control
-what information is exposed to middleboxes.  For those fields that are not
-encrypted, QUIC uses integrity protection to prevent modification.
-
-
-## Falsifying Active Use {#grease}
+### Falsifying Active Use {#grease}
 
 "Grease", originally defined for TLS {{?GREASE=RFC8701}}, identifies lack of use
 as an issue (protocol mechanisms "rusting" shut) and proposes reserving values
@@ -494,8 +482,30 @@ extensibility.  However, this relies on there being a sufficient proportion of
 participants that are willing to invest the effort and tolerate the risk of
 interoperability failures.
 
+## Complementary Defensive Techniques
 
-## Invariants
+The protections to protocol evolution that come from active use can be improved
+through the use of other defensive techniques. The techniques listed here might
+not prevent ossification on their own, but can make active use more effective.
+
+### Cryptography
+
+Cryptography can be used to reduce the number of middlebox entities that can
+participate in a protocol.  Using tools like TLS ensures that only authorized
+participants are able to influence whether a new protocol feature is used.
+
+Permitting fewer protocol participants reduces the number of implementations
+that can prevent a new mechanism from being deployed.  As recommended in
+{{?PATH-SIGNALS=RFC8588}}, use of encryption and integrity protection can be
+used to limit participation.
+
+For example, the QUIC protocol {{?QUIC=RFC9000}} adopts both
+encryption and integrity protection.  Encryption is used to carefully control
+what information is exposed to middleboxes.  For those fields that are not
+encrypted, QUIC uses integrity protection to prevent modification.
+
+
+### Invariants
 
 Documenting aspects of the protocol that cannot or will not change as
 extensions or new versions are added can be a useful exercise. Understanding
@@ -511,11 +521,11 @@ invariants.
 
 Protocol invariants need to be clearly and concisely documented.  Including
 examples of aspects of the protocol that are not invariant, such as the
-appendix of {{?QUIC-INVARIANTS=I-D.ietf-quic-invariants}}, can be used to
+appendix of {{?QUIC-INVARIANTS=RFC8999}}, can be used to
 clarify intent.
 
 
-## Effective Feedback
+### Effective Feedback
 
 While not a direct means of protecting extensibility mechanisms, feedback
 systems can be important to discovering problems.
