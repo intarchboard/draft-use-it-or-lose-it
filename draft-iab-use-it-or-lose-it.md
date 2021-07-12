@@ -101,8 +101,8 @@ maintainers have the ability to design and deploy new or modified protocols.
 {{implementations}} highlights some historical examples of difficulties in
 transitions to new protocol features.  {{use-it}} argues that ossified protocols
 are more difficult to update and successful protocols make frequent use of new
-extensions and code-points.  {{strategies}} outlines several strategies that
-might aid in ensuring that protocol changes remain possible over time.
+extensions and code-points.  {{use}} and {{other}} outline several strategies
+that might aid in ensuring that protocol changes remain possible over time.
 
 The experience that informs this document is predominantly at "higher" layers of
 the network stack, in protocols that operate at very large scale and
@@ -422,13 +422,7 @@ small number of incompatible servers and the names they serve also become
 inaccessible to most clients.
 
 
-# Defensive Design Principles for Protocols {#strategies}
-
-There are several potential approaches that can provide some measure of
-protection against a protocol deployment becoming resistant to future changes.
-
-
-## Active Use
+# Active Use {#use}
 
 As discussed in {{use-it}}, the most effective defense against ossification of
 protocol extension points is active use.
@@ -446,7 +440,7 @@ mechanisms might be slow enough to attract ossification in another protocol
 deployment, while being excessive in others.
 
 
-### Version Negotiation
+## Version Negotiation
 
 As noted in {{not-good-enough}}, protocols that provide version negotiation
 mechanisms might not be able to test that feature until a new version is
@@ -470,7 +464,7 @@ protocol number is known to be unreliable and therefore not suitable
 {{?NEW-PROTOCOLS=DOI.10.1016/j.comnet.2020.107211}}.
 
 
-### Falsifying Active Use {#grease}
+## Falsifying Active Use {#grease}
 
 "Grease" was originally defined for TLS {{?GREASE=RFC8701}}, but has been
 adopted by other protocols, such as QUIC {{?QUIC=RFC9000}}.  Grease identifies
@@ -524,14 +518,15 @@ participants that are willing to invest the effort and tolerate the risk of
 interoperability failures.
 
 
-## Complementary Techniques
+# Complementary Techniques {#other}
 
-The protections to protocol evolution that come from active use can be improved
-through the use of other defensive techniques. The techniques listed here might
-not prevent ossification on their own, but can make active use more effective.
+The protections to protocol evolution that come from [active use](#use) can be
+improved through the use of other defensive techniques. The techniques listed
+here might not prevent ossification on their own, but can make active use more
+effective.
 
 
-### Cryptography
+## Cryptography
 
 Cryptography can be used to reduce the number of middlebox entities that can
 participate in a protocol or limit the extent of participation.  Using TLS or
@@ -544,7 +539,7 @@ protocol {{?QUIC=RFC9000}} to limit the information that is available to
 middleboxes and integrity protection prevents modification.
 
 
-### Fewer Extension Points
+## Fewer Extension Points
 
 A successful protocol will include many potential types of extension.  Designing
 multiple types of extension mechanism, each suited to a specific purpose, might
@@ -579,7 +574,7 @@ appendix of {{?QUIC-INVARIANTS=RFC8999}}, can be used to
 clarify intent.
 
 
-### Effective Feedback
+## Effective Feedback
 
 While not a direct means of protecting extensibility mechanisms, feedback
 systems can be important to discovering problems.
