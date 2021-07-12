@@ -69,6 +69,8 @@ informative:
     date: 2019-05
     target: https://dnsflagday.net/2019/
 
+  HTTP11: I-D.ietf-httpbis-messaging
+
 
 
 --- abstract
@@ -174,6 +176,13 @@ particularly affected by this problem.
 
 ## Disuse Can Hide Problems {#disuse}
 
+There are many examples of extension points in protocols that have been either
+completely unused, or their use was so infrequent that they could no longer be
+relied upon to function correctly.
+
+
+### TLS
+
 Transport Layer Security (TLS) {{?TLS12=RFC5246}} provides examples of where a
 design that is objectively sound fails when incorrectly implemented.  TLS
 provides examples of failures in protocol version negotiation and extensibility.
@@ -199,6 +208,16 @@ been proposed.  Despite an otherwise exemplary design, SNI is so inconsistently
 implemented that any hope for using the extension point it defines has been
 abandoned {{SNI}}.
 
+Even where extension points have multiple valid values, if the set of permitted
+values does not change over time, there is still a risk that new values are not
+tolerated by existing implementations.  If the set of values for a particular
+field remains fixed over a long period, some implementations might not correctly
+handle a new value when it is introduced.  For example, implementations of TLS
+broke when new values of the signature_algorithms extension were introduced.
+
+
+### DNS
+
 Ossified DNS code bases and systems resulted in fears that new Resource Record
 Codes (RRCodes) would take years of software propagation before new RRCodes
 could be used.  The result for a long time was heavily overloaded use of the TXT
@@ -206,6 +225,9 @@ record, such as in the Sender Policy Framework {{?SPF=RFC7208}}.  It wasn't
 until after the standard mechanism for dealing with new RRCodes
 {{?RRTYPE=RFC3597}} was considered widely deployed that new RRCodes can be
 safely created and used.
+
+
+### SNMP
 
 As a counter example, the first version of the Simple Network Management
 Protocol (SNMP) {{?SNMPv1=RFC1157}} defines that unparseable or unauthenticated
@@ -217,6 +239,34 @@ messages are simply discarded without response:
 When SNMP versions 2, 2c and 3 came along, older agents did exactly what the
 protocol specifies.  Deployment of new versions was likely successful because
 the handling of newer versions was both clear and simple.
+
+
+### HTTP
+
+HTTP has a number of very effective extension points in addition to the
+aforementioned header fields.  It also has some examples of extension points
+that are so rarely used that it is possible that they are not at all usable.
+
+Extension points in HTTP that might be unwise to use include the extension point
+on each chunk in the chunked transfer coding {{Section 7.1 of HTTP11}}, the
+ability to use transfer codings other than the chunked coding, and the range
+unit in a range request {{Section 14 of HTTP}}.
+
+
+### IPv4
+
+Codepoints that are reserved for future use can be especially problematic.
+Reserving codepoints without attributing semantics to their use can result in
+diverse or conflicting semantics being attributed without any hope of
+interoperability.  An example of this is the "class E" address space in IPv4
+{{?RFC0988}}, which was reserved without assigning any semantics.
+
+For protocols that can use negotiation to attribute semantics to codepoints, it
+is possible that unused codepoints can be reclaimed for active use, though this
+requires that the negotiation include all protocol participants.  For something
+as fundamental as addressing, negotiation is difficult or even impossible, as
+all nodes on the network path plus potential alternative paths would need to be
+involved.
 
 
 ## Multi-Party Interactions and Middleboxes {#middleboxes}
@@ -351,40 +401,6 @@ not change over time, implementations might not see new variations or assume a
 narrower interpretation of what is possible.  Those implementations might still
 exhibit errors when presented with new variations.
 
-
-## Unused Extension Points Become Unusable {#unused}
-
-In contrast, there are many examples of extension points in protocols that have
-been either completely unused, or their use was so infrequent that they could no
-longer be relied upon to function correctly.
-
-HTTP has a number of very effective extension points in addition to the
-aforementioned header fields.  It also has some examples of extension points
-that are so rarely used that it is possible that they are not at all usable.
-Extension points in HTTP that might be unwise to use include the extension point
-on each chunk in the chunked transfer coding {{?HTTP}}, the ability to
-use transfer codings other than the chunked coding, and the range unit in a
-range request {{?HTTP-RANGE=RFC7233}}.
-
-Even where extension points have multiple valid values, if the set of permitted
-values does not change over time, there is still a risk that new values are not
-tolerated by existing implementations.  If the set of values for a particular
-field remains fixed over a long period, some implementations might not correctly
-handle a new value when it is introduced.  For example, implementations of TLS
-broke when new values of the signature_algorithms extension were introduced.
-
-Codepoints that are reserved for future use can be especially problematic.
-Reserving codepoints without attributing semantics to their use can result in
-diverse or conflicting semantics being attributed without any hope of
-interoperability.  An example of this is the "class E" address space in IPv4
-{{?RFC0988}}, which was reserved without assigning any semantics.
-
-For protocols that can use negotiation to attribute semantics to codepoints, it
-is possible that unused codepoints can be reclaimed for active use, though this
-requires that the negotiation include all protocol participants.  For something
-as fundamental as addressing, negotiation is difficult or even impossible, as
-all nodes on the network path plus potential alternative paths would need to be
-involved.
 
 
 ## Restoring Active Use
