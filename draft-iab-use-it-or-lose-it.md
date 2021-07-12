@@ -446,8 +446,8 @@ over Ethernet {{?RFC2464}} required a different EtherType from IPv4.  This
 change took advantage of the already-diverse usage of EtherType.
 
 Other examples of this style of design include Application-Layer Protocol
-Negotiation ({{?ALPN=RFC7301}}) and HTTP content negotiation (Section 12 of
-{{?HTTP}}).
+Negotiation ({{?ALPN=RFC7301}}) and HTTP content negotiation ({{Section 12 of
+HTTP}}).
 
 This technique relies on the codepoint being usable.  For instance, the IP
 protocol number is known to be unreliable and therefore not suitable
