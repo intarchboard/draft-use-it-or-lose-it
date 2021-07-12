@@ -606,6 +606,18 @@ errors as early as possible, such as seen in {{?DMARC=RFC7489}} and
 
 # Security Considerations
 
+Many of the problems identified in this document are not the result of
+deliberate actions by an adversary, but more the result of mistakes, decisions
+made without sufficient context, or simple neglect.  Problems therefore not the
+result of opposition by an adversary.  In response, the recommended measures
+generally assume that other protocol participants will not take deliberate
+action to prevent protocol evolution.
+
+The use of cryptographic techniques to exclude potential participants is the
+only strong measure that the document recommends.  However, authorized protocol
+peers are most often responsible for the identified problems, which can mean
+that cryptography cannot be used to exclude them.
+
 The ability to design, implement, and deploy new protocol mechanisms can be
 critical to security.  In particular, it is important to be able to replace
 cryptographic algorithms over time {{?AGILITY=RFC7696}}.  For example,
