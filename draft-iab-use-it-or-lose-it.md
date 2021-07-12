@@ -513,21 +513,18 @@ The protections to protocol evolution that come from active use can be improved
 through the use of other defensive techniques. The techniques listed here might
 not prevent ossification on their own, but can make active use more effective.
 
+
 ### Cryptography
 
 Cryptography can be used to reduce the number of middlebox entities that can
-participate in a protocol.  Using tools like TLS ensures that only authorized
-participants are able to influence whether a new protocol feature is used.
+participate in a protocol or limit the extent of participation.  Using TLS or
+other cryptographic tools can therefore reduce the number of entities that can
+influence whether new features are usable.
 
-Permitting fewer protocol participants reduces the number of implementations
-that can prevent a new mechanism from being deployed.  As recommended in
-{{?PATH-SIGNALS=RFC8588}}, use of encryption and integrity protection can be
-used to limit participation.
-
-For example, the QUIC protocol {{?QUIC=RFC9000}} adopts both
-encryption and integrity protection.  Encryption is used to carefully control
-what information is exposed to middleboxes.  For those fields that are not
-encrypted, QUIC uses integrity protection to prevent modification.
+{{?PATH-SIGNALS=RFC8588}} recommends the use of encryption and integrity
+protection to limit participation.  For example, encryption is used by the QUIC
+protocol {{?QUIC=RFC9000}} to limit the information that is available to
+middleboxes and integrity protection prevents modification.
 
 
 ### Invariants
