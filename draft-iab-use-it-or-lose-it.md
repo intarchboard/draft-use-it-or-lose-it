@@ -616,7 +616,7 @@ action to prevent protocol evolution.
 The use of cryptographic techniques to exclude potential participants is the
 only strong measure that the document recommends.  However, authorized protocol
 peers are most often responsible for the identified problems, which can mean
-that cryptography cannot be used to exclude them.
+that cryptography is insufficient to exclude them.
 
 The ability to design, implement, and deploy new protocol mechanisms can be
 critical to security.  In particular, it is important to be able to replace
