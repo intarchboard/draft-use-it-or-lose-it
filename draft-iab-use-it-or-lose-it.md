@@ -64,6 +64,11 @@ informative:
     date: 2010-08-27
     target: https://labs.ripe.net/Members/erik/ripe-ncc-and-duke-university-bgp-experiment/
 
+  DNSFLAGDAY:
+    title: "DNS Flag Day 2019"
+    date: 2019-05
+    target: https://dnsflagday.net/2019/
+
 
 
 --- abstract
@@ -380,6 +385,25 @@ requires that the negotiation include all protocol participants.  For something
 as fundamental as addressing, negotiation is difficult or even impossible, as
 all nodes on the network path plus potential alternative paths would need to be
 involved.
+
+
+## Restoring Active Use
+
+With enough effort, active use can be used to restore capabililities.
+
+EDNS {{?EDNS=RFC6891}} was defined to provide extensibility in DNS.  Intolerance
+of the extension in DNS servers resulted in a fallback method being widely
+deployed (see {{Section 6.2.2 of EDNS}}), This fallback resulted in EDNS being
+disabled for affected servers.  Over time, greater support for EDNS and
+increased reliance on it for different features motivated a flag day
+{{DNSFLAGDAY}} where the workaround was removed.
+
+The EDNS example shows that effort can be used to restore capabilities.  This is
+in part because EDNS was actively used with most resolvers and servers.  It was
+therefore possible to force a change to ensure that extension capabilities would
+always be available.  However, this required an enormous coordination effort.  A
+small number of incompatible servers and the names they serve also become
+inaccessible to most clients.
 
 
 # Defensive Design Principles for Protocols {#strategies}
