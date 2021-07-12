@@ -456,15 +456,16 @@ protocol number is known to be unreliable and therefore not suitable
 
 ### Falsifying Active Use {#grease}
 
-"Grease", originally defined for TLS {{?GREASE=RFC8701}}, identifies lack of use
-as an issue (protocol mechanisms "rusting" shut) and proposes reserving values
-for extensions that have no semantic value attached.
+"Grease" was originally defined for TLS {{?GREASE=RFC8701}}, but has been
+adopted by other protocols, such as QUIC {{?QUIC=RFC9000}}.  Grease identifies
+lack of use as an issue (protocol mechanisms "rusting" shut) and proposes
+reserving values for extensions that have no semantic value attached.
 
 The design in {{?GREASE}} is aimed at the style of negotiation most used in TLS,
-where the client offers a set of options and the server chooses the one that it
-most prefers from those that it supports.  A client that uses grease randomly
+where one endpoint offers a set of options and the other chooses the one that it
+most prefers from those that it supports.  An endpoint that uses grease randomly
 offers options - usually just one - from a set of reserved values.  These values
-are guaranteed to never be assigned real meaning, so the server will never have
+are guaranteed to never be assigned real meaning, so its peer will never have
 cause to genuinely select one of these values.
 
 More generally, greasing is used to refer to any attempt to exercise extension
