@@ -290,7 +290,7 @@ points rarely have trouble adding additional ones, especially when the handling
 of new versions or extension is well defined.
 
 
-## Examples of Active Use
+## Examples of Active Use {#ex-active}
 
 For example, header fields in email {{?SMTP=RFC5322}}, HTTP {{?HTTP}}
 and SIP {{?SIP=RFC3261}} all derive from the same basic design, which amounts to
@@ -507,7 +507,8 @@ extensibility.  However, this relies on there being a sufficient proportion of
 participants that are willing to invest the effort and tolerate the risk of
 interoperability failures.
 
-## Complementary Defensive Techniques
+
+## Complementary Techniques
 
 The protections to protocol evolution that come from active use can be improved
 through the use of other defensive techniques. The techniques listed here might
@@ -525,6 +526,21 @@ influence whether new features are usable.
 protection to limit participation.  For example, encryption is used by the QUIC
 protocol {{?QUIC=RFC9000}} to limit the information that is available to
 middleboxes and integrity protection prevents modification.
+
+
+### Fewer Extension Points
+
+A successful protocol will include many potential types of extension.  Designing
+multiple types of extension mechanism, each suited to a specific purpose, might
+leave some extension points less heavily used than others.
+
+Disuse of a specialized extension point might render it unusable.  In contrast,
+having a smaller number of extension points with wide applicability could
+improve the use of those extension points.  Use of a shared extension point for
+any purpose can protect rarer or more specialized uses.
+
+Both extensions and core protocol elements use the same extension points in
+protocols like HTTP {{?HTTP}} and DIAMETER {{?DIAMETER}}; see {{ex-active}}.
 
 
 ### Invariants
