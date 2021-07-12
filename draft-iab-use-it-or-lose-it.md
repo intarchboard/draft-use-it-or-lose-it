@@ -450,16 +450,16 @@ to tolerate new or varying values of protocol elements.
 The principle that grease operates on is that an implementation that is
 regularly exposed to unknown values is less likely to be intolerant of new
 values when they appear.  This depends largely on the assumption that the
-difficulty of implementing the extension mechanism correctly is not
-significantly more effort than implementing code to identify and filter out
-reserved values.  Reserving random or unevenly distributed values for this
-purpose is thought to further discourage special treatment.
+difficulty of implementing the extension mechanism correctly is as easy or
+easier than implementing code to identify and filter out reserved values.
+Reserving random or unevenly distributed values for this purpose is thought to
+further discourage special treatment.
 
 Without reserved greasing codepoints, an implementation can use code points from
 spaces used for private or experimental use if such a range exists.  In addition
 to the risk of triggering participation in an unwanted experiment, this can be
-less effective.  Incorrect implementations might still be able to correctly
-identify these code points and ignore them.
+less effective.  Incorrect implementations might still be able to identify these
+code points and ignore them.
 
 In addition to advertising bogus capabilities, an endpoint might also
 selectively disable non-critical protocol elements to test the ability of peers
