@@ -305,13 +305,12 @@ to full participation.  For example, a SIP back-to-back user agent (B2BUA)
 This phenomenon appears at all layers of the protocol stack, especially when
 protocols are not designed with middlebox participation in mind. TCP's
 {{?TCP=RFC0793}} extension points have been rendered difficult to use, largely
-due to middlebox interactions, as experience with Multipath TCP
-{{?MPTCP=RFC6824}} and Fast Open {{?TFO=RFC7413}} has shown.  IP's version field
-was rendered useless when encapsulated over Ethernet, requring a new ethertype
-with IPv6 {{?RFC2464}}, due in part to layer 2 devices making
-version-independent assumptions about the structure of the IPv4 header.  The
-announcements of new optional transitive attributes in BGP caused significant
-routing instability {{RIPE-99}}.
+due to middlebox interactions; see for example Multipath TCP {{?MPTCP=RFC6824}}
+or Fast Open {{?TFO=RFC7413}}.  IP's version field was rendered useless when
+encapsulated over Ethernet, requring a new ethertype with IPv6 {{?RFC2464}}, due
+in part to layer 2 devices making version-independent assumptions about the
+structure of the IPv4 header.  The announcements of new optional transitive
+attributes in BGP caused significant routing instability {{RIPE-99}}.
 
 By increasing the number of different actors involved in any single protocol
 exchange, the number of potential implementation bugs that a deployment needs to
@@ -337,10 +336,12 @@ through active mechanism use.
 The conditions for retaining the ability to evolve a design is most clearly
 evident in the protocols that are known to have viable version negotiation or
 extension points.  The definition of mechanisms alone is insufficient; it's the
-assured implementation through active use of those mechanisms that determines
-the existence of freedom.  Protocols that routinely add new extensions and code
-points rarely have trouble adding additional ones, especially when the handling
-of new versions or extension is well defined.
+assured implementation and active use of those mechanisms that determines their
+availability.
+
+Protocols that routinely add new extensions and code points rarely have trouble
+adding additional ones, especially when the handling of new versions or
+extension is well defined.
 
 
 ## Examples of Active Use {#ex-active}
