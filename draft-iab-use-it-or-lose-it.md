@@ -113,17 +113,17 @@ operate under different constraints.
 
 # Imperfect Implementations Limit Protocol Evolution {#implementations}
 
-It can be extremely difficult to deploy a change to a protocol if there are
-bugs in implementations with which the new deployment needs to interoperate.
-Bugs in how new codepoints or extensions are handled often mean that endpoints
-will react poorly to the use of extension mechanisms. This can manifest
-as abrupt termination of sessions, errors, crashes, or disappearances of
-endpoints and timeouts.
+It can be extremely difficult to deploy a change to a protocol if
+implementations with which the new deployment needs to interoperate do not
+operate predictably.  Variation in how new codepoints or extensions are handled
+can be the result of bugs in implementation or specifications. Unpredictability
+can manifest as abrupt termination of sessions, errors, crashes, or
+disappearances of endpoints and timeouts.
 
 Interoperability with other implementations is usually highly valued, so
 deploying mechanisms that trigger adverse reactions can be untenable.  Where
-interoperability is a competitive advantage, this is true even if the negative
-reactions happen infrequently or only under relatively rare conditions.
+interoperability is a competitive advantage, this is true even if problems are
+infrequent or only occur under relatively rare conditions.
 
 Deploying a change to a protocol could require implementations fix a
 substantial proportion of the bugs that the change exposes.  This can
