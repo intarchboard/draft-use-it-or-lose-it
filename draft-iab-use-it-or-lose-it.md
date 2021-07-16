@@ -383,9 +383,9 @@ suffer an inability to rely on that mechanism.
 
 ## Dependency is Better {#need-it}
 
-The best way to guarantee that a protocol mechanism is used is to make the
-handling of it critical to an endpoint participating in that protocol.
-This means that implementations must rely on both the existence of extension
+The easiest way to guarantee that a protocol mechanism is used is to make the
+handling of it critical to an endpoint participating in that protocol.  This
+means that implementations must rely on both the existence of extension
 mechanisms and their continued, repeated expansion over time.
 
 For example, the message format in SMTP relies on header fields for most of its
@@ -408,7 +408,6 @@ term.  If the set of possible uses is narrowly constrained and deployments do
 not change over time, implementations might not see new variations or assume a
 narrower interpretation of what is possible.  Those implementations might still
 exhibit errors when presented with new variations.
-
 
 
 ## Restoring Active Use
@@ -564,10 +563,11 @@ protocols like HTTP {{?HTTP}} and DIAMETER {{?DIAMETER}}; see {{ex-active}}.
 
 ### Invariants
 
-Documenting aspects of the protocol that cannot or will not change as
-extensions or new versions are added can be a useful exercise. Understanding
-what aspects of a protocol are invariant can help guide the process of
-identifying those parts of the protocol that might change.
+Documenting aspects of the protocol that cannot or will not change as extensions
+or new versions are added can be a useful exercise. Understanding what aspects
+of a protocol are invariant can help guide the process of identifying those
+parts of the protocol that might change.  {{?QUIC-INVARIANTS=RFC8999}} and
+{{Section 9.3 of TLS13}} are both examples of documented invariants.
 
 As a means of protecting extensibility, a declaration of protocol invariants is
 useful only to the extent that protocol participants are willing to allow new
@@ -577,9 +577,8 @@ protocol invariants relies on implementations understanding and respecting those
 invariants.
 
 Protocol invariants need to be clearly and concisely documented.  Including
-examples of aspects of the protocol that are not invariant, such as the
-appendix of {{?QUIC-INVARIANTS=RFC8999}}, can be used to
-clarify intent.
+examples of aspects of the protocol that are not invariant, such as {{Appendix A
+of QUIC-INVARIANTS}}, can be used to clarify intent.
 
 
 ## Effective Feedback
