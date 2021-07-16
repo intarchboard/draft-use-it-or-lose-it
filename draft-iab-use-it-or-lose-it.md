@@ -168,10 +168,10 @@ aren't used are the ones that fail most often.  The same paragraph from RFC
   has been deployed for a while, and its deficiencies have become evident.
 
 Indeed, basic interoperability is considered critical early in the deployment of
-a protocol.  A desire to deploy can result in an engineering practice that
-values simplicity, which could result in deferring implementation of version
-negotiation and extension mechanisms.  This leads to these mechanisms being
-particularly affected by this problem.
+a protocol.  A desire to deploy can result in early focus on a reduced feature
+set, which could result in deferring implementation of version negotiation and
+extension mechanisms.  This leads to these mechanisms being particularly
+affected by this problem.
 
 
 ## Disuse Can Hide Problems {#disuse}
