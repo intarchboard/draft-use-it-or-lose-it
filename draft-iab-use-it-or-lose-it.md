@@ -282,15 +282,17 @@ with all actors that could be involved in the protocol.
 
 Protocols deployed without active measures against intermediation will tend to
 become intermediated over time, as network operators deploy middleboxes to
-perform some function on traffic {{?PATH-SIGNALS=RFC8558}}.  In particular, one
-of the consequences of an unencrypted protocol is that any element on path can
-interact with the protocol.  For example, HTTP was specifically designed with
-intermediation in mind, transparent proxies {{?HTTP=I-D.ietf-httpbis-semantics}}
-are not only possible but sometimes advantageous, despite some significant
-downsides.  Consequently, transparent proxies for cleartext HTTP are commonplace.
-The DNS protocol was designed with intermediation in mind through its use of
-caching recursive resolvers {{?DNS=RFC1034}}.  What was less anticipated was the
-forced spoofing of DNS records by many middle-boxes such as those that inject
+perform some function on traffic {{?PATH-SIGNALS=RFC8558}}.  Any element on path
+can observe unencrypted protocol elements and modify unauthenticated protocol
+elements.
+
+For example, HTTP was specifically designed with intermediation in mind,
+transparent proxies {{?HTTP=I-D.ietf-httpbis-semantics}} are not only possible
+but sometimes advantageous, despite some significant downsides.  Consequently,
+transparent proxies for cleartext HTTP were once commonplace.  Similarly, the
+DNS protocol was designed with intermediation in mind through its use of caching
+recursive resolvers {{?DNS=RFC1034}}.  What was less anticipated was the forced
+spoofing of DNS records by many middle-boxes such as those that inject
 authentication or pay-wall mechanisms as an authentication and authorization
 check, which are now prevalent in hotels, coffee shops and business networks.
 
@@ -300,7 +302,7 @@ middlebox participates varies from the basic functions that a router performs
 to full participation.  For example, a SIP back-to-back user agent (B2BUA)
 {{?B2BUA=RFC7092}} can be very deeply involved in the SIP protocol.
 
-This phenomenon appears at all layers of the protocol stack, even when
+This phenomenon appears at all layers of the protocol stack, especially when
 protocols are not designed with middlebox participation in mind. TCP's
 {{?TCP=RFC0793}} extension points have been rendered difficult to use, largely
 due to middlebox interactions, as experience with Multipath TCP
