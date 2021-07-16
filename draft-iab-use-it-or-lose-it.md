@@ -168,10 +168,10 @@ aren't used are the ones that fail most often.  The same paragraph from RFC
   has been deployed for a while, and its deficiencies have become evident.
 
 Indeed, basic interoperability is considered critical early in the deployment of
-a protocol.  A desire to deploy can result in an engineering practice that
-values simplicity, which could result in deferring implementation of version
-negotiation and extension mechanisms.  This leads to these mechanisms being
-particularly affected by this problem.
+a protocol.  A desire to deploy can result in early focus on a reduced feature
+set, which could result in deferring implementation of version negotiation and
+extension mechanisms.  This leads to these mechanisms being particularly
+affected by this problem.
 
 
 ## Disuse Can Hide Problems {#disuse}
@@ -361,11 +361,10 @@ These examples show extension points that are heavily used are also being
 relatively unaffected by deployment issues preventing addition of new values
 for new use cases.
 
-These examples also confirm the case that good design does not guarantee
-success.  On the contrary, success is often despite shortcomings in the design.
-For instance, the shortcomings of HTTP header fields are significant enough that
-there are ongoing efforts to improve the syntax
-{{?HTTP-HEADERS=RFC8941}}.
+These examples show that a good design is not required for success.  On the
+contrary, success is often despite shortcomings in the design.  For instance,
+the shortcomings of HTTP header fields are significant enough that there are
+ongoing efforts to improve the syntax {{?HTTP-HEADERS=RFC8941}}.
 
 Only by using a protocol's extension capabilities does it ensure the
 availability of that capability.  Protocols that fail to use a mechanism, or a
