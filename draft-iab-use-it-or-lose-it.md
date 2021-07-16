@@ -374,10 +374,11 @@ For instance, the shortcomings of HTTP header fields are significant enough that
 there are ongoing efforts to improve the syntax
 {{?HTTP-HEADERS=RFC8941}}.
 
-Only by using a protocol's extension capabilities does it ensure the
-availability of that capability.  Protocols that fail to use a mechanism, or a
-protocol that only rarely uses a mechanism, may suffer an inability to rely on
-that mechanism.
+Only by using a extension capabilities of a protocol is the availability of that
+capability assured. "Using" here includes specifying, implementing, and
+deploying capabilities that rely on the extension capability.  Protocols that
+fail to use a mechanism, or a protocol that only rarely uses a mechanism, may
+suffer an inability to rely on that mechanism.
 
 
 ## Dependency is Better {#need-it}
