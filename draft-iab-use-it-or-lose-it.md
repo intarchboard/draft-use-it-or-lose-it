@@ -361,11 +361,10 @@ These examples show extension points that are heavily used are also being
 relatively unaffected by deployment issues preventing addition of new values
 for new use cases.
 
-These examples also confirm the case that good design does not guarantee
-success.  On the contrary, success is often despite shortcomings in the design.
-For instance, the shortcomings of HTTP header fields are significant enough that
-there are ongoing efforts to improve the syntax
-{{?HTTP-HEADERS=RFC8941}}.
+These examples show that a good design is not required for success.  On the
+contrary, success is often despite shortcomings in the design.  For instance,
+the shortcomings of HTTP header fields are significant enough that there are
+ongoing efforts to improve the syntax {{?HTTP-HEADERS=RFC8941}}.
 
 Only by using a protocol's extension capabilities does it ensure the
 availability of that capability.  Protocols that fail to use a mechanism, or a
