@@ -202,11 +202,10 @@ uses the same technique for extension that is used with considerable success in
 other parts of the TLS protocol.  The original design of SNI includes the
 ability to include multiple names of different types.
 
-What is telling in this case is that SNI was defined with just one type of name:
-a domain name.  No other type has ever been standardized, though several have
-been proposed.  Despite an otherwise exemplary design, SNI is so inconsistently
-implemented that any hope for using the extension point it defines has been
-abandoned {{SNI}}.
+SNI was originally defined with just one type of name: a domain name.  No other
+type has ever been standardized, though several have been proposed.  Despite an
+otherwise exemplary design, SNI is so inconsistently implemented that any hope
+for using the extension point it defines has been abandoned {{SNI}}.
 
 Even where extension points have multiple valid values, if the set of permitted
 values does not change over time, there is still a risk that new values are not
@@ -218,13 +217,14 @@ broke when new values of the signature_algorithms extension were introduced.
 
 ### DNS
 
-Ossified DNS code bases and systems resulted in fears that new Resource Record
-Codes (RRCodes) would take years of software propagation before new RRCodes
-could be used.  The result for a long time was heavily overloaded use of the TXT
-record, such as in the Sender Policy Framework {{?SPF=RFC7208}}.  It wasn't
-until after the standard mechanism for dealing with new RRCodes
-{{?RRTYPE=RFC3597}} was considered widely deployed that new RRCodes can be
-safely created and used.
+Ossified DNS code bases and systems resulted in new Resource Record Codes
+(RRCodes) being unusable. A new codepoint would take years of coordination
+between implementations and deployments before it could be relied upon.
+Consequently, overloading use of the TXT record was used to avoid effort and
+delays involved, a method used in the Sender Policy Framework {{?SPF=RFC7208}}
+and other protocols.  It was not until after the standard mechanism for dealing
+with new RRCodes {{?RRTYPE=RFC3597}} was considered widely deployed that new
+RRCodes can be safely created and used.
 
 
 ### SNMP
@@ -253,16 +253,17 @@ ability to use transfer codings other than the chunked coding, and the range
 unit in a range request {{Section 14 of HTTP}}.
 
 
-### IPv4
+### IPv4 Class E
 
-Codepoints that are reserved for future use can be especially problematic.
-Reserving codepoints without attributing semantics to their use can result in
-diverse or conflicting semantics being attributed without any hope of
-interoperability.  An example of this is the "class E" address space in IPv4
-{{?RFC0988}}, which was reserved without assigning any semantics.
+Protocol identifiers or codepoints that are reserved for future use can be
+especially problematic.  Reserving values without attributing semantics to their
+use can result in diverse or conflicting semantics being attributed without any
+hope of interoperability.  An example of this is the "class E" address space in
+IPv4 {{?RFC0988}}, which was originally reserved in {{?RFC0791}} without
+assigning any semantics.
 
-For protocols that can use negotiation to attribute semantics to codepoints, it
-is possible that unused codepoints can be reclaimed for active use, though this
+For protocols that can use negotiation to attribute semantics to values, it is
+possible that unused codepoints can be reclaimed for active use, though this
 requires that the negotiation include all protocol participants.  For something
 as fundamental as addressing, negotiation is difficult or even impossible, as
 all nodes on the network path plus potential alternative paths would need to be
@@ -281,7 +282,7 @@ with all actors that could be involved in the protocol.
 
 Protocols deployed without active measures against intermediation will tend to
 become intermediated over time, as network operators deploy middleboxes to
-perform some function on traffic {{?PATH-SIGNALS=RFC8588}}.  In particular, one
+perform some function on traffic {{?PATH-SIGNALS=RFC8558}}.  In particular, one
 of the consequences of an unencrypted protocol is that any element on path can
 interact with the protocol.  For example, HTTP was specifically designed with
 intermediation in mind, transparent proxies {{?HTTP=I-D.ietf-httpbis-semantics}}
@@ -533,7 +534,7 @@ participate in a protocol or limit the extent of participation.  Using TLS or
 other cryptographic tools can therefore reduce the number of entities that can
 influence whether new features are usable.
 
-{{?PATH-SIGNALS=RFC8588}} recommends the use of encryption and integrity
+{{?PATH-SIGNALS=RFC8558}} recommends the use of encryption and integrity
 protection to limit participation.  For example, encryption is used by the QUIC
 protocol {{?QUIC=RFC9000}} to limit the information that is available to
 middleboxes and integrity protection prevents modification.
