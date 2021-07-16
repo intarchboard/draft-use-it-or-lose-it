@@ -346,15 +346,18 @@ extension is well defined.
 
 ## Examples of Active Use {#ex-active}
 
-For example, header fields in email {{?SMTP=RFC5322}}, HTTP {{?HTTP}}
-and SIP {{?SIP=RFC3261}} all derive from the same basic design, which amounts to
-a list name/value pairs.  There is no evidence of significant barriers to
-deploying header fields with new names and semantics in email and HTTP as
-clients and servers can ignore headers they do not understand or need.  The
-widespread deployment of SIP B2BUAs means that new SIP header fields do not
-reliably reach peers, however, which doesn't necessarily cause interoperability
-issues but rather causes feature deployment issues due to the lack of
-option passing {{middleboxes}}.
+For example, header fields in email {{?SMTP=RFC5322}}, HTTP {{?HTTP}} and SIP
+{{?SIP=RFC3261}} all derive from the same basic design, which amounts to a list
+name/value pairs.  There is no evidence of significant barriers to deploying
+header fields with new names and semantics in email and HTTP as clients and
+servers generally ignore headers they do not understand or need.  The widespread
+deployment of SIP B2BUAs, which generally do not ignore unknown fields, means
+that new SIP header fields do not reliably reach peers.  This does not
+necessarily cause interoperability issues in SIP but rather causes features to
+remain unavailable until the B2BUA is updated.  All three protocols are still
+able to deploy new features reliably, but SIP features are deployed more slowly
+due to the larger number of active participants that need to support new
+features.
 
 As another example, the attribute-value pairs (AVPs) in Diameter
 {{?DIAMETER=RFC6733}} are fundamental to the design of the protocol.  Any use of
