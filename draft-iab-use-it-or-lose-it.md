@@ -125,7 +125,7 @@ deploying mechanisms that trigger adverse reactions can be untenable.  Where
 interoperability is a competitive advantage, this is true even if problems are
 infrequent or only occur under relatively rare conditions.
 
-Deploying a change to a protocol could require implementations fix a
+Deploying a change to a protocol could require implementations to fix a
 substantial proportion of the bugs that the change exposes.  This can
 involve a difficult process that includes identifying the cause of
 these errors, finding the responsible implementation(s), coordinating a
@@ -168,10 +168,10 @@ aren't used are the ones that fail most often.  The same paragraph from RFC
   has been deployed for a while, and its deficiencies have become evident.
 
 Indeed, basic interoperability is considered critical early in the deployment of
-a protocol.  A desire to deploy can result in an engineering practice that
-values simplicity, which could result in deferring implementation of version
-negotiation and extension mechanisms.  This leads to these mechanisms being
-particularly affected by this problem.
+a protocol.  A desire to deploy can result in early focus on a reduced feature
+set, which could result in deferring implementation of version negotiation and
+extension mechanisms.  This leads to these mechanisms being particularly
+affected by this problem.
 
 
 ## Disuse Can Hide Problems {#disuse}
@@ -190,7 +190,7 @@ provides examples of failures in protocol version negotiation and extensibility.
 Version negotiation in TLS 1.2 and earlier uses the "Highest mutually supported
 version (HMSV)" scheme exactly as it is described in {{?EXTENSIBILITY}}.
 However, clients are unable to advertise a new version without causing a
-non-trivial proportions of sessions to fail due to bugs in server and middlebox
+non-trivial proportion of sessions to fail due to bugs in server and middlebox
 implementations.
 
 Intolerance to new TLS versions is so severe {{INTOLERANCE}} that TLS 1.3
@@ -328,7 +328,7 @@ deploying new versions or other changes to a protocol.
 The design of a protocol for extensibility and eventual replacement
 {{?EXTENSIBILITY}} does not guarantee the ability to exercise those options.
 The set of features that enable future evolution need to be interoperable in the
-first implementations and deployments of the protocol.  Implementations of
+first implementations and deployments of the protocol.  Implementation of
 mechanisms that support evolution is necessary to ensure that they remain
 available for new uses, and history has shown this occurs almost exclusively
 through active mechanism use.
@@ -346,7 +346,7 @@ extension is well defined.
 
 ## Examples of Active Use {#ex-active}
 
-For example, header fields in email {{?SMTP=RFC5322}}, HTTP {{?HTTP}} and SIP
+Header fields in email {{?SMTP=RFC5322}}, HTTP {{?HTTP}} and SIP
 {{?SIP=RFC3261}} all derive from the same basic design, which amounts to a list
 name/value pairs.  There is no evidence of significant barriers to deploying
 header fields with new names and semantics in email and HTTP as clients and
@@ -368,11 +368,10 @@ These examples show extension points that are heavily used are also being
 relatively unaffected by deployment issues preventing addition of new values
 for new use cases.
 
-These examples also confirm the case that good design does not guarantee
-success.  On the contrary, success is often despite shortcomings in the design.
-For instance, the shortcomings of HTTP header fields are significant enough that
-there are ongoing efforts to improve the syntax
-{{?HTTP-HEADERS=RFC8941}}.
+These examples show that a good design is not required for success.  On the
+contrary, success is often despite shortcomings in the design.  For instance,
+the shortcomings of HTTP header fields are significant enough that there are
+ongoing efforts to improve the syntax {{?HTTP-HEADERS=RFC8941}}.
 
 Only by using a extension capabilities of a protocol is the availability of that
 capability assured. "Using" here includes specifying, implementing, and
@@ -392,7 +391,7 @@ For example, the message format in SMTP relies on header fields for most of its
 functions, including the most basic delivery functions.  A deployment of SMTP
 cannot avoid including an implementation of header field handling.  In addition
 to this, the regularity with which new header fields are defined and used
-ensures that deployments frequently encounter header fields that it does not yet
+ensures that deployments frequently encounter header fields that they do not yet
 (and may never) understand.  An SMTP implementation therefore needs to be able
 to both process header fields that it understands and ignore those that it does
 not.
@@ -416,7 +415,7 @@ With enough effort, active use can be used to restore capabililities.
 
 EDNS {{?EDNS=RFC6891}} was defined to provide extensibility in DNS.  Intolerance
 of the extension in DNS servers resulted in a fallback method being widely
-deployed (see {{Section 6.2.2 of EDNS}}), This fallback resulted in EDNS being
+deployed (see {{Section 6.2.2 of EDNS}}).  This fallback resulted in EDNS being
 disabled for affected servers.  Over time, greater support for EDNS and
 increased reliance on it for different features motivated a flag day
 {{DNSFLAGDAY}} where the workaround was removed.
@@ -425,7 +424,7 @@ The EDNS example shows that effort can be used to restore capabilities.  This is
 in part because EDNS was actively used with most resolvers and servers.  It was
 therefore possible to force a change to ensure that extension capabilities would
 always be available.  However, this required an enormous coordination effort.  A
-small number of incompatible servers and the names they serve also become
+small number of incompatible servers and the names they serve also became
 inaccessible to most clients.
 
 
