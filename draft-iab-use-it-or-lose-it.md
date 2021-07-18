@@ -534,9 +534,9 @@ effective.
 
 ## Cryptography
 
-Cryptography can be used to reduce the number of middlebox entities that can
-participate in a protocol or limit the extent of participation.  Using TLS or
-other cryptographic tools can therefore reduce the number of entities that can
+Cryptography can be used to reduce the number of entities that can participate
+in a protocol or limit the extent of participation.  Using TLS or other
+cryptographic tools can therefore reduce the number of entities that can
 influence whether new features are usable.
 
 {{?PATH-SIGNALS=RFC8558}} recommends the use of encryption and integrity
@@ -641,5 +641,5 @@ This document makes no request of IANA.
 # Acknowledgments
 {:numbered="false"}
 
-Wes Hardaker, Mirja Kühlewind, Mark Nottingham, and Brian Trammell made
-significant contributions to this document.
+Toerless Eckert, Wes Hardaker, Mirja Kühlewind, Mark Nottingham, and Brian
+Trammell made significant contributions to this document.
