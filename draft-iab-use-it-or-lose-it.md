@@ -113,17 +113,17 @@ operate under different constraints.
 
 # Imperfect Implementations Limit Protocol Evolution {#implementations}
 
-It can be extremely difficult to deploy a change to a protocol if there are
-bugs in implementations with which the new deployment needs to interoperate.
-Bugs in how new codepoints or extensions are handled often mean that endpoints
-will react poorly to the use of extension mechanisms. This can manifest
-as abrupt termination of sessions, errors, crashes, or disappearances of
-endpoints and timeouts.
+It can be extremely difficult to deploy a change to a protocol if
+implementations with which the new deployment needs to interoperate do not
+operate predictably.  Variation in how new codepoints or extensions are handled
+can be the result of bugs in implementation or specifications. Unpredictability
+can manifest as abrupt termination of sessions, errors, crashes, or
+disappearances of endpoints and timeouts.
 
 Interoperability with other implementations is usually highly valued, so
 deploying mechanisms that trigger adverse reactions can be untenable.  Where
-interoperability is a competitive advantage, this is true even if the negative
-reactions happen infrequently or only under relatively rare conditions.
+interoperability is a competitive advantage, this is true even if problems are
+infrequent or only occur under relatively rare conditions.
 
 Deploying a change to a protocol could require implementations to fix a
 substantial proportion of the bugs that the change exposes.  This can
@@ -202,11 +202,10 @@ uses the same technique for extension that is used with considerable success in
 other parts of the TLS protocol.  The original design of SNI includes the
 ability to include multiple names of different types.
 
-What is telling in this case is that SNI was defined with just one type of name:
-a domain name.  No other type has ever been standardized, though several have
-been proposed.  Despite an otherwise exemplary design, SNI is so inconsistently
-implemented that any hope for using the extension point it defines has been
-abandoned {{SNI}}.
+SNI was originally defined with just one type of name: a domain name.  No other
+type has ever been standardized, though several have been proposed.  Despite an
+otherwise exemplary design, SNI is so inconsistently implemented that any hope
+for using the extension point it defines has been abandoned {{SNI}}.
 
 Even where extension points have multiple valid values, if the set of permitted
 values does not change over time, there is still a risk that new values are not
@@ -218,13 +217,14 @@ broke when new values of the signature_algorithms extension were introduced.
 
 ### DNS
 
-Ossified DNS code bases and systems resulted in fears that new Resource Record
-Codes (RRCodes) would take years of software propagation before new RRCodes
-could be used.  The result for a long time was heavily overloaded use of the TXT
-record, such as in the Sender Policy Framework {{?SPF=RFC7208}}.  It wasn't
-until after the standard mechanism for dealing with new RRCodes
-{{?RRTYPE=RFC3597}} was considered widely deployed that new RRCodes can be
-safely created and used.
+Ossified DNS code bases and systems resulted in new Resource Record Codes
+(RRCodes) being unusable. A new codepoint would take years of coordination
+between implementations and deployments before it could be relied upon.
+Consequently, overloading use of the TXT record was used to avoid effort and
+delays involved, a method used in the Sender Policy Framework {{?SPF=RFC7208}}
+and other protocols.  It was not until after the standard mechanism for dealing
+with new RRCodes {{?RRTYPE=RFC3597}} was considered widely deployed that new
+RRCodes can be safely created and used.
 
 
 ### SNMP
@@ -253,16 +253,17 @@ ability to use transfer codings other than the chunked coding, and the range
 unit in a range request {{Section 14 of HTTP}}.
 
 
-### IPv4
+### IPv4 Class E
 
-Codepoints that are reserved for future use can be especially problematic.
-Reserving codepoints without attributing semantics to their use can result in
-diverse or conflicting semantics being attributed without any hope of
-interoperability.  An example of this is the "class E" address space in IPv4
-{{?RFC0988}}, which was reserved without assigning any semantics.
+Protocol identifiers or codepoints that are reserved for future use can be
+especially problematic.  Reserving values without attributing semantics to their
+use can result in diverse or conflicting semantics being attributed without any
+hope of interoperability.  An example of this is the "class E" address space in
+IPv4 {{?RFC0988}}, which was originally reserved in {{?RFC0791}} without
+assigning any semantics.
 
-For protocols that can use negotiation to attribute semantics to codepoints, it
-is possible that unused codepoints can be reclaimed for active use, though this
+For protocols that can use negotiation to attribute semantics to values, it is
+possible that unused codepoints can be reclaimed for active use, though this
 requires that the negotiation include all protocol participants.  For something
 as fundamental as addressing, negotiation is difficult or even impossible, as
 all nodes on the network path plus potential alternative paths would need to be
@@ -281,15 +282,17 @@ with all actors that could be involved in the protocol.
 
 Protocols deployed without active measures against intermediation will tend to
 become intermediated over time, as network operators deploy middleboxes to
-perform some function on traffic {{?PATH-SIGNALS=RFC8588}}.  In particular, one
-of the consequences of an unencrypted protocol is that any element on path can
-interact with the protocol.  For example, HTTP was specifically designed with
-intermediation in mind, transparent proxies {{?HTTP=I-D.ietf-httpbis-semantics}}
-are not only possible but sometimes advantageous, despite some significant
-downsides.  Consequently, transparent proxies for cleartext HTTP are commonplace.
-The DNS protocol was designed with intermediation in mind through its use of
-caching recursive resolvers {{?DNS=RFC1034}}.  What was less anticipated was the
-forced spoofing of DNS records by many middle-boxes such as those that inject
+perform some function on traffic {{?PATH-SIGNALS=RFC8558}}.  Any element on path
+can observe unencrypted protocol elements and modify unauthenticated protocol
+elements.
+
+For example, HTTP was specifically designed with intermediation in mind,
+transparent proxies {{?HTTP=I-D.ietf-httpbis-semantics}} are not only possible
+but sometimes advantageous, despite some significant downsides.  Consequently,
+transparent proxies for cleartext HTTP were once commonplace.  Similarly, the
+DNS protocol was designed with intermediation in mind through its use of caching
+recursive resolvers {{?DNS=RFC1034}}.  What was less anticipated was the forced
+spoofing of DNS records by many middle-boxes such as those that inject
 authentication or pay-wall mechanisms as an authentication and authorization
 check, which are now prevalent in hotels, coffee shops and business networks.
 
@@ -299,16 +302,15 @@ middlebox participates varies from the basic functions that a router performs
 to full participation.  For example, a SIP back-to-back user agent (B2BUA)
 {{?B2BUA=RFC7092}} can be very deeply involved in the SIP protocol.
 
-This phenomenon appears at all layers of the protocol stack, even when
+This phenomenon appears at all layers of the protocol stack, especially when
 protocols are not designed with middlebox participation in mind. TCP's
 {{?TCP=RFC0793}} extension points have been rendered difficult to use, largely
-due to middlebox interactions, as experience with Multipath TCP
-{{?MPTCP=RFC6824}} and Fast Open {{?TFO=RFC7413}} has shown.  IP's version field
-was rendered useless when encapsulated over Ethernet, requring a new ethertype
-with IPv6 {{?RFC2464}}, due in part to layer 2 devices making
-version-independent assumptions about the structure of the IPv4 header.  The
-announcements of new optional transitive attributes in BGP caused significant
-routing instability {{RIPE-99}}.
+due to middlebox interactions; see for example Multipath TCP {{?MPTCP=RFC6824}}
+or Fast Open {{?TFO=RFC7413}}.  IP's version field was rendered useless when
+encapsulated over Ethernet, requring a new ethertype with IPv6 {{?RFC2464}}, due
+in part to layer 2 devices making version-independent assumptions about the
+structure of the IPv4 header.  The announcements of new optional transitive
+attributes in BGP caused significant routing instability {{RIPE-99}}.
 
 By increasing the number of different actors involved in any single protocol
 exchange, the number of potential implementation bugs that a deployment needs to
@@ -334,23 +336,28 @@ through active mechanism use.
 The conditions for retaining the ability to evolve a design is most clearly
 evident in the protocols that are known to have viable version negotiation or
 extension points.  The definition of mechanisms alone is insufficient; it's the
-assured implementation through active use of those mechanisms that determines
-the existence of freedom.  Protocols that routinely add new extensions and code
-points rarely have trouble adding additional ones, especially when the handling
-of new versions or extensions is well defined.
+assured implementation and active use of those mechanisms that determines their
+availability.
+
+Protocols that routinely add new extensions and code points rarely have trouble
+adding additional ones, especially when the handling of new versions or
+extension is well defined.
 
 
 ## Examples of Active Use {#ex-active}
 
-For example, header fields in email {{?SMTP=RFC5322}}, HTTP {{?HTTP}}
-and SIP {{?SIP=RFC3261}} all derive from the same basic design, which amounts to
-a list of name/value pairs.  There is no evidence of significant barriers to
-deploying header fields with new names and semantics in email and HTTP as
-clients and servers can ignore headers they do not understand or need.  The
-widespread deployment of SIP B2BUAs means that new SIP header fields do not
-reliably reach peers, however, which doesn't necessarily cause interoperability
-issues but rather causes feature deployment issues due to the lack of
-option passing middleboxes (see {{middleboxes}}).
+Header fields in email {{?SMTP=RFC5322}}, HTTP {{?HTTP}} and SIP
+{{?SIP=RFC3261}} all derive from the same basic design, which amounts to a list
+name/value pairs.  There is no evidence of significant barriers to deploying
+header fields with new names and semantics in email and HTTP as clients and
+servers generally ignore headers they do not understand or need.  The widespread
+deployment of SIP B2BUAs, which generally do not ignore unknown fields, means
+that new SIP header fields do not reliably reach peers.  This does not
+necessarily cause interoperability issues in SIP but rather causes features to
+remain unavailable until the B2BUA is updated.  All three protocols are still
+able to deploy new features reliably, but SIP features are deployed more slowly
+due to the larger number of active participants that need to support new
+features.
 
 As another example, the attribute-value pairs (AVPs) in Diameter
 {{?DIAMETER=RFC6733}} are fundamental to the design of the protocol.  Any use of
@@ -366,17 +373,18 @@ contrary, success is often despite shortcomings in the design.  For instance,
 the shortcomings of HTTP header fields are significant enough that there are
 ongoing efforts to improve the syntax {{?HTTP-HEADERS=RFC8941}}.
 
-Only by using a protocol's extension capabilities does it ensure the
-availability of that capability.  Protocols that fail to use a mechanism, or a
-protocol that only rarely uses a mechanism, may suffer an inability to rely on
-that mechanism.
+Only by using a extension capabilities of a protocol is the availability of that
+capability assured. "Using" here includes specifying, implementing, and
+deploying capabilities that rely on the extension capability.  Protocols that
+fail to use a mechanism, or a protocol that only rarely uses a mechanism, may
+suffer an inability to rely on that mechanism.
 
 
 ## Dependency is Better {#need-it}
 
-The best way to guarantee that a protocol mechanism is used is to make the
-handling of it critical to an endpoint participating in that protocol.
-This means that implementations must rely on both the existence of extension
+The easiest way to guarantee that a protocol mechanism is used is to make the
+handling of it critical to an endpoint participating in that protocol.  This
+means that implementations must rely on both the existence of extension
 mechanisms and their continued, repeated expansion over time.
 
 For example, the message format in SMTP relies on header fields for most of its
@@ -399,7 +407,6 @@ term.  If the set of possible uses is narrowly constrained and deployments do
 not change over time, implementations might not see new variations or assume a
 narrower interpretation of what is possible.  Those implementations might still
 exhibit errors when presented with new variations.
-
 
 
 ## Restoring Active Use
@@ -532,7 +539,7 @@ participate in a protocol or limit the extent of participation.  Using TLS or
 other cryptographic tools can therefore reduce the number of entities that can
 influence whether new features are usable.
 
-{{?PATH-SIGNALS=RFC8588}} recommends the use of encryption and integrity
+{{?PATH-SIGNALS=RFC8558}} recommends the use of encryption and integrity
 protection to limit participation.  For example, encryption is used by the QUIC
 protocol {{?QUIC=RFC9000}} to limit the information that is available to
 middleboxes and integrity protection prevents modification.
@@ -555,10 +562,11 @@ protocols like HTTP {{?HTTP}} and DIAMETER {{?DIAMETER}}; see {{ex-active}}.
 
 ### Invariants
 
-Documenting aspects of the protocol that cannot or will not change as
-extensions or new versions are added can be a useful exercise. Understanding
-what aspects of a protocol are invariant can help guide the process of
-identifying those parts of the protocol that might change.
+Documenting aspects of the protocol that cannot or will not change as extensions
+or new versions are added can be a useful exercise. Understanding what aspects
+of a protocol are invariant can help guide the process of identifying those
+parts of the protocol that might change.  {{?QUIC-INVARIANTS=RFC8999}} and
+{{Section 9.3 of TLS13}} are both examples of documented invariants.
 
 As a means of protecting extensibility, a declaration of protocol invariants is
 useful only to the extent that protocol participants are willing to allow new
@@ -568,9 +576,8 @@ protocol invariants relies on implementations understanding and respecting those
 invariants.
 
 Protocol invariants need to be clearly and concisely documented.  Including
-examples of aspects of the protocol that are not invariant, such as the
-appendix of {{?QUIC-INVARIANTS=RFC8999}}, can be used to
-clarify intent.
+examples of aspects of the protocol that are not invariant, such as {{Appendix A
+of QUIC-INVARIANTS}}, can be used to clarify intent.
 
 
 ## Effective Feedback
