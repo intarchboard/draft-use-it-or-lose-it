@@ -570,10 +570,10 @@ parts of the protocol that might change.  {{?QUIC-INVARIANTS=RFC8999}} and
 
 As a means of protecting extensibility, a declaration of protocol invariants is
 useful only to the extent that protocol participants are willing to allow new
-uses for the protocol.  Like with greasing, protocol participants could still
-purposefully block the deployment of new features.  A protocol that declares
-protocol invariants relies on implementations understanding and respecting those
-invariants.
+uses for the protocol.  A protocol that declares protocol invariants relies on
+implementations understanding and respecting those invariants.  If active use is not
+possible for all non-invariant parts of the protocol, greasing ({{grease}}) might be
+used to improve the chance that invariants are respected.
 
 Protocol invariants need to be clearly and concisely documented.  Including
 examples of aspects of the protocol that are not invariant, such as {{Appendix A
