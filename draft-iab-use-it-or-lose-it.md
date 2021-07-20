@@ -224,7 +224,8 @@ to full participation.  For example, a SIP back-to-back user agent (B2BUA)
 {{?B2BUA=RFC7092}} can be very deeply involved in the SIP protocol.
 
 This phenomenon appears at all layers of the protocol stack, especially when
-protocols are not designed with middlebox participation in mind.
+protocols are not designed with middlebox participation in mind. Some of the
+examples in {{examples}} demonstrate this problem.
 
 By increasing the number of different actors involved in any single protocol
 exchange, the number of potential implementation bugs that a deployment needs to
@@ -628,12 +629,14 @@ the handling of newer versions was both clear and simple.
 ## TCP
 
 Extension points in TCP {{?TCP=RFC0793}} have been rendered difficult to use,
-largely due to middlebox interactions.
+largely due to middlebox interactions; see
+{{?EXT-TCP=DOI.10.1145/2068816.2068834}}.
 
 For instance, multipath TCP {{?MPTCP=RFC6824}} can only be deployed
-opportunistically.  As multipath TCP enables progressive enhancement of the
-protocol, this largely only causes the feature to not be available if the path
-is intolerant of the extension.
+opportunistically; see {{?MPTCP-HOW-HARD=DOI.10.5555/2228298.2228338}}.  As
+multipath TCP enables progressive enhancement of the protocol, this largely only
+causes the feature to not be available if the path is intolerant of the
+extension.
 
 In comparison, the deployment of Fast Open {{?TFO=RFC7413}} critically depends
 on extension capability being widely available.  Though very few network paths
