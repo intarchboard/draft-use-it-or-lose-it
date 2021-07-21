@@ -618,6 +618,14 @@ as fundamental as addressing, negotiation is difficult or even impossible, as
 all nodes on the network path plus potential alternative paths would need to be
 involved.
 
+IP Router Alerts {{?RAv4=RFC2113}}{{?RAv6=RFC2711}} use IP options or extension
+headers to indicate that data is intended for consumption by the next hop router
+rather than the addressed destination.  In part, the deployment of router alerts
+was unsuccessful due to the realities of processing IP packets at line rates,
+combined with bad assumptions in the protocol design about these performance
+constraints.  However, this was not exclusively down to design problems or bugs
+as the capability was also deliberately blocked at some routers.
+
 
 ## SNMP
 
