@@ -153,6 +153,11 @@ critical infrastructure (e.g., IP, BGP, DNS, or TLS).  It could even be
 necessary to come up with a new protocol design that uses a different method to
 achieve the same result.
 
+This document largely assumes that extensions are not deliberately blocked.
+Some deployments or implementations apply policies that explicitly prohibit the
+use of unknown capabilities.  This is especially true of functions that seek to
+make security guarantees, like firewalls.
+
 The set of interoperable features in a protocol is often the subset of its
 features that have some value to those implementing and deploying the protocol.
 It is not always the case that future extensibility is in that set.
@@ -227,15 +232,18 @@ but sometimes advantageous, despite some significant downsides.  Consequently,
 transparent proxies for cleartext HTTP were once commonplace.  Similarly, the
 DNS protocol was designed with intermediation in mind through its use of caching
 recursive resolvers {{?DNS=RFC1034}}.  What was less anticipated was the forced
-spoofing of DNS records by many middle-boxes such as those that inject
-authentication or pay-wall mechanisms as an authentication and authorization
-check, which are now prevalent in hotels, coffee shops and business networks.
+spoofing of DNS records by middleboxes such as those that inject authentication
+or pay-wall mechanisms as an authentication and authorization check, which are
+now prevalent in hotels, coffee shops and business networks.
 
-Middleboxes are also protocol participants, to the degree that they are able
-to observe and act in ways that affect the protocol.  The degree to which a
-middlebox participates varies from the basic functions that a router performs
-to full participation.  For example, a SIP back-to-back user agent (B2BUA)
-{{?B2BUA=RFC7092}} can be very deeply involved in the SIP protocol.
+Middleboxes are also protocol participants, to the degree that they are able to
+observe and act in ways that affect the protocol.  The degree to which a
+middlebox participates in a protocol can vary depending on the purpose and
+implementation of the middlebox.  Middleboxes can also apply their own policy,
+with or without the knowledge or permission of endpoints.  For example, a SIP
+back-to-back user agent (B2BUA) {{?B2BUA=RFC7092}} can be very deeply involved
+in the SIP protocol and is often relied upon to provide policy-based security
+controls.
 
 This phenomenon appears at all layers of the protocol stack, especially when
 protocols are not designed with middlebox participation in mind. Some of the
@@ -624,6 +632,14 @@ requires that the negotiation include all protocol participants.  For something
 as fundamental as addressing, negotiation is difficult or even impossible, as
 all nodes on the network path plus potential alternative paths would need to be
 involved.
+
+IP Router Alerts {{?RAv4=RFC2113}}{{?RAv6=RFC2711}} use IP options or extension
+headers to indicate that data is intended for consumption by the next hop router
+rather than the addressed destination.  In part, the deployment of router alerts
+was unsuccessful due to the realities of processing IP packets at line rates,
+combined with bad assumptions in the protocol design about these performance
+constraints.  However, this was not exclusively down to design problems or bugs
+as the capability was also deliberately blocked at some routers.
 
 
 ## SNMP
