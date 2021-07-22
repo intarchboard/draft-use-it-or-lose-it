@@ -69,6 +69,20 @@ informative:
     date: 2019-05
     target: https://dnsflagday.net/2019/
 
+  MPTCP-HOW-HARD:
+    title: "How Hard Can It Be? Designing and Implementing a Deployable Multipath TCP"
+    target: "https://www.usenix.org/conference/nsdi12/technical-sessions/presentation/raiciu"
+    date: 2012-04
+    author:
+      - name: Costin Raiciu
+      - name: Christoph Paasch
+      - name: Sebastien Barre
+      - name: Alan Ford
+      - name: Michio Honda
+      - name: Fabien Duchene
+      - name: Olivier Bonaventure
+      - name: Mark Handley
+
   HTTP11: I-D.ietf-httpbis-messaging
 
 
@@ -649,7 +663,7 @@ largely due to middlebox interactions; see
 {{?EXT-TCP=DOI.10.1145/2068816.2068834}}.
 
 For instance, multipath TCP {{?MPTCP=RFC6824}} can only be deployed
-opportunistically; see {{?MPTCP-HOW-HARD=DOI.10.5555/2228298.2228338}}.  As
+opportunistically; see {{MPTCP-HOW-HARD}}.  As
 multipath TCP enables progressive enhancement of the protocol, this largely only
 causes the feature to not be available if the path is intolerant of the
 extension.
