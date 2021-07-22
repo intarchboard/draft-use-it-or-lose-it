@@ -139,10 +139,10 @@ critical infrastructure (e.g., IP, BGP, DNS, or TLS).  It could even be
 necessary to come up with a new protocol design that uses a different method to
 achieve the same result.
 
-To some degree assumes that extensions are not deliberately blocked.  Some
-deployments or implementations apply policies that prohibit the use of unknown
-capabilities.  This is especially true of functions that seek to make security
-guarantees, like firewalls.
+This document largely assumes that extensions are not deliberately blocked.
+Some deployments or implementations apply policies that explicitly prohibit the
+use of unknown capabilities.  This is especially true of functions that seek to
+make security guarantees, like firewalls.
 
 The set of interoperable features in a protocol is often the subset of its
 features that have some value to those implementing and deploying the protocol.
@@ -224,11 +224,12 @@ now prevalent in hotels, coffee shops and business networks.
 
 Middleboxes are also protocol participants, to the degree that they are able to
 observe and act in ways that affect the protocol.  The degree to which a
-middlebox participates varies.  This can include middleboxes that apply their
-own policy, with or without the knowledge or permission of endpoints.  For
-example, a SIP back-to-back user agent (B2BUA) {{?B2BUA=RFC7092}} can be very
-deeply involved in the SIP protocol and is often relied upon to provide
-policy-based security controls.
+middlebox participates in a protocol can vary depending on the purpose and
+implementation of the middlebox.  Middleboxes can also apply their own policy,
+with or without the knowledge or permission of endpoints.  For example, a SIP
+back-to-back user agent (B2BUA) {{?B2BUA=RFC7092}} can be very deeply involved
+in the SIP protocol and is often relied upon to provide policy-based security
+controls.
 
 This phenomenon appears at all layers of the protocol stack, especially when
 protocols are not designed with middlebox participation in mind. Some of the
