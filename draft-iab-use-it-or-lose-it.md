@@ -69,6 +69,20 @@ informative:
     date: 2019-05
     target: https://dnsflagday.net/2019/
 
+  MPTCP-HOW-HARD:
+    title: "How Hard Can It Be? Designing and Implementing a Deployable Multipath TCP"
+    target: "https://www.usenix.org/conference/nsdi12/technical-sessions/presentation/raiciu"
+    date: 2012-04
+    author:
+      - name: Costin Raiciu
+      - name: Christoph Paasch
+      - name: Sebastien Barre
+      - name: Alan Ford
+      - name: Michio Honda
+      - name: Fabien Duchene
+      - name: Olivier Bonaventure
+      - name: Mark Handley
+
   HTTP11: I-D.ietf-httpbis-messaging
 
 
@@ -180,32 +194,8 @@ There are many examples of extension points in protocols that have been either
 completely unused, or their use was so infrequent that they could no longer be
 relied upon to function correctly.
 
-
-### TLS
-
-Transport Layer Security (TLS) {{?TLS12=RFC5246}} provides examples of where a
-design that is objectively sound fails when incorrectly implemented.  TLS
-provides examples of failures in protocol version negotiation and extensibility.
-
-Version negotiation in TLS 1.2 and earlier uses the "Highest mutually supported
-version (HMSV)" scheme exactly as it is described in {{?EXTENSIBILITY}}.
-However, clients are unable to advertise a new version without causing a
-non-trivial proportion of sessions to fail due to bugs in server and middlebox
-implementations.
-
-Intolerance to new TLS versions is so severe {{INTOLERANCE}} that TLS 1.3
-{{?TLS13=RFC8446}} has abandoned HMSV version negotiation for a new mechanism.
-
-The server name indication (SNI) {{?TLS-EXT=RFC6066}} in TLS is another
-excellent example of the failure of a well-designed extensibility point.  SNI
-uses the same technique for extension that is used with considerable success in
-other parts of the TLS protocol.  The original design of SNI includes the
-ability to include multiple names of different types.
-
-SNI was originally defined with just one type of name: a domain name.  No other
-type has ever been standardized, though several have been proposed.  Despite an
-otherwise exemplary design, SNI is so inconsistently implemented that any hope
-for using the extension point it defines has been abandoned {{SNI}}.
+{{examples}} includes examples of disuse in a number of widely deployed Internet
+protocols.
 
 Even where extension points have multiple valid values, if the set of permitted
 values does not change over time, there is still a risk that new values are not
@@ -213,61 +203,6 @@ tolerated by existing implementations.  If the set of values for a particular
 field remains fixed over a long period, some implementations might not correctly
 handle a new value when it is introduced.  For example, implementations of TLS
 broke when new values of the signature_algorithms extension were introduced.
-
-
-### DNS
-
-Ossified DNS code bases and systems resulted in new Resource Record Codes
-(RRCodes) being unusable. A new codepoint would take years of coordination
-between implementations and deployments before it could be relied upon.
-Consequently, overloading use of the TXT record was used to avoid effort and
-delays involved, a method used in the Sender Policy Framework {{?SPF=RFC7208}}
-and other protocols.  It was not until after the standard mechanism for dealing
-with new RRCodes {{?RRTYPE=RFC3597}} was considered widely deployed that new
-RRCodes can be safely created and used.
-
-
-### SNMP
-
-As a counter example, the first version of the Simple Network Management
-Protocol (SNMP) {{?SNMPv1=RFC1157}} defines that unparseable or unauthenticated
-messages are simply discarded without response:
-
-> It then verifies the version number of the SNMP message. If there is a
-  mismatch, it discards the datagram and performs no further actions.
-
-When SNMP versions 2, 2c and 3 came along, older agents did exactly what the
-protocol specifies.  Deployment of new versions was likely successful because
-the handling of newer versions was both clear and simple.
-
-
-### HTTP
-
-HTTP has a number of very effective extension points in addition to the
-aforementioned header fields.  It also has some examples of extension points
-that are so rarely used that it is possible that they are not at all usable.
-
-Extension points in HTTP that might be unwise to use include the extension point
-on each chunk in the chunked transfer coding {{Section 7.1 of HTTP11}}, the
-ability to use transfer codings other than the chunked coding, and the range
-unit in a range request {{Section 14 of HTTP}}.
-
-
-### IPv4 Class E
-
-Protocol identifiers or codepoints that are reserved for future use can be
-especially problematic.  Reserving values without attributing semantics to their
-use can result in diverse or conflicting semantics being attributed without any
-hope of interoperability.  An example of this is the "class E" address space in
-IPv4 {{?RFC0988}}, which was originally reserved in {{?RFC0791}} without
-assigning any semantics.
-
-For protocols that can use negotiation to attribute semantics to values, it is
-possible that unused codepoints can be reclaimed for active use, though this
-requires that the negotiation include all protocol participants.  For something
-as fundamental as addressing, negotiation is difficult or even impossible, as
-all nodes on the network path plus potential alternative paths would need to be
-involved.
 
 
 ## Multi-Party Interactions and Middleboxes {#middleboxes}
@@ -303,14 +238,8 @@ to full participation.  For example, a SIP back-to-back user agent (B2BUA)
 {{?B2BUA=RFC7092}} can be very deeply involved in the SIP protocol.
 
 This phenomenon appears at all layers of the protocol stack, especially when
-protocols are not designed with middlebox participation in mind. TCP's
-{{?TCP=RFC0793}} extension points have been rendered difficult to use, largely
-due to middlebox interactions; see for example Multipath TCP {{?MPTCP=RFC6824}}
-or Fast Open {{?TFO=RFC7413}}.  IP's version field was rendered useless when
-encapsulated over Ethernet, requring a new ethertype with IPv6 {{?RFC2464}}, due
-in part to layer 2 devices making version-independent assumptions about the
-structure of the IPv4 header.  The announcements of new optional transitive
-attributes in BGP caused significant routing instability {{RIPE-99}}.
+protocols are not designed with middlebox participation in mind. Some of the
+examples in {{examples}} demonstrate this problem.
 
 By increasing the number of different actors involved in any single protocol
 exchange, the number of potential implementation bugs that a deployment needs to
@@ -637,6 +566,124 @@ This document makes no request of IANA.
 
 
 --- back
+
+# Examples {#examples}
+
+This appendix contains a brief study of problems in a range of Internet
+protocols at different layers of the stack.
+
+
+## BGP
+
+The announcements of new optional transitive attributes in BGP caused
+significant routing instability {{RIPE-99}}.
+
+
+## DNS
+
+Ossified DNS code bases and systems resulted in new Resource Record Codes
+(RRCodes) being unusable. A new codepoint would take years of coordination
+between implementations and deployments before it could be relied upon.
+Consequently, overloading use of the TXT record was used to avoid effort and
+delays involved, a method used in the Sender Policy Framework {{?SPF=RFC7208}}
+and other protocols.
+
+It was not until after the standard mechanism for dealing with new RRCodes
+{{?RRTYPE=RFC3597}} was considered widely deployed that new RRCodes can be
+safely created and used.
+
+
+## HTTP
+
+HTTP has a number of very effective extension points in addition to the
+aforementioned header fields.  It also has some examples of extension points
+that are so rarely used that it is possible that they are not at all usable.
+
+Extension points in HTTP that might be unwise to use include the extension point
+on each chunk in the chunked transfer coding {{Section 7.1 of HTTP11}}, the
+ability to use transfer codings other than the chunked coding, and the range
+unit in a range request {{Section 14 of HTTP}}.
+
+
+## IP
+
+The version field in IP was rendered useless when encapsulated over Ethernet,
+requring a new ethertype with IPv6 {{?RFC2464}}, due in part to layer 2 devices
+making version-independent assumptions about the structure of the IPv4 header.
+
+Protocol identifiers or codepoints that are reserved for future use can be
+especially problematic.  Reserving values without attributing semantics to their
+use can result in diverse or conflicting semantics being attributed without any
+hope of interoperability.  An example of this is the "class E" address space in
+IPv4 {{?RFC0988}}, which was originally reserved in {{?RFC0791}} without
+assigning any semantics.
+
+For protocols that can use negotiation to attribute semantics to values, it is
+possible that unused codepoints can be reclaimed for active use, though this
+requires that the negotiation include all protocol participants.  For something
+as fundamental as addressing, negotiation is difficult or even impossible, as
+all nodes on the network path plus potential alternative paths would need to be
+involved.
+
+
+## SNMP
+
+As a counter example, the first version of the Simple Network Management
+Protocol (SNMP) {{?SNMPv1=RFC1157}} defines that unparseable or unauthenticated
+messages are simply discarded without response:
+
+> It then verifies the version number of the SNMP message. If there is a
+  mismatch, it discards the datagram and performs no further actions.
+
+When SNMP versions 2, 2c and 3 came along, older agents did exactly what the
+protocol specifies.  Deployment of new versions was likely successful because
+the handling of newer versions was both clear and simple.
+
+
+## TCP
+
+Extension points in TCP {{?TCP=RFC0793}} have been rendered difficult to use,
+largely due to middlebox interactions; see
+{{?EXT-TCP=DOI.10.1145/2068816.2068834}}.
+
+For instance, multipath TCP {{?MPTCP=RFC6824}} can only be deployed
+opportunistically; see {{MPTCP-HOW-HARD}}.  As
+multipath TCP enables progressive enhancement of the protocol, this largely only
+causes the feature to not be available if the path is intolerant of the
+extension.
+
+In comparison, the deployment of Fast Open {{?TFO=RFC7413}} critically depends
+on extension capability being widely available.  Though very few network paths
+were intolerant of the extension in absolute terms, TCP Fast Open could not be
+deployed as a result.
+
+
+## TLS
+
+Transport Layer Security (TLS) {{?TLS12=RFC5246}} provides examples of where a
+design that is objectively sound fails when incorrectly implemented.  TLS
+provides examples of failures in protocol version negotiation and extensibility.
+
+Version negotiation in TLS 1.2 and earlier uses the "Highest mutually supported
+version (HMSV)" scheme exactly as it is described in {{?EXTENSIBILITY}}.
+However, clients are unable to advertise a new version without causing a
+non-trivial proportion of sessions to fail due to bugs in server and middlebox
+implementations.
+
+Intolerance to new TLS versions is so severe {{INTOLERANCE}} that TLS 1.3
+{{?TLS13=RFC8446}} abandoned HMSV version negotiation for a new mechanism.
+
+The server name indication (SNI) {{?TLS-EXT=RFC6066}} in TLS is another
+excellent example of the failure of a well-designed extensibility point.  SNI
+uses the same technique for extension that is used successfully in other parts
+of the TLS protocol.  The original design of SNI anticipated the ability to
+include multiple names of different types.
+
+SNI was originally defined with just one type of name: a domain name.  No other
+type has ever been standardized, though several have been proposed.  Despite an
+otherwise exemplary design, SNI is so inconsistently implemented that any hope
+for using the extension point it defines has been abandoned {{SNI}}.
+
 
 # Acknowledgments
 {:numbered="false"}
