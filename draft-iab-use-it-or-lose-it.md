@@ -382,9 +382,7 @@ implementation is deployed, the more difficult it is to correct.
 What constitutes "active use" can depend greatly on the environment in which a
 protocol is deployed.  The frequency of changes necessary to safeguard some
 mechanisms might be slow enough to attract ossification in another protocol
-deployment, while being excessive in others.  Active use can also vary based
-on how values are used, e.g., either by changing the set of which values are
-in use or by changing the way in which these values are expressed on the wire.
+deployment, while being excessive in others.
 
 
 ## Version Negotiation
