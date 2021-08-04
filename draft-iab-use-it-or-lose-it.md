@@ -116,9 +116,10 @@ This document examines the specific conditions that determine whether protocol
 maintainers have the ability to design and deploy new or modified protocols.
 {{implementations}} highlights some historical examples of difficulties in
 transitions to new protocol features.  {{use-it}} argues that ossified protocols
-are more difficult to update and successful protocols make frequent use of new
-extensions and code-points.  {{use}} and {{other}} outline several strategies
-that might aid in ensuring that protocol changes remain possible over time.
+are more difficult to update and describes how successful protocols make
+frequent use of new extensions and code-points.  {{other}} outline several
+additional strategies that might aid in ensuring that protocol changes remain
+possible over time.
 
 The experience that informs this document is predominantly at "higher" layers of
 the network stack, in protocols that operate at very large scale and
@@ -227,7 +228,7 @@ Protocols that are intermediated need to consider the effect that deploying an
 extension might have on a middlebox.
 
 
-# Retaining Viable Protocol Evolution Mechanisms {#use-it}
+# Active Use {#use-it}
 
 The design of a protocol for extensibility and eventual replacement
 {{?EXTENSIBILITY}} does not guarantee the ability to exercise those options.
@@ -237,51 +238,27 @@ mechanisms that support evolution is necessary to ensure that they remain
 available for new uses, and history has shown this occurs almost exclusively
 through active mechanism use.
 
-The conditions for retaining the ability to evolve a design is most clearly
-evident in the protocols that are known to have viable version negotiation or
-extension points.  The definition of mechanisms alone is insufficient; it's the
-assured implementation and active use of those mechanisms that determines their
-availability.
+Only by using the extension capabilities of a protocol is the availability of that
+capability assured. "Using" here includes specifying, implementing, and
+deploying capabilities that rely on the extension capability.  Protocols that
+fail to use a mechanism, or a protocol that only rarely uses a mechanism, could
+lead to that mechanism being unreliable.
+
+Implementations that routinely see new values are more likely to correctly
+handle new values.  More frequent changes will improve the likelihood that
+incorrect handling or intolerance is discovered and rectified.  The longer an
+intolerant implementation is deployed, the more difficult it is to correct.
 
 Protocols that routinely add new extensions and code points rarely have trouble
 adding additional ones, especially when the handling of new versions or
-extension is well defined.
+extensions are well defined.  The definition of mechanisms alone is
+insufficient; it is the assured implementation and active use of those
+mechanisms that determines their availability.
 
-
-## Examples of Active Use {#ex-active}
-
-Header fields in email {{?SMTP=RFC5321}}, HTTP {{HTTP}} and SIP
-{{?SIP=RFC3261}} all derive from the same basic design, which amounts to a list
-name/value pairs.  There is no evidence of significant barriers to deploying
-header fields with new names and semantics in email and HTTP as clients and
-servers generally ignore headers they do not understand or need.  The widespread
-deployment of SIP B2BUAs, which generally do not ignore unknown fields, means
-that new SIP header fields do not reliably reach peers.  This does not
-necessarily cause interoperability issues in SIP but rather causes features to
-remain unavailable until the B2BUA is updated.  All three protocols are still
-able to deploy new features reliably, but SIP features are deployed more slowly
-due to the larger number of active participants that need to support new
-features.
-
-As another example, the attribute-value pairs (AVPs) in Diameter
-{{?DIAMETER=RFC6733}} are fundamental to the design of the protocol.  Any use of
-Diameter requires exercising the ability to add new AVPs.  This is routinely
-done without fear that the new feature might not be successfully deployed.
-
-These examples show extension points that are heavily used are also being
-relatively unaffected by deployment issues preventing addition of new values
-for new use cases.
-
-These examples show that a good design is not required for success.  On the
-contrary, success is often despite shortcomings in the design.  For instance,
-the shortcomings of HTTP header fields are significant enough that there are
-ongoing efforts to improve the syntax {{?HTTP-HEADERS=RFC8941}}.
-
-Only by using a extension capabilities of a protocol is the availability of that
-capability assured. "Using" here includes specifying, implementing, and
-deploying capabilities that rely on the extension capability.  Protocols that
-fail to use a mechanism, or a protocol that only rarely uses a mechanism, may
-suffer an inability to rely on that mechanism.
+What constitutes "active use" can depend greatly on the environment in which a
+protocol is deployed.  The frequency of changes necessary to safeguard some
+mechanisms might be slow enough to attract ossification in another protocol
+deployment, while being excessive in others.
 
 
 ## Dependency is Better {#need-it}
@@ -311,43 +288,6 @@ term.  If the set of possible uses is narrowly constrained and deployments do
 not change over time, implementations might not see new variations or assume a
 narrower interpretation of what is possible.  Those implementations might still
 exhibit errors when presented with new variations.
-
-
-## Restoring Active Use
-
-With enough effort, active use can be used to restore capabililities.
-
-EDNS {{?EDNS=RFC6891}} was defined to provide extensibility in DNS.  Intolerance
-of the extension in DNS servers resulted in a fallback method being widely
-deployed (see {{Section 6.2.2 of EDNS}}).  This fallback resulted in EDNS being
-disabled for affected servers.  Over time, greater support for EDNS and
-increased reliance on it for different features motivated a flag day
-{{DNSFLAGDAY}} where the workaround was removed.
-
-The EDNS example shows that effort can be used to restore capabilities.  This is
-in part because EDNS was actively used with most resolvers and servers.  It was
-therefore possible to force a change to ensure that extension capabilities would
-always be available.  However, this required an enormous coordination effort.  A
-small number of incompatible servers and the names they serve also became
-inaccessible to most clients.
-
-
-# Active Use {#use}
-
-As discussed in {{use-it}}, the most effective defense against ossification of
-protocol extension points is active use.
-
-Implementations are most likely to be tolerant of new values if they depend on
-being able to frequently use new values.  Failing that, implementations that
-routinely see new values are more likely to correctly handle new values.  More
-frequent changes will improve the likelihood that incorrect handling or
-intolerance is discovered and rectified.  The longer an intolerant
-implementation is deployed, the more difficult it is to correct.
-
-What constitutes "active use" can depend greatly on the environment in which a
-protocol is deployed.  The frequency of changes necessary to safeguard some
-mechanisms might be slow enough to attract ossification in another protocol
-deployment, while being excessive in others.
 
 
 ## Version Negotiation
@@ -428,10 +368,60 @@ participants that are willing to invest the effort and tolerate the risk of
 interoperability failures.
 
 
+## Examples of Active Use {#ex-active}
+
+Header fields in email {{?SMTP=RFC5321}}, HTTP {{HTTP}} and SIP
+{{?SIP=RFC3261}} all derive from the same basic design, which amounts to a list
+name/value pairs.  There is no evidence of significant barriers to deploying
+header fields with new names and semantics in email and HTTP as clients and
+servers generally ignore headers they do not understand or need.  The widespread
+deployment of SIP B2BUAs, which generally do not ignore unknown fields, means
+that new SIP header fields do not reliably reach peers.  This does not
+necessarily cause interoperability issues in SIP but rather causes features to
+remain unavailable until the B2BUA is updated.  All three protocols are still
+able to deploy new features reliably, but SIP features are deployed more slowly
+due to the larger number of active participants that need to support new
+features.
+
+As another example, the attribute-value pairs (AVPs) in Diameter
+{{?DIAMETER=RFC6733}} are fundamental to the design of the protocol.  Any use of
+Diameter requires exercising the ability to add new AVPs.  This is routinely
+done without fear that the new feature might not be successfully deployed.
+
+These examples show extension points that are heavily used are also being
+relatively unaffected by deployment issues preventing addition of new values
+for new use cases.
+
+These examples show that a good design is not required for success.  On the
+contrary, success is often despite shortcomings in the design.  For instance,
+the shortcomings of HTTP header fields are significant enough that there are
+ongoing efforts to improve the syntax {{?HTTP-HEADERS=RFC8941}}.
+
+
+## Restoring Active Use
+
+With enough effort, active use can be used to restore capabililities.
+
+EDNS {{?EDNS=RFC6891}} was defined to provide extensibility in DNS.  Intolerance
+of the extension in DNS servers resulted in a fallback method being widely
+deployed (see {{Section 6.2.2 of EDNS}}).  This fallback resulted in EDNS being
+disabled for affected servers.  Over time, greater support for EDNS and
+increased reliance on it for different features motivated a flag day
+{{DNSFLAGDAY}} where the workaround was removed.
+
+The EDNS example shows that effort can be used to restore capabilities.  This is
+in part because EDNS was actively used with most resolvers and servers.  It was
+therefore possible to force a change to ensure that extension capabilities would
+always be available.  However, this required an enormous coordination effort.  A
+small number of incompatible servers and the names they serve also became
+inaccessible to most clients.
+
+
+
 # Complementary Techniques {#other}
 
-The protections to protocol evolution that come from [active use](#use) can be
-improved through the use of other defensive techniques. The techniques listed
+The protections to protocol evolution that come from [active use](#use-it) can
+be improved through the use of other defensive techniques. The techniques listed
 here might not prevent ossification on their own, but can make active use more
 effective.
 
