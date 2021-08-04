@@ -83,6 +83,7 @@ informative:
       - name: Olivier Bonaventure
       - name: Mark Handley
 
+  HTTP: I-D.ietf-httpbis-semantics
   HTTP11: I-D.ietf-httpbis-messaging
 
 
@@ -212,52 +213,14 @@ broke when new values of the signature_algorithms extension were introduced.
 
 ## Multi-Party Interactions and Middleboxes {#middleboxes}
 
-Even the most superficially simple protocols can often involve more actors than
-is immediately apparent.  A two-party protocol has two ends, but even at the
-endpoints of an interaction, protocol elements can be passed on to other
-entities in ways that can affect protocol operation.
-
 One of the key challenges in deploying new features is ensuring compatibility
-with all actors that could be involved in the protocol.
+with all actors that could be involved in the protocol.  Even the most
+superficially simple protocols can often involve more actors than is immediately
+apparent.  Even for a two-party protocol, protocol elements can be passed on to
+other entities in ways that can affect protocol operation.
 
-Protocols deployed without active measures against intermediation will tend to
-become intermediated over time, as network operators deploy middleboxes to
-perform some function on traffic {{?PATH-SIGNALS=RFC8558}}.  Any element on path
-can observe unencrypted protocol elements and modify unauthenticated protocol
-elements.
-
-For example, HTTP was specifically designed with intermediation in mind,
-transparent proxies {{?HTTP=I-D.ietf-httpbis-semantics}} are not only possible
-but sometimes advantageous, despite some significant downsides.  Consequently,
-transparent proxies for cleartext HTTP were once commonplace.  Similarly, the
-DNS protocol was designed with intermediation in mind through its use of caching
-recursive resolvers {{?DNS=RFC1034}}.  What was less anticipated was the forced
-spoofing of DNS records by middleboxes such as those that inject authentication
-or pay-wall mechanisms as an authentication and authorization check, which are
-now prevalent in hotels, coffee shops and business networks.
-
-Middleboxes are also protocol participants, to the degree that they are able to
-observe and act in ways that affect the protocol.  The degree to which a
-middlebox participates in a protocol can vary depending on the purpose and
-implementation of the middlebox.  Middleboxes can also apply their own policy,
-with or without the knowledge or permission of endpoints.  For example, a SIP
-back-to-back user agent (B2BUA) {{?B2BUA=RFC7092}} can be very deeply involved
-in the SIP protocol and is often relied upon to provide policy-based security
-controls.
-
-This phenomenon appears at all layers of the protocol stack, especially when
-protocols are not designed with middlebox participation in mind. Some of the
-examples in {{examples}} demonstrate this problem.
-
-By increasing the number of different actors involved in any single protocol
-exchange, the number of potential implementation bugs that a deployment needs to
-contend with also increases.  In particular, incompatible changes to a protocol
-that might be negotiated between endpoints in ignorance of the presence of a
-middlebox can result in a middlebox interfering in negative and
-unexpected ways.
-
-Unfortunately, middleboxes can considerably increase the difficulty of
-deploying new versions or other changes to a protocol.
+Protocols that are intermediated need to consider the effect that deploying an
+extension might have on a middlebox.
 
 
 # Retaining Viable Protocol Evolution Mechanisms {#use-it}
@@ -283,7 +246,7 @@ extension is well defined.
 
 ## Examples of Active Use {#ex-active}
 
-Header fields in email {{?SMTP=RFC5322}}, HTTP {{?HTTP}} and SIP
+Header fields in email {{?SMTP=RFC5322}}, HTTP {{HTTP}} and SIP
 {{?SIP=RFC3261}} all derive from the same basic design, which amounts to a list
 name/value pairs.  There is no evidence of significant barriers to deploying
 header fields with new names and semantics in email and HTTP as clients and
@@ -469,19 +432,6 @@ here might not prevent ossification on their own, but can make active use more
 effective.
 
 
-## Cryptography
-
-Cryptography can be used to reduce the number of entities that can participate
-in a protocol or limit the extent of participation.  Using TLS or other
-cryptographic tools can therefore reduce the number of entities that can
-influence whether new features are usable.
-
-{{?PATH-SIGNALS=RFC8558}} recommends the use of encryption and integrity
-protection to limit participation.  For example, encryption is used by the QUIC
-protocol {{?QUIC=RFC9000}} to limit the information that is available to
-middleboxes and integrity protection prevents modification.
-
-
 ## Fewer Extension Points
 
 A successful protocol will include many potential types of extension.  Designing
@@ -494,7 +444,7 @@ improve the use of those extension points.  Use of a shared extension point for
 any purpose can protect rarer or more specialized uses.
 
 Both extensions and core protocol elements use the same extension points in
-protocols like HTTP {{?HTTP}} and DIAMETER {{?DIAMETER}}; see {{ex-active}}.
+protocols like HTTP {{HTTP}} and DIAMETER {{?DIAMETER}}; see {{ex-active}}.
 
 
 ### Invariants
@@ -556,10 +506,10 @@ result of opposition by an adversary.  In response, the recommended measures
 generally assume that other protocol participants will not take deliberate
 action to prevent protocol evolution.
 
-The use of cryptographic techniques to exclude potential participants is the
-only strong measure that the document recommends.  However, authorized protocol
-peers are most often responsible for the identified problems, which can mean
-that cryptography is insufficient to exclude them.
+Cryptography might be used to exclude potential participants (such as
+{{?PATH-SIGNALS=RFC8558}} suggests), limiting the number of entities that might.
+However, authorized protocol peers are most often responsible for the identified
+problems, which can mean that cryptography is insufficient to exclude them.
 
 The ability to design, implement, and deploy new protocol mechanisms can be
 critical to security.  In particular, it is important to be able to replace
@@ -704,5 +654,5 @@ for using the extension point it defines has been abandoned {{SNI}}.
 # Acknowledgments
 {:numbered="false"}
 
-Toerless Eckert, Wes Hardaker, Mirja Kühlewind, Mark Nottingham, and Brian
-Trammell made significant contributions to this document.
+Toerless Eckert, Wes Hardaker, Mirja Kühlewind, Eliot Lear, Mark Nottingham, and
+Brian Trammell made significant contributions to this document.
