@@ -177,10 +177,11 @@ advice on designing for extension.  It includes the following advice:
   implementers of the first protocol version at least managed to implement the
   version-negotiation mechanism correctly.
 
-This has proven to be insufficient in practice.  Many protocols have evidence of
-imperfect implementation of critical mechanisms of this sort.  Mechanisms that
-aren't used are the ones that fail most often.  The same paragraph from RFC
-6709 acknowledges the existence of this problem, but does not offer any remedy:
+There are a number of protocols for which this has proven to be insufficient in
+practice.  These protocols have imperfect implementations of these mechanisms.
+Mechanisms that aren't used are the ones that fail most often.  The same
+paragraph from RFC 6709 acknowledges the existence of this problem, but does not
+offer any remedy:
 
 > The nature of protocol version-negotiation mechanisms is that, by definition,
   they don't get widespread real-world testing until *after* the base protocol
