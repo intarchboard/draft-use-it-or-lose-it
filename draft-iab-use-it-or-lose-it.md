@@ -432,6 +432,19 @@ here might not prevent ossification on their own, but can make active use more
 effective.
 
 
+## Cryptography
+
+Cryptography can be used to reduce the number of entities that can participate
+in a protocol or limit the extent of participation.  Using TLS or other
+cryptographic tools can therefore reduce the number of entities that can
+influence whether new features are usable.
+
+{{?PATH-SIGNALS=RFC8558}} recommends the use of encryption and integrity
+protection to limit participation.  For example, encryption is used by the QUIC
+protocol {{?QUIC=RFC9000}} to limit the information that is available to
+middleboxes and integrity protection prevents modification.
+
+
 ## Fewer Extension Points
 
 A successful protocol will include many potential types of extension.  Designing
@@ -506,10 +519,10 @@ result of opposition by an adversary.  In response, the recommended measures
 generally assume that other protocol participants will not take deliberate
 action to prevent protocol evolution.
 
-Cryptography might be used to exclude potential participants (such as
-{{?PATH-SIGNALS=RFC8558}} suggests), limiting the number of entities that might.
-However, authorized protocol peers are most often responsible for the identified
-problems, which can mean that cryptography is insufficient to exclude them.
+The use of cryptographic techniques to exclude potential participants is the
+only strong measure that the document recommends.  However, authorized protocol
+peers are most often responsible for the identified problems, which can mean
+that cryptography is insufficient to exclude them.
 
 The ability to design, implement, and deploy new protocol mechanisms can be
 critical to security.  In particular, it is important to be able to replace
