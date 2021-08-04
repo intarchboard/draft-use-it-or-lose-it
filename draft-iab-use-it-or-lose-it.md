@@ -205,9 +205,11 @@ protocols.
 Even where extension points have multiple valid values, if the set of permitted
 values does not change over time, there is still a risk that new values are not
 tolerated by existing implementations.  If the set of values for a particular
-field remains fixed over a long period, some implementations might not correctly
-handle a new value when it is introduced.  For example, implementations of TLS
-broke when new values of the signature_algorithms extension were introduced.
+field or the order in which these values appear in the wire format of a
+protocol remains fixed over a long period, some implementations might not
+correctly handle a new value when it is introduced.  For example,
+implementations of TLS broke when new values of the signature_algorithms
+extension were introduced.
 
 
 ## Multi-Party Interactions and Middleboxes {#middleboxes}
@@ -380,7 +382,9 @@ implementation is deployed, the more difficult it is to correct.
 What constitutes "active use" can depend greatly on the environment in which a
 protocol is deployed.  The frequency of changes necessary to safeguard some
 mechanisms might be slow enough to attract ossification in another protocol
-deployment, while being excessive in others.
+deployment, while being excessive in others.  Active use can also vary based
+on how values are used, e.g., either by changing the set of which values are
+in use or by changing the way in which these values are expressed on the wire.
 
 
 ## Version Negotiation
