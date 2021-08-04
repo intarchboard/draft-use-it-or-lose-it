@@ -83,7 +83,9 @@ informative:
       - name: Olivier Bonaventure
       - name: Mark Handley
 
+  HTTP: I-D.ietf-httpbis-semantics
   HTTP11: I-D.ietf-httpbis-messaging
+  RFC5704:
 
 
 
@@ -178,10 +180,11 @@ advice on designing for extension.  It includes the following advice:
   implementers of the first protocol version at least managed to implement the
   version-negotiation mechanism correctly.
 
-This has proven to be insufficient in practice.  Many protocols have evidence of
-imperfect implementation of critical mechanisms of this sort.  Mechanisms that
-aren't used are the ones that fail most often.  The same paragraph from RFC
-6709 acknowledges the existence of this problem, but does not offer any remedy:
+There are a number of protocols for which this has proven to be insufficient in
+practice.  These protocols have imperfect implementations of these mechanisms.
+Mechanisms that aren't used are the ones that fail most often.  The same
+paragraph from RFC 6709 acknowledges the existence of this problem, but does not
+offer any remedy:
 
 > The nature of protocol version-negotiation mechanisms is that, by definition,
   they don't get widespread real-world testing until *after* the base protocol
@@ -206,59 +209,23 @@ protocols.
 Even where extension points have multiple valid values, if the set of permitted
 values does not change over time, there is still a risk that new values are not
 tolerated by existing implementations.  If the set of values for a particular
-field remains fixed over a long period, some implementations might not correctly
-handle a new value when it is introduced.  For example, implementations of TLS
-broke when new values of the signature_algorithms extension were introduced.
+field or the order in which these values appear of a
+protocol remains fixed over a long period, some implementations might not
+correctly handle a new value when it is introduced.  For example,
+implementations of TLS broke when new values of the signature_algorithms
+extension were introduced.
 
 
 ## Multi-Party Interactions and Middleboxes {#middleboxes}
 
-Even the most superficially simple protocols can often involve more actors than
-is immediately apparent.  A two-party protocol has two ends, but even at the
-endpoints of an interaction, protocol elements can be passed on to other
-entities in ways that can affect protocol operation.
-
 One of the key challenges in deploying new features is ensuring compatibility
-with all actors that could be involved in the protocol.
+with all actors that could be involved in the protocol.  Even the most
+superficially simple protocols can often involve more actors than is immediately
+apparent.  Even for a two-party protocol, protocol elements can be passed on to
+other entities in ways that can affect protocol operation.
 
-Protocols deployed without active measures against intermediation will tend to
-become intermediated over time, as network operators deploy middleboxes to
-perform some function on traffic {{?PATH-SIGNALS=RFC8558}}.  Any element on path
-can observe unencrypted protocol elements and modify unauthenticated protocol
-elements.
-
-For example, HTTP was specifically designed with intermediation in mind,
-transparent proxies {{?HTTP=I-D.ietf-httpbis-semantics}} are not only possible
-but sometimes advantageous, despite some significant downsides.  Consequently,
-transparent proxies for cleartext HTTP were once commonplace.  Similarly, the
-DNS protocol was designed with intermediation in mind through its use of caching
-recursive resolvers {{?DNS=RFC1034}}.  What was less anticipated was the forced
-spoofing of DNS records by middleboxes such as those that inject authentication
-or pay-wall mechanisms as an authentication and authorization check, which are
-now prevalent in hotels, coffee shops and business networks.
-
-Middleboxes are also protocol participants, to the degree that they are able to
-observe and act in ways that affect the protocol.  The degree to which a
-middlebox participates in a protocol can vary depending on the purpose and
-implementation of the middlebox.  Middleboxes can also apply their own policy,
-with or without the knowledge or permission of endpoints.  For example, a SIP
-back-to-back user agent (B2BUA) {{?B2BUA=RFC7092}} can be very deeply involved
-in the SIP protocol and is often relied upon to provide policy-based security
-controls.
-
-This phenomenon appears at all layers of the protocol stack, especially when
-protocols are not designed with middlebox participation in mind. Some of the
-examples in {{examples}} demonstrate this problem.
-
-By increasing the number of different actors involved in any single protocol
-exchange, the number of potential implementation bugs that a deployment needs to
-contend with also increases.  In particular, incompatible changes to a protocol
-that might be negotiated between endpoints in ignorance of the presence of a
-middlebox can result in a middlebox interfering in negative and
-unexpected ways.
-
-Unfortunately, middleboxes can considerably increase the difficulty of
-deploying new versions or other changes to a protocol.
+Protocols that are intermediated need to consider the effect that deploying an
+extension might have on a middlebox.
 
 
 # Active Use {#use-it}
@@ -403,7 +370,7 @@ interoperability failures.
 
 ## Examples of Active Use {#ex-active}
 
-Header fields in email {{?SMTP=RFC5321}}, HTTP {{?HTTP}} and SIP
+Header fields in email {{?SMTP=RFC5321}}, HTTP {{HTTP}} and SIP
 {{?SIP=RFC3261}} all derive from the same basic design, which amounts to a list
 name/value pairs.  There is no evidence of significant barriers to deploying
 header fields with new names and semantics in email and HTTP as clients and
@@ -459,19 +426,6 @@ here might not prevent ossification on their own, but can make active use more
 effective.
 
 
-## Cryptography
-
-Cryptography can be used to reduce the number of entities that can participate
-in a protocol or limit the extent of participation.  Using TLS or other
-cryptographic tools can therefore reduce the number of entities that can
-influence whether new features are usable.
-
-{{?PATH-SIGNALS=RFC8558}} recommends the use of encryption and integrity
-protection to limit participation.  For example, encryption is used by the QUIC
-protocol {{?QUIC=RFC9000}} to limit the information that is available to
-middleboxes and integrity protection prevents modification.
-
-
 ## Fewer Extension Points
 
 A successful protocol will include many potential types of extension.  Designing
@@ -484,16 +438,22 @@ improve the use of those extension points.  Use of a shared extension point for
 any purpose can protect rarer or more specialized uses.
 
 Both extensions and core protocol elements use the same extension points in
-protocols like HTTP {{?HTTP}} and DIAMETER {{?DIAMETER}}; see {{ex-active}}.
+protocols like HTTP {{HTTP}} and DIAMETER {{?DIAMETER}}; see {{ex-active}}.
 
 
-### Invariants
+## Invariants
 
 Documenting aspects of the protocol that cannot or will not change as extensions
-or new versions are added can be a useful exercise. Understanding what aspects
-of a protocol are invariant can help guide the process of identifying those
-parts of the protocol that might change.  {{?QUIC-INVARIANTS=RFC8999}} and
-{{Section 9.3 of TLS13}} are both examples of documented invariants.
+or new versions are added can be a useful exercise. {{Section 2.2 of RFC5704}}
+defines invariants as:
+
+> Invariants are core properties that are consistent across the network and do
+  not change over extremely long time-scales.
+
+Understanding what aspects of a protocol are invariant can help guide the
+process of identifying those parts of the protocol that might change.
+{{?QUIC-INVARIANTS=RFC8999}} and {{Section 9.3 of TLS13}} are both examples of
+documented invariants.
 
 As a means of protecting extensibility, a declaration of protocol invariants is
 useful only to the extent that protocol participants are willing to allow new
@@ -505,6 +465,19 @@ used to improve the chance that invariants are respected.
 Protocol invariants need to be clearly and concisely documented.  Including
 examples of aspects of the protocol that are not invariant, such as {{Appendix A
 of QUIC-INVARIANTS}}, can be used to clarify intent.
+
+
+## Limiting Participation
+
+Reducing the number of entities that can participate in a protocol or limiting
+the extent of participation can reduce the number of entities that might affect
+extensibility.  Using TLS or other cryptographic tools can therefore reduce the
+number of entities that can influence whether new features are usable.
+
+{{?PATH-SIGNALS=RFC8558}} also recommends the use of encryption and integrity
+protection to limit participation.  For example, encryption is used by the QUIC
+protocol {{?QUIC=RFC9000}} to limit the information that is available to
+middleboxes and integrity protection prevents modification.
 
 
 ## Effective Feedback
@@ -694,5 +667,5 @@ for using the extension point it defines has been abandoned {{SNI}}.
 # Acknowledgments
 {:numbered="false"}
 
-Toerless Eckert, Wes Hardaker, Mirja Kühlewind, Mark Nottingham, and Brian
-Trammell made significant contributions to this document.
+Toerless Eckert, Wes Hardaker, Mirja Kühlewind, Eliot Lear, Mark Nottingham, and
+Brian Trammell made significant contributions to this document.
