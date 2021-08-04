@@ -498,7 +498,7 @@ Both extensions and core protocol elements use the same extension points in
 protocols like HTTP {{?HTTP}} and DIAMETER {{?DIAMETER}}; see {{ex-active}}.
 
 
-### Invariants
+## Invariants
 
 Documenting aspects of the protocol that cannot or will not change as extensions
 or new versions are added can be a useful exercise. {{Section 2.2 of RFC5704}}
