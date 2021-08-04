@@ -334,7 +334,7 @@ mechanisms that support evolution is necessary to ensure that they remain
 available for new uses, and history has shown this occurs almost exclusively
 through active mechanism use.
 
-Only by using a extension capabilities of a protocol is the availability of that
+Only by using the extension capabilities of a protocol is the availability of that
 capability assured. "Using" here includes specifying, implementing, and
 deploying capabilities that rely on the extension capability.  Protocols that
 fail to use a mechanism, or a protocol that only rarely uses a mechanism, could
