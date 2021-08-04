@@ -207,9 +207,11 @@ protocols.
 Even where extension points have multiple valid values, if the set of permitted
 values does not change over time, there is still a risk that new values are not
 tolerated by existing implementations.  If the set of values for a particular
-field remains fixed over a long period, some implementations might not correctly
-handle a new value when it is introduced.  For example, implementations of TLS
-broke when new values of the signature_algorithms extension were introduced.
+field or the order in which these values appear of a
+protocol remains fixed over a long period, some implementations might not
+correctly handle a new value when it is introduced.  For example,
+implementations of TLS broke when new values of the signature_algorithms
+extension were introduced.
 
 
 ## Multi-Party Interactions and Middleboxes {#middleboxes}
