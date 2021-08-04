@@ -469,19 +469,6 @@ here might not prevent ossification on their own, but can make active use more
 effective.
 
 
-## Cryptography
-
-Cryptography can be used to reduce the number of entities that can participate
-in a protocol or limit the extent of participation.  Using TLS or other
-cryptographic tools can therefore reduce the number of entities that can
-influence whether new features are usable.
-
-{{?PATH-SIGNALS=RFC8558}} recommends the use of encryption and integrity
-protection to limit participation.  For example, encryption is used by the QUIC
-protocol {{?QUIC=RFC9000}} to limit the information that is available to
-middleboxes and integrity protection prevents modification.
-
-
 ## Fewer Extension Points
 
 A successful protocol will include many potential types of extension.  Designing
@@ -515,6 +502,19 @@ used to improve the chance that invariants are respected.
 Protocol invariants need to be clearly and concisely documented.  Including
 examples of aspects of the protocol that are not invariant, such as {{Appendix A
 of QUIC-INVARIANTS}}, can be used to clarify intent.
+
+
+## Limiting Participation
+
+Reducing the number of entities that can participate in a protocol or limiting
+the extent of participation can reduce the number of entities that might affect
+extensibility.  Using TLS or other cryptographic tools can therefore reduce the
+number of entities that can influence whether new features are usable.
+
+{{?PATH-SIGNALS=RFC8558}} also recommends the use of encryption and integrity
+protection to limit participation.  For example, encryption is used by the QUIC
+protocol {{?QUIC=RFC9000}} to limit the information that is available to
+middleboxes and integrity protection prevents modification.
 
 
 ## Effective Feedback
