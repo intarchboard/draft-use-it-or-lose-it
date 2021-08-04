@@ -283,7 +283,7 @@ extension is well defined.
 
 ## Examples of Active Use {#ex-active}
 
-Header fields in email {{?SMTP=RFC5322}}, HTTP {{?HTTP}} and SIP
+Header fields in email {{?SMTP=RFC5321}}, HTTP {{?HTTP}} and SIP
 {{?SIP=RFC3261}} all derive from the same basic design, which amounts to a list
 name/value pairs.  There is no evidence of significant barriers to deploying
 header fields with new names and semantics in email and HTTP as clients and
