@@ -85,6 +85,7 @@ informative:
 
   HTTP: I-D.ietf-httpbis-semantics
   HTTP11: I-D.ietf-httpbis-messaging
+  RFC5704:
 
 
 
@@ -246,7 +247,7 @@ extension is well defined.
 
 ## Examples of Active Use {#ex-active}
 
-Header fields in email {{?SMTP=RFC5322}}, HTTP {{HTTP}} and SIP
+Header fields in email {{?SMTP=RFC5321}}, HTTP {{HTTP}} and SIP
 {{?SIP=RFC3261}} all derive from the same basic design, which amounts to a list
 name/value pairs.  There is no evidence of significant barriers to deploying
 header fields with new names and semantics in email and HTTP as clients and
@@ -460,13 +461,19 @@ Both extensions and core protocol elements use the same extension points in
 protocols like HTTP {{HTTP}} and DIAMETER {{?DIAMETER}}; see {{ex-active}}.
 
 
-### Invariants
+## Invariants
 
 Documenting aspects of the protocol that cannot or will not change as extensions
-or new versions are added can be a useful exercise. Understanding what aspects
-of a protocol are invariant can help guide the process of identifying those
-parts of the protocol that might change.  {{?QUIC-INVARIANTS=RFC8999}} and
-{{Section 9.3 of TLS13}} are both examples of documented invariants.
+or new versions are added can be a useful exercise. {{Section 2.2 of RFC5704}}
+defines invariants as:
+
+> Invariants are core properties that are consistent across the network and do
+  not change over extremely long time-scales.
+
+Understanding what aspects of a protocol are invariant can help guide the
+process of identifying those parts of the protocol that might change.
+{{?QUIC-INVARIANTS=RFC8999}} and {{Section 9.3 of TLS13}} are both examples of
+documented invariants.
 
 As a means of protecting extensibility, a declaration of protocol invariants is
 useful only to the extent that protocol participants are willing to allow new
