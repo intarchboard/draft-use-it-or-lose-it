@@ -92,8 +92,10 @@ informative:
 --- abstract
 
 The ability to change protocols depends on exercising the extension and version
-negotiation mechanisms that support change.  Protocols that don't use these
-mechanisms can find it difficult and costly to deploy changes.
+negotiation mechanisms that support change.  This document explores how regular
+use of new protocol features can ensure that it remains possible to deploy
+changes to a protocol. Examples are given where lack of use caused changes to be
+more difficult or costly.
 
 
 --- middle
@@ -101,9 +103,9 @@ mechanisms can find it difficult and costly to deploy changes.
 # Introduction
 
 A successful protocol {{?SUCCESS=RFC5218}} needs to change in ways that allow it
-to continue to fulfill the needs of its users.  New use cases, conditions and
-constraints on the deployment of a protocol can render a protocol that does not
-change obsolete.
+to continue to fulfill the changing needs of its users.  New use cases,
+conditions and constraints on the deployment of a protocol can render a protocol
+that does not change obsolete.
 
 Usage patterns and requirements for a protocol shift over time.  In response,
 implementations might adjust usage patterns within the constraints of the
@@ -112,14 +114,15 @@ developed.  Experience with Internet-scale protocol deployment shows that each
 option comes with different costs.  {{?TRANSITIONS=RFC8170}} examines the
 problem of protocol evolution more broadly.
 
-This document examines the specific conditions that determine whether protocol
-maintainers have the ability to design and deploy new or modified protocols.
-{{implementations}} highlights some historical examples of difficulties in
-transitions to new protocol features.  {{use-it}} argues that ossified protocols
-are more difficult to update and describes how successful protocols make
-frequent use of new extensions and code-points.  {{other}} outline several
-additional strategies that might aid in ensuring that protocol changes remain
-possible over time.
+An extension point is a mechanism that allows a protocol to be changed or
+enhanced.  This document examines the specific conditions that determine whether
+protocol maintainers have the ability to design and deploy new or modified
+protocols via their specified extension points.  {{implementations}} highlights
+some historical examples of difficulties in transitions to new protocol
+features.  {{use-it}} argues that ossified protocols are more difficult to
+update and describes how successful protocols make frequent use of new
+extensions and code-points.  {{other}} outlines several additional strategies
+that might aid in ensuring that protocol changes remain possible over time.
 
 The experience that informs this document is predominantly at "higher" layers of
 the network stack, in protocols that operate at very large scale and
