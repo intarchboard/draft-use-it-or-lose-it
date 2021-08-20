@@ -121,7 +121,7 @@ protocols via their specified extension points.  {{implementations}} highlights
 some historical examples of difficulties in transitions to new protocol
 features.  {{use-it}} argues that ossified protocols are more difficult to
 update and describes how successful protocols make frequent use of new
-extensions and code-points.  {{other}} outline several additional strategies
+extensions and code-points.  {{other}} outlines several additional strategies
 that might aid in ensuring that protocol changes remain possible over time.
 
 The experience that informs this document is predominantly at "higher" layers of
