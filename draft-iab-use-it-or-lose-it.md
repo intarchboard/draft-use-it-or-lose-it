@@ -140,10 +140,10 @@ can be the result of bugs in implementation or specifications. Unpredictability
 can manifest as abrupt termination of sessions, errors, crashes, or
 disappearances of endpoints and timeouts.
 
-Interoperability with other implementations is usually highly valued, so
-deploying mechanisms that trigger adverse reactions can be untenable.  Where
-interoperability is a competitive advantage, this is true even if problems are
-infrequent or only occur under relatively rare conditions.
+The risk of interoperability problems can in turn make it infeasible to
+deploy certain protocol changes.  If deploying a new codepoint or extension
+makes an implementation less reliable than others, even if only in rare cases,
+it is far less likely that implementations will adopt the change.
 
 Deploying a change to a protocol could require implementations to fix a
 substantial proportion of the bugs that the change exposes.  This can
