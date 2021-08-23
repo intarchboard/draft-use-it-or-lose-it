@@ -588,9 +588,11 @@ making version-independent assumptions about the structure of the IPv4 header.
 Protocol identifiers or codepoints that are reserved for future use can be
 especially problematic.  Reserving values without attributing semantics to their
 use can result in diverse or conflicting semantics being attributed without any
-hope of interoperability.  An example of this is the "class E" address space in
-IPv4 {{?RFC0988}}, which was originally reserved in {{?RFC0791}} without
-assigning any semantics.
+hope of interoperability.  An example of this is the 224/3 "class E" address
+space in IPv4 {{?RFC0988}}. This space was originally reserved in {{?RFC0791}}
+without assigning any semantics and has since been partially reclaimed for use
+in multicast (224/4) or not successfully reclaimed for any purpose (240/4)
+{{?RFC0988}}.
 
 For protocols that can use negotiation to attribute semantics to values, it is
 possible that unused codepoints can be reclaimed for active use, though this
