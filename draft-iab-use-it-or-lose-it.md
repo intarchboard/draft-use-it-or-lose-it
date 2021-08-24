@@ -55,15 +55,6 @@ informative:
     date: 2016-07-20
     target: "https://mailarchive.ietf.org/arch/msg/tls/bOJ2JQc3HjAHFFWCiNTIb0JuMZc"
 
-  RIPE-99:
-    title: "RIPE NCC and Duke University BGP Experiment"
-    author:
-      -
-        ins: E. Romijn
-        name: Erik Romijn
-    date: 2010-08-27
-    target: https://labs.ripe.net/Members/erik/ripe-ncc-and-duke-university-bgp-experiment/
-
   DNSFLAGDAY:
     title: "DNS Flag Day 2019"
     date: 2019-05
@@ -545,12 +536,6 @@ This document makes no request of IANA.
 
 This appendix contains a brief study of problems in a range of Internet
 protocols at different layers of the stack.
-
-
-## BGP
-
-The announcements of new optional transitive attributes in BGP caused
-significant routing instability {{RIPE-99}}.
 
 
 ## DNS
