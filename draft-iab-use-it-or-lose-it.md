@@ -150,10 +150,10 @@ critical infrastructure (e.g., IP, BGP, DNS, or TLS).  It could even be
 necessary to come up with a new protocol design that uses a different method to
 achieve the same result.
 
-This document largely assumes that extensions are not deliberately blocked.
-Some deployments or implementations apply policies that explicitly prohibit the
-use of unknown capabilities.  This is especially true of functions that seek to
-make security guarantees, like firewalls.
+This document only addresses cases where extensions are not deliberately
+blocked.  Some deployments or implementations apply policies that explicitly
+prohibit the use of unknown capabilities.  This is especially true of functions
+that seek to make security guarantees, like firewalls.
 
 The set of interoperable features in a protocol is often the subset of its
 features that have some value to those implementing and deploying the protocol.
