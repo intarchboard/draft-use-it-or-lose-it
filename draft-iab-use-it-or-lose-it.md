@@ -116,10 +116,11 @@ extensions and code-points.  {{other}} outlines several additional strategies
 that might aid in ensuring that protocol changes remain possible over time.
 
 The experience that informs this document is predominantly at "higher" layers of
-the network stack, in protocols that operate at very large scale and
-Internet-scale applications.  It is possible that these conclusions are less
-applicable to protocol deployments that have less scale and diversity, or
-operate under different constraints.
+the network stack, in protocols with limited numbers of participants.  Though
+similar issues are present in many protocols that operate at scale, the
+tradeoffs involved with applying some of the suggested techniques can be more
+complex when there are many participants, such as at the network layer or in
+routing systems.
 
 
 # Imperfect Implementations Limit Protocol Evolution {#implementations}
