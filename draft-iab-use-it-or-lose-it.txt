@@ -5,8 +5,8 @@
 Network Working Group                                         M. Thomson
 Internet-Draft                                                   Mozilla
 Intended status: Informational                                  T. Pauly
-Expires: 26 February 2022                                          Apple
-                                                          25 August 2021
+Expires: 8 March 2022                                              Apple
+                                                        4 September 2021
 
 
           Long-term Viability of Protocol Extension Mechanisms
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 February 2022.
+   This Internet-Draft will expire on 8 March 2022.
 
 Copyright Notice
 
@@ -122,11 +122,12 @@ Table of Contents
    possible over time.
 
    The experience that informs this document is predominantly at
-   "higher" layers of the network stack, in protocols that operate at
-   very large scale and Internet-scale applications.  It is possible
-   that these conclusions are less applicable to protocol deployments
-   that have less scale and diversity, or operate under different
-   constraints.
+   "higher" layers of the network stack, in protocols with limited
+   numbers of participants.  Though similar issues are present in many
+   protocols that operate at scale, the tradeoffs involved with applying
+   some of the suggested techniques can be more complex when there are
+   many participants, such as at the network layer or in routing
+   systems.
 
 2.  Imperfect Implementations Limit Protocol Evolution
 
