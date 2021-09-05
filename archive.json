@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-08-29T00:47:00.563312+00:00",
+  "timestamp": "2021-09-05T00:48:15.950039+00:00",
   "repo": "intarchboard/draft-use-it-or-lose-it",
   "labels": [
     {
@@ -3285,52 +3285,84 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NzIwMDY0NDg3",
       "title": "Stronger disclaimer",
       "url": "https://github.com/intarchboard/draft-use-it-or-lose-it/pull/77",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "martinthomson",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Joel Halpern suggested that we more forcibly disclaim some of the\r\ntechniques that are mentioned in the document.\r\n\r\nOn review, the GREASE section is clear enough about limited\r\napplicability (and also efficacy), so I think we're OK there.  But\r\nthe disclaimer in the introduction could be tightened more.\r\n\r\nJoel acknowledged that the problem exists, but that the tradeoffs\r\ninvolved in applying various techniques are much more complex.  That's a\r\ngood angle on this.  I've tried to phrase that sentiment in my own\r\nwords.",
       "createdAt": "2021-08-25T23:17:48Z",
-      "updatedAt": "2021-08-25T23:17:48Z",
+      "updatedAt": "2021-09-04T02:35:43Z",
       "baseRepository": "intarchboard/draft-use-it-or-lose-it",
       "baseRefName": "main",
       "baseRefOid": "f958ef96f51b443995c890cb5b88dbd8bb2cfafc",
       "headRepository": "intarchboard/draft-use-it-or-lose-it",
       "headRefName": "joelh-routing-disclaimer",
       "headRefOid": "f8bf160dc0a617b3e23b7354780d9d306a9e6e98",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2021-09-04T02:35:42Z",
+      "mergedAt": "2021-09-04T02:35:42Z",
+      "mergedBy": "tfpauly",
+      "mergeCommit": {
+        "oid": "1bd638d3a45f7e8a380fc0b1c7a97e501d2ac30d"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NzQ2NTMzMTgz",
+          "commit": {
+            "abbreviatedOid": "f8bf160"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2021-09-04T02:35:38Z",
+          "updatedAt": "2021-09-04T02:35:38Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 78,
       "id": "MDExOlB1bGxSZXF1ZXN0NzIwMTg1OTAx",
       "title": "Crisper and more direct",
       "url": "https://github.com/intarchboard/draft-use-it-or-lose-it/pull/78",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "martinthomson",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2021-08-26T05:08:05Z",
-      "updatedAt": "2021-08-26T05:08:05Z",
+      "updatedAt": "2021-09-04T02:36:33Z",
       "baseRepository": "intarchboard/draft-use-it-or-lose-it",
       "baseRefName": "main",
       "baseRefOid": "f958ef96f51b443995c890cb5b88dbd8bb2cfafc",
       "headRepository": "intarchboard/draft-use-it-or-lose-it",
       "headRefName": "blocking",
       "headRefOid": "e978bb350002c9e21ae777354ec59cf1f071039a",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2021-09-04T02:36:33Z",
+      "mergedAt": "2021-09-04T02:36:33Z",
+      "mergedBy": "tfpauly",
+      "mergeCommit": {
+        "oid": "1a11b6d36977dfd835365c53074498d4e51d3ea2"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NzQ2NTMzMjMw",
+          "commit": {
+            "abbreviatedOid": "e978bb3"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2021-09-04T02:36:29Z",
+          "updatedAt": "2021-09-04T02:36:29Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
