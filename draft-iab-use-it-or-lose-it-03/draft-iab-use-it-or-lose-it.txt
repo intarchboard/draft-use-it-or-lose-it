@@ -5,8 +5,8 @@
 Network Working Group                                         M. Thomson
 Internet-Draft                                                   Mozilla
 Intended status: Informational                                  T. Pauly
-Expires: 24 February 2022                                          Apple
-                                                          23 August 2021
+Expires: 4 April 2022                                              Apple
+                                                          1 October 2021
 
 
           Long-term Viability of Protocol Extension Mechanisms
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 February 2022.
+   This Internet-Draft will expire on 4 April 2022.
 
 Copyright Notice
 
@@ -85,13 +85,12 @@ Table of Contents
    6.  IANA Considerations
    7.  Informative References
    Appendix A.  Examples
-     A.1.  BGP
-     A.2.  DNS
-     A.3.  HTTP
-     A.4.  IP
-     A.5.  SNMP
-     A.6.  TCP
-     A.7.  TLS
+     A.1.  DNS
+     A.2.  HTTP
+     A.3.  IP
+     A.4.  SNMP
+     A.5.  TCP
+     A.6.  TLS
    Acknowledgments
    Authors' Addresses
 
@@ -123,11 +122,12 @@ Table of Contents
    possible over time.
 
    The experience that informs this document is predominantly at
-   "higher" layers of the network stack, in protocols that operate at
-   very large scale and Internet-scale applications.  It is possible
-   that these conclusions are less applicable to protocol deployments
-   that have less scale and diversity, or operate under different
-   constraints.
+   "higher" layers of the network stack, in protocols with limited
+   numbers of participants.  Though similar issues are present in many
+   protocols that operate at scale, the tradeoffs involved with applying
+   some of the suggested techniques can be more complex when there are
+   many participants, such as at the network layer or in routing
+   systems.
 
 2.  Imperfect Implementations Limit Protocol Evolution
 
@@ -160,11 +160,11 @@ Table of Contents
    or TLS).  It could even be necessary to come up with a new protocol
    design that uses a different method to achieve the same result.
 
-   This document largely assumes that extensions are not deliberately
-   blocked.  Some deployments or implementations apply policies that
-   explicitly prohibit the use of unknown capabilities.  This is
-   especially true of functions that seek to make security guarantees,
-   like firewalls.
+   This document only addresses cases where extensions are not
+   deliberately blocked.  Some deployments or implementations apply
+   policies that explicitly prohibit the use of unknown capabilities.
+   This is especially true of functions that seek to make security
+   guarantees, like firewalls.
 
    The set of interoperable features in a protocol is often the subset
    of its features that have some value to those implementing and
@@ -623,9 +623,9 @@ Table of Contents
 
    [HTTP]     Fielding, R. T., Nottingham, M., and J. Reschke, "HTTP
               Semantics", Work in Progress, Internet-Draft, draft-ietf-
-              httpbis-semantics-18, 18 August 2021,
+              httpbis-semantics-19, 12 September 2021,
               <https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-
-              semantics-18>.
+              semantics-19>.
 
    [HTTP-HEADERS]
               Nottingham, M. and P-H. Kamp, "Structured Field Values for
@@ -634,9 +634,9 @@ Table of Contents
 
    [HTTP11]   Fielding, R. T., Nottingham, M., and J. Reschke,
               "HTTP/1.1", Work in Progress, Internet-Draft, draft-ietf-
-              httpbis-messaging-18, 18 August 2021,
+              httpbis-messaging-19, 12 September 2021,
               <https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-
-              messaging-18>.
+              messaging-19>.
 
    [INTOLERANCE]
               Kario, H., "Re: [TLS] Thoughts on Version Intolerance", 20
@@ -703,10 +703,6 @@ Table of Contents
               Protocol Development Considered Harmful", RFC 5704,
               DOI 10.17487/RFC5704, November 2009,
               <https://datatracker.ietf.org/doc/html/rfc5704>.
-
-   [RIPE-99]  Romijn, E., "RIPE NCC and Duke University BGP Experiment",
-              27 August 2010, <https://labs.ripe.net/Members/erik/ripe-
-              ncc-and-duke-university-bgp-experiment/>.
 
    [RRTYPE]   Gustafsson, A., "Handling of Unknown DNS Resource Record
               (RR) Types", RFC 3597, DOI 10.17487/RFC3597, September
@@ -779,12 +775,7 @@ Appendix A.  Examples
    This appendix contains a brief study of problems in a range of
    Internet protocols at different layers of the stack.
 
-A.1.  BGP
-
-   The announcements of new optional transitive attributes in BGP caused
-   significant routing instability [RIPE-99].
-
-A.2.  DNS
+A.1.  DNS
 
    Ossified DNS code bases and systems resulted in new Resource Record
    Codes (RRCodes) being unusable.  A new codepoint would take years of
@@ -797,7 +788,7 @@ A.2.  DNS
    RRCodes [RRTYPE] was considered widely deployed that new RRCodes can
    be safely created and used.
 
-A.3.  HTTP
+A.2.  HTTP
 
    HTTP has a number of very effective extension points in addition to
    the aforementioned header fields.  It also has some examples of
@@ -810,7 +801,7 @@ A.3.  HTTP
    than the chunked coding, and the range unit in a range request
    Section 14 of [HTTP].
 
-A.4.  IP
+A.3.  IP
 
    The version field in IP was rendered useless when encapsulated over
    Ethernet, requring a new ethertype with IPv6 [RFC2464], due in part
@@ -821,8 +812,11 @@ A.4.  IP
    can be especially problematic.  Reserving values without attributing
    semantics to their use can result in diverse or conflicting semantics
    being attributed without any hope of interoperability.  An example of
-   this is the "class E" address space in IPv4 [RFC0988], which was
-   originally reserved in [RFC0791] without assigning any semantics.
+   this is the 224/3 "class E" address space in IPv4 [RFC0988].  This
+   space was originally reserved in [RFC0791] without assigning any
+   semantics and has since been partially reclaimed for use in multicast
+   (224/4), but otherwise has not been successfully reclaimed for any
+   purpose (240/4) [RFC0988].
 
    For protocols that can use negotiation to attribute semantics to
    values, it is possible that unused codepoints can be reclaimed for
@@ -841,7 +835,7 @@ A.4.  IP
    exclusively down to design problems or bugs as the capability was
    also deliberately blocked at some routers.
 
-A.5.  SNMP
+A.4.  SNMP
 
    As a counter example, the first version of the Simple Network
    Management Protocol (SNMP) [SNMPv1] defines that unparseable or
@@ -856,7 +850,7 @@ A.5.  SNMP
    successful because the handling of newer versions was both clear and
    simple.
 
-A.6.  TCP
+A.5.  TCP
 
    Extension points in TCP [TCP] have been rendered difficult to use,
    largely due to middlebox interactions; see [EXT-TCP].
@@ -872,7 +866,7 @@ A.6.  TCP
    network paths were intolerant of the extension in absolute terms, TCP
    Fast Open could not be deployed as a result.
 
-A.7.  TLS
+A.6.  TLS
 
    Transport Layer Security (TLS) [TLS12] provides examples of where a
    design that is objectively sound fails when incorrectly implemented.
