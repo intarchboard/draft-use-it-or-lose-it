@@ -115,6 +115,11 @@ update and describes how successful protocols make frequent use of new
 extensions and code-points.  {{other}} outlines several additional strategies
 that might aid in ensuring that protocol changes remain possible over time.
 
+This document only addresses cases where extensions are not deliberately
+blocked.  Some deployments or implementations apply policies that explicitly
+prohibit the use of unknown capabilities.  This is especially true of functions
+that seek to make security guarantees, like firewalls.
+
 The experience that informs this document is predominantly at "higher" layers of
 the network stack, in protocols with limited numbers of participants.  Though
 similar issues are present in many protocols that operate at scale, the
@@ -150,11 +155,6 @@ especially for protocols involving multiple parties or that are considered
 critical infrastructure (e.g., IP, BGP, DNS, or TLS).  It could even be
 necessary to come up with a new protocol design that uses a different method to
 achieve the same result.
-
-This document only addresses cases where extensions are not deliberately
-blocked.  Some deployments or implementations apply policies that explicitly
-prohibit the use of unknown capabilities.  This is especially true of functions
-that seek to make security guarantees, like firewalls.
 
 The set of interoperable features in a protocol is often the subset of its
 features that have some value to those implementing and deploying the protocol.
@@ -216,11 +216,15 @@ extension were introduced.
 One of the key challenges in deploying new features is ensuring compatibility
 with all actors that could be involved in the protocol.  Even the most
 superficially simple protocols can often involve more actors than is immediately
-apparent.  Even for a two-party protocol, protocol elements can be passed on to
-other entities in ways that can affect protocol operation.
+apparent.
 
-Protocols that are intermediated need to consider the effect that deploying an
-extension might have on a middlebox.
+Actions that might be taken by middleboxes in response to a change in a protocol
+and the effect that might have on the operation of the protocol require careful
+consideration when designing for extensibility.
+
+Changes might affect entites with indirect interactions with a protocol. How
+protocol elements are handled in applications or other interconnected systems
+might need to be considered when making changes.
 
 
 # Active Use {#use-it}
