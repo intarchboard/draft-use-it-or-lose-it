@@ -115,11 +115,6 @@ update and describes how successful protocols make frequent use of new
 extensions and code-points.  {{other}} outlines several additional strategies
 that might aid in ensuring that protocol changes remain possible over time.
 
-This document only addresses cases where extensions are not deliberately
-blocked.  Some deployments or implementations apply policies that explicitly
-prohibit the use of unknown capabilities.  This is especially true of functions
-that seek to make security guarantees, like firewalls.
-
 The experience that informs this document is predominantly at "higher" layers of
 the network stack, in protocols with limited numbers of participants.  Though
 similar issues are present in many protocols that operate at scale, the
@@ -155,6 +150,11 @@ especially for protocols involving multiple parties or that are considered
 critical infrastructure (e.g., IP, BGP, DNS, or TLS).  It could even be
 necessary to come up with a new protocol design that uses a different method to
 achieve the same result.
+
+This document only addresses cases where extensions are not deliberately
+blocked.  Some deployments or implementations apply policies that explicitly
+prohibit the use of unknown capabilities.  This is especially true of functions
+that seek to make security guarantees, like firewalls.
 
 The set of interoperable features in a protocol is often the subset of its
 features that have some value to those implementing and deploying the protocol.
