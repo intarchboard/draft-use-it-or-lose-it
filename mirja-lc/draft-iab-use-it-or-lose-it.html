@@ -1245,16 +1245,12 @@ features.  <a href="#use-it" class="xref">Section 3</a> argues that ossified pro
 update and describes how successful protocols make frequent use of new
 extensions and code-points.  <a href="#other" class="xref">Section 4</a> outlines several additional strategies
 that might aid in ensuring that protocol changes remain possible over time.<a href="#section-1-3" class="pilcrow">¶</a></p>
-<p id="section-1-4">This document only addresses cases where extensions are not deliberately
-blocked.  Some deployments or implementations apply policies that explicitly
-prohibit the use of unknown capabilities.  This is especially true of functions
-that seek to make security guarantees, like firewalls.<a href="#section-1-4" class="pilcrow">¶</a></p>
-<p id="section-1-5">The experience that informs this document is predominantly at "higher" layers of
+<p id="section-1-4">The experience that informs this document is predominantly at "higher" layers of
 the network stack, in protocols with limited numbers of participants.  Though
 similar issues are present in many protocols that operate at scale, the
 tradeoffs involved with applying some of the suggested techniques can be more
 complex when there are many participants, such as at the network layer or in
-routing systems.<a href="#section-1-5" class="pilcrow">¶</a></p>
+routing systems.<a href="#section-1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="implementations">
@@ -1284,9 +1280,13 @@ especially for protocols involving multiple parties or that are considered
 critical infrastructure (e.g., IP, BGP, DNS, or TLS).  It could even be
 necessary to come up with a new protocol design that uses a different method to
 achieve the same result.<a href="#section-2-4" class="pilcrow">¶</a></p>
-<p id="section-2-5">The set of interoperable features in a protocol is often the subset of its
+<p id="section-2-5">This document only addresses cases where extensions are not deliberately
+blocked.  Some deployments or implementations apply policies that explicitly
+prohibit the use of unknown capabilities.  This is especially true of functions
+that seek to make security guarantees, like firewalls.<a href="#section-2-5" class="pilcrow">¶</a></p>
+<p id="section-2-6">The set of interoperable features in a protocol is often the subset of its
 features that have some value to those implementing and deploying the protocol.
-It is not always the case that future extensibility is in that set.<a href="#section-2-5" class="pilcrow">¶</a></p>
+It is not always the case that future extensibility is in that set.<a href="#section-2-6" class="pilcrow">¶</a></p>
 <div id="not-good-enough">
 <section id="section-2.1">
         <h3 id="name-good-protocol-design-is-not">
