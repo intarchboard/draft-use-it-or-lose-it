@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-09-05T00:48:15.950039+00:00",
+  "timestamp": "2021-10-07T00:50:06.095737+00:00",
   "repo": "intarchboard/draft-use-it-or-lose-it",
   "labels": [
     {
@@ -3361,6 +3361,73 @@
           "createdAt": "2021-09-04T02:36:29Z",
           "updatedAt": "2021-09-04T02:36:29Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 79,
+      "id": "PR_kwDOBP4r1c4svLWg",
+      "title": "Mirja's comments",
+      "url": "https://github.com/intarchboard/draft-use-it-or-lose-it/pull/79",
+      "state": "OPEN",
+      "author": "martinthomson",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The move is just a move, but the other pieces needed more thought.\r\n\r\nI tried to minimize changes, but a more complete rewrite seemed like it\r\nmight be clearer for some of these.",
+      "createdAt": "2021-10-06T00:27:06Z",
+      "updatedAt": "2021-10-06T22:54:10Z",
+      "baseRepository": "intarchboard/draft-use-it-or-lose-it",
+      "baseRefName": "main",
+      "baseRefOid": "1a11b6d36977dfd835365c53074498d4e51d3ea2",
+      "headRepository": "intarchboard/draft-use-it-or-lose-it",
+      "headRefName": "mirja-lc",
+      "headRefOid": "0f1342eb112d65546ec8c7805558d74953272660",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOBP4r1c4uD3e4",
+          "commit": {
+            "abbreviatedOid": "0f1342e"
+          },
+          "author": "mirjak",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-10-06T14:14:01Z",
+          "updatedAt": "2021-10-06T14:14:02Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "Thanks, that's much more clear. I guess  \"indirect interaction\" is still a bit vague and might not be clear to all readers. Maybe something like \"entities which are not an explicit communication endpoint\" is a bit clearer? Or you just add an example, e.g. \"like middleboxes or firewalls\".",
+              "createdAt": "2021-10-06T14:14:01Z",
+              "updatedAt": "2021-10-06T14:14:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOBP4r1c4uF55n",
+          "commit": {
+            "abbreviatedOid": "0f1342e"
+          },
+          "author": "martinthomson",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-10-06T22:54:10Z",
+          "updatedAt": "2021-10-06T22:54:10Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "I'm thinking \"application code in servers and clients that use the protocol\".  That is, not stuff that directly touches the protocol, but things that might consume protocol elements once they come off the wire, or things that produce the information that is encoded into the protocol.",
+              "createdAt": "2021-10-06T22:54:10Z",
+              "updatedAt": "2021-10-06T22:54:10Z"
+            }
+          ]
         }
       ]
     }
