@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-10-07T00:50:06.095737+00:00",
+  "timestamp": "2021-10-10T00:49:32.422724+00:00",
   "repo": "intarchboard/draft-use-it-or-lose-it",
   "labels": [
     {
@@ -3376,7 +3376,7 @@
       "labels": [],
       "body": "The move is just a move, but the other pieces needed more thought.\r\n\r\nI tried to minimize changes, but a more complete rewrite seemed like it\r\nmight be clearer for some of these.",
       "createdAt": "2021-10-06T00:27:06Z",
-      "updatedAt": "2021-10-06T22:54:10Z",
+      "updatedAt": "2021-10-08T00:18:06Z",
       "baseRepository": "intarchboard/draft-use-it-or-lose-it",
       "baseRefName": "main",
       "baseRefOid": "1a11b6d36977dfd835365c53074498d4e51d3ea2",
@@ -3426,6 +3426,46 @@
               "body": "I'm thinking \"application code in servers and clients that use the protocol\".  That is, not stuff that directly touches the protocol, but things that might consume protocol elements once they come off the wire, or things that produce the information that is encoded into the protocol.",
               "createdAt": "2021-10-06T22:54:10Z",
               "updatedAt": "2021-10-06T22:54:10Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOBP4r1c4uGyRz",
+          "commit": {
+            "abbreviatedOid": "0f1342e"
+          },
+          "author": "mirjak",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-10-07T07:22:28Z",
+          "updatedAt": "2021-10-07T07:22:28Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "Are you talking about the payload now? That seems to be out of scope for me because, yes if you extend a protocol, you change the proposal behaviour and that can impact the application above but that's also why you often have a config option to use a new extension. However, this is an entirely different discussion. The section is titled \"Multi-Party Interactions and Middleboxes\"; so I really thought that the scope for this text, no...?",
+              "createdAt": "2021-10-07T07:22:28Z",
+              "updatedAt": "2021-10-07T07:22:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOBP4r1c4uKeZs",
+          "commit": {
+            "abbreviatedOid": "0f1342e"
+          },
+          "author": "martinthomson",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-10-08T00:18:06Z",
+          "updatedAt": "2021-10-08T00:18:06Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "The \"and\" in the title means that it is not just about middleboxes.\r\n\r\nI think that this point about applications is important.  What applications do can constrain how protocols evolve.  We see that all the time with HTTP.  Maybe BGP is less affected by that sort of thing, but I can't believe that it is completely free of interactions with operational or configuration systems outside of the protocol.",
+              "createdAt": "2021-10-08T00:18:06Z",
+              "updatedAt": "2021-10-08T00:18:06Z"
             }
           ]
         }
