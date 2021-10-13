@@ -222,9 +222,11 @@ The design of extension points needs to consider what actions middleboxes
 might take in response to a protocol change, as well as the effect those actions
 could have on the operation of the protocol.
 
-Changes might affect entites with indirect interactions with a protocol. How
-protocol elements are handled in applications or other interconnected systems
-might need to be considered when making changes.
+Deployments of protocol extensions also need to consider the impact
+of the changes on entities beyond protocol participants and middleboxes.
+Protocol changes can affect the behavior of applications or systems
+that don't directly interact with the protocol, such as when a protocol
+change modifies the formatting of data delivered to an application.
 
 
 # Active Use {#use-it}
