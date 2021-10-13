@@ -218,9 +218,9 @@ with all actors that could be involved in the protocol.  Even the most
 superficially simple protocols can often involve more actors than is immediately
 apparent.
 
-Actions that might be taken by middleboxes in response to a change in a protocol
-and the effect that might have on the operation of the protocol require careful
-consideration when designing for extensibility.
+The design of extension points needs to consider what actions middleboxes
+might take in response to a protocol change, as well as the effect those actions
+could have on the operation of the protocol.
 
 Changes might affect entites with indirect interactions with a protocol. How
 protocol elements are handled in applications or other interconnected systems
