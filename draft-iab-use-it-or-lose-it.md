@@ -216,11 +216,17 @@ extension were introduced.
 One of the key challenges in deploying new features is ensuring compatibility
 with all actors that could be involved in the protocol.  Even the most
 superficially simple protocols can often involve more actors than is immediately
-apparent.  Even for a two-party protocol, protocol elements can be passed on to
-other entities in ways that can affect protocol operation.
+apparent.
 
-Protocols that are intermediated need to consider the effect that deploying an
-extension might have on a middlebox.
+The design of extension points needs to consider what actions middleboxes
+might take in response to a protocol change, as well as the effect those actions
+could have on the operation of the protocol.
+
+Deployments of protocol extensions also need to consider the impact
+of the changes on entities beyond protocol participants and middleboxes.
+Protocol changes can affect the behavior of applications or systems
+that don't directly interact with the protocol, such as when a protocol
+change modifies the formatting of data delivered to an application.
 
 
 # Active Use {#use-it}
