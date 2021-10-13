@@ -5,8 +5,8 @@
 Network Working Group                                         M. Thomson
 Internet-Draft                                                   Mozilla
 Intended status: Informational                                  T. Pauly
-Expires: 8 March 2022                                              Apple
-                                                        4 September 2021
+Expires: 16 April 2022                                             Apple
+                                                         13 October 2021
 
 
           Long-term Viability of Protocol Extension Mechanisms
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 March 2022.
+   This Internet-Draft will expire on 16 April 2022.
 
 Copyright Notice
 
@@ -228,12 +228,18 @@ Table of Contents
    One of the key challenges in deploying new features is ensuring
    compatibility with all actors that could be involved in the protocol.
    Even the most superficially simple protocols can often involve more
-   actors than is immediately apparent.  Even for a two-party protocol,
-   protocol elements can be passed on to other entities in ways that can
-   affect protocol operation.
+   actors than is immediately apparent.
 
-   Protocols that are intermediated need to consider the effect that
-   deploying an extension might have on a middlebox.
+   The design of extension points needs to consider what actions
+   middleboxes might take in response to a protocol change, as well as
+   the effect those actions could have on the operation of the protocol.
+
+   Deployments of protocol extensions also need to consider the impact
+   of the changes on entities beyond protocol participants and
+   middleboxes.  Protocol changes can affect the behavior of
+   applications or systems that don't directly interact with the
+   protocol, such as when a protocol change modifies the formatting of
+   data delivered to an application.
 
 3.  Active Use
 
@@ -623,9 +629,9 @@ Table of Contents
 
    [HTTP]     Fielding, R. T., Nottingham, M., and J. Reschke, "HTTP
               Semantics", Work in Progress, Internet-Draft, draft-ietf-
-              httpbis-semantics-18, 18 August 2021,
+              httpbis-semantics-19, 12 September 2021,
               <https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-
-              semantics-18>.
+              semantics-19>.
 
    [HTTP-HEADERS]
               Nottingham, M. and P-H. Kamp, "Structured Field Values for
@@ -634,9 +640,9 @@ Table of Contents
 
    [HTTP11]   Fielding, R. T., Nottingham, M., and J. Reschke,
               "HTTP/1.1", Work in Progress, Internet-Draft, draft-ietf-
-              httpbis-messaging-18, 18 August 2021,
+              httpbis-messaging-19, 12 September 2021,
               <https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-
-              messaging-18>.
+              messaging-19>.
 
    [INTOLERANCE]
               Kario, H., "Re: [TLS] Thoughts on Version Intolerance", 20
