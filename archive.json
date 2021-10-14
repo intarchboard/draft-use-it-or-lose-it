@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-10-10T00:49:32.422724+00:00",
+  "timestamp": "2021-10-14T00:46:08.978129+00:00",
   "repo": "intarchboard/draft-use-it-or-lose-it",
   "labels": [
     {
@@ -3369,25 +3369,35 @@
       "id": "PR_kwDOBP4r1c4svLWg",
       "title": "Mirja's comments",
       "url": "https://github.com/intarchboard/draft-use-it-or-lose-it/pull/79",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "martinthomson",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "The move is just a move, but the other pieces needed more thought.\r\n\r\nI tried to minimize changes, but a more complete rewrite seemed like it\r\nmight be clearer for some of these.",
       "createdAt": "2021-10-06T00:27:06Z",
-      "updatedAt": "2021-10-08T00:18:06Z",
+      "updatedAt": "2021-10-13T02:40:07Z",
       "baseRepository": "intarchboard/draft-use-it-or-lose-it",
       "baseRefName": "main",
       "baseRefOid": "1a11b6d36977dfd835365c53074498d4e51d3ea2",
       "headRepository": "intarchboard/draft-use-it-or-lose-it",
       "headRefName": "mirja-lc",
-      "headRefOid": "0f1342eb112d65546ec8c7805558d74953272660",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "headRefOid": "5b4841229a72f5967b08164adb14a1b458f89901",
+      "closedAt": "2021-10-13T02:40:06Z",
+      "mergedAt": "2021-10-13T02:40:06Z",
+      "mergedBy": "tfpauly",
+      "mergeCommit": {
+        "oid": "8e1e4d0c6a0b60d46fb6a015e84103229e8f131e"
+      },
+      "comments": [
+        {
+          "author": "martinthomson",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks Tommy, I think that the second perspective is helpful.  I took your suggestions.\r\n\r\nThere's probably a lot more to say about this in the companion documentation we will never write.  If we can get people to think about the problem a bit more, then we win.",
+          "createdAt": "2021-10-13T00:51:28Z",
+          "updatedAt": "2021-10-13T00:51:28Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOBP4r1c4uD3e4",
@@ -3468,6 +3478,45 @@
               "updatedAt": "2021-10-08T00:18:06Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOBP4r1c4uXr03",
+          "commit": {
+            "abbreviatedOid": "0f1342e"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "@martinthomson I took a stab at rewording these thoughts to make them a bit more direct, as I was struggling to parse them at first.",
+          "createdAt": "2021-10-12T23:43:08Z",
+          "updatedAt": "2021-10-12T23:53:51Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "```suggestion\r\nThe design of extension points needs to consider what actions middleboxes\r\nmight take in response to a protocol change, as well as the effect those actions\r\ncould have on the operation of the protocol.\r\n```",
+              "createdAt": "2021-10-12T23:43:08Z",
+              "updatedAt": "2021-10-12T23:53:51Z"
+            },
+            {
+              "originalPosition": 16,
+              "body": "```suggestion\r\nDeployments of protocol extensions also need to consider the impact\r\nof the changes on entities beyond protocol participants and middleboxes.\r\nProtocol changes can affect the behavior of applications or systems\r\nthat don't directly interact with the protocol, such as when a protocol\r\nchange modifies the formatting of data delivered to an application.\r\n```",
+              "createdAt": "2021-10-12T23:53:15Z",
+              "updatedAt": "2021-10-12T23:53:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOBP4r1c4uX-VB",
+          "commit": {
+            "abbreviatedOid": "5b48412"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2021-10-13T02:39:59Z",
+          "updatedAt": "2021-10-13T02:39:59Z",
+          "comments": []
         }
       ]
     }
