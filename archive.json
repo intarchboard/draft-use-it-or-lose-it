@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-10-14T00:46:08.978129+00:00",
+  "timestamp": "2021-11-21T00:49:57.582620+00:00",
   "repo": "intarchboard/draft-use-it-or-lose-it",
   "labels": [
     {
@@ -1114,6 +1114,24 @@
           "updatedAt": "2021-08-07T15:00:07Z"
         }
       ]
+    },
+    {
+      "number": 80,
+      "id": "I_kwDOBP4r1c4_B_eB",
+      "title": "Explain HMSV on first use",
+      "url": "https://github.com/intarchboard/draft-use-it-or-lose-it/issues/80",
+      "state": "OPEN",
+      "author": "tfpauly",
+      "authorAssociation": "MEMBER",
+      "assignees": [
+        "tfpauly"
+      ],
+      "labels": [],
+      "body": "In section 3.3: HMSV should be expanded on first use, with a reference for it (to RFC 6709). It's currently only expanded in the appendix for TLS.",
+      "createdAt": "2021-11-18T15:26:47Z",
+      "updatedAt": "2021-11-18T15:26:47Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
